@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickBasket - Grocery Delivery</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f7f7f7;
+  color: #222;
+}
+
+header {
+  background: #ffffff;
+  padding: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #00a651;
+}
+
+.location {
+  font-size: 12px;
+  color: #555;
+}
+
+.cart-btn {
+  border: none;
+  background: #00a651;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.search {
+  margin-top: 12px;
+}
+
+.search input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.banner {
+  margin: 15px;
+  padding: 22px;
+  border-radius: 15px;
+  background: #dff7e8;
+}
+
+.banner h2 {
+  margin-bottom: 7px;
+}
+
+.categories {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 5px 15px 15px;
+}
+
+.category {
+  background: white;
+  min-width: 85px;
+  padding: 12px 8px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.08);
+}
+
+.category div {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.products {
+  padding: 0 15px 100px;
+}
+
+.products h2 {
+  margin: 10px 0 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.product {
+  background: white;
+  padding: 12px;
+  border-radius: 13px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.08);
+}
+
+.product-img {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  background: #fafafa;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.product h3 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.product p {
+  color: #777;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.add {
+  float: right;
+  border: 1px solid #00a651;
+  color: #00a651;
+  background: white;
+  padding: 6px 12px;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.bottom-cart {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
+  background: #00a651;
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+  display: none;
+  z-index: 20;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 30;
+  padding: 20px;
+}
+
+.modal-box {
+  background: white;
+  margin-top: 50px;
+  padding: 20px;
+  border-radius: 15px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.close {
+  float: right;
+  font-size: 25px;
+  border: none;
+  background: none;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.whatsapp {
+  width: 100%;
+  margin-top: 15px;
+  padding: 14px;
+  border: none;
+  border-radius: 9px;
+  background: #25D366;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="top">
+    <div>
+      <div class="logo">Quick<span>Basket</span></div>
+      <div class="location">📍 Deliver to your location</div>
+    </div>
+
+    <button class="cart-btn" onclick="openCart()">
+      🛒 Cart
+    </button>
+  </div>
+
+  <div class="search">
+    <input
+      type="text"
+      id="search"
+      placeholder="Search for products..."
+      onkeyup="searchProducts()"
+    >
+  </div>
+</header>
+
+<div class="banner">
+  <h2>Grocery at your doorstep 🛒</h2>
+  <p>Fresh products • Easy ordering • WhatsApp delivery</p>
+</div>
+
+<div class="categories">
+  <div class="category">
+    <div>🥦</div>
+    Vegetables
+  </div>
+
+  <div class="category">
+    <div>🍎</div>
+    Fruits
+  </div>
+
+  <div class="category">
+    <div>🥛</div>
+    Dairy
+  </div>
+
+  <div class="category">
+    <div>🍪</div>
+    Snacks
+  </div>
+
+  <div class="category">
+    <div>🥤</div>
+    Drinks
+  </div>
+</div>
+
+<section class="products">
+  <h2>Popular Products</h2>
+
+  <div class="grid" id="productGrid">
+
+    <div class="product" data-name="Milk">
+      <div class="product-img">🥛</div>
+      <h3>Fresh Milk</h3>
+      <p>500 ml</p>
+      <span class="price">₹30</span>
+      <button class="add" onclick="addToCart('Fresh Milk',30)">ADD</button>
+    </div>
+
+    <div class="product" data-name="Bread">
+      <div class="product-img">🍞</div>
+      <h3>Brown Bread</h3>
+      <p>400 g</p>
+      <span class="price">₹45</span>
+      <button class="add" onclick="addToCart('Brown Bread',45)">ADD</button>
+    </div>
+
+    <div class="product" data-name="Apple">
+      <div class="product-img">🍎</div>
+      <h3>Fresh Apple</h3>
+      <p>1 kg</p>
+      <span class="price">₹120</span>
+      <button class="add" onclick="addToCart('Fresh Apple',120)">ADD</button>
+    </div>
+
+    <div class="product" data-name="Banana">
+      <div class="product-img">🍌</div>
+      <h3>Banana</h3>
+      <p>1 dozen</p>
+      <span class="price">₹60</span>
+      <button class="add" onclick="addToCart('Banana',60)">ADD</button>
+    </div>
+
+    <div class="product" data-name="Biscuits">
+      <div class="product-img">🍪</div>
+      <h3>Biscuits</h3>
+      <p>Pack</p>
+      <span class="price">₹25</span>
+      <button class="add" onclick="addToCart('Biscuits',25)">ADD</button>
+    </div>
+
+    <div class="product" data-name="Juice">
+      <div class="product-img">🧃</div>
+      <h3>Fruit Juice</h3>
+      <p>1 litre</p>
+      <span class="price">₹90</span>
+      <button class="add" onclick="addToCart('Fruit Juice',90)">ADD</button>
+    </div>
+
+  </div>
+</section>
+
+<div class="bottom-cart" id="bottomCart" onclick="openCart()">
+  🛒 View Cart
+</div>
+
+<!-- CART -->
+<div class="modal" id="cartModal">
+  <div class="modal-box">
+
+    <button class="close" onclick="closeCart()">×</button>
+
+    <h2>Your Cart 🛒</h2>
+
+    <div id="cartItems"></div>
+
+    <h3 style="margin-top:15px;">
+      Total: ₹<span id="total">0</span>
+    </h3>
+
+    <div class="form">
+      <input id="customerName" placeholder="Your Name">
+
+      <input id="phone" placeholder="Phone Number">
+
+      <textarea id="address" rows="3"
+        placeholder="Delivery Address"></textarea>
+    </div>
+
+    <button class="whatsapp" onclick="orderWhatsApp()">
+      📱 Order on WhatsApp
+    </button>
+
+  </div>
+</div>
+
+<script>
+
+let cart = [];
+
+function addToCart(name, price) {
+
+  let existing = cart.find(item => item.name === name);
+
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({
+      name: name,
+      price: price,
+      qty: 1
+    });
+  }
+
+  updateCart();
+
+  alert(name + " added to cart!");
+}
+
+function updateCart() {
+
+  let html = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+
+    let itemTotal = item.price * item.qty;
+    total += itemTotal;
+
+    html += `
+      <div class="cart-item">
+        <div>
+          <b>${item.name}</b><br>
+          ₹${item.price} × ${item.qty}
+        </div>
+
+        <div>
+          <button onclick="changeQty(${index},-1)">−</button>
+          ${item.qty}
+          <button onclick="changeQty(${index},1)">+</button>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById("cartItems").innerHTML =
+    html || "<p style='margin-top:20px'>Cart is empty.</p>";
+
+  document.getElementById("total").innerText = total;
+
+  if (cart.length > 0) {
+    document.getElementById("bottomCart").style.display = "block";
+  } else {
+    document.getElementById("bottomCart").style.display = "none";
+  }
+}
+
+function changeQty(index, amount) {
+
+  cart[index].qty += amount;
+
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
+
+  updateCart();
+}
+
+function openCart() {
+  document.getElementById("cartModal").style.display = "block";
+}
+
+function closeCart() {
+  document.getElementById("cartModal").style.display = "none";
+}
+
+function searchProducts() {
+
+  let search =
+    document.getElementById("search").value.toLowerCase();
+
+  let products =
+    document.querySelectorAll(".product");
+
+  products.forEach(product => {
+
+    let name =
+      product.getAttribute("data-name").toLowerCase();
+
+    if (name.includes(search)) {
+      product.style.display = "block";
+    } else {
+      product.style.display = "none";
+    }
+
+  });
+}
+
+function orderWhatsApp() {
+
+  if (cart.length === 0) {
+    alert("Please add products first.");
+    return;
+  }
+
+  let name =
+    document.getElementById("customerName").value;
+
+  let phone =
+    document.getElementById("phone").value;
+
+  let address =
+    document.getElementById("address").value;
+
+  if (!name || !phone || !address) {
+    alert("Please fill Name, Phone and Address.");
+    return;
+  }
+
+  let message = "🛒 NEW ORDER%0A%0A";
+
+  cart.forEach(item => {
+    message +=
+      item.name +
+      " × " +
+      item.qty +
+      " = ₹" +
+      (item.price * item.qty) +
+      "%0A";
+  });
+
+  let total =
+    cart.reduce(
+      (sum, item) =>
+        sum + item.price * item.qty,
+      0
+    );
+
+  message +=
+    "%0A💰 Total: ₹" +
+    total;
+
+  message +=
+    "%0A%0A👤 Name: " +
+    name;
+
+  message +=
+    "%0A📞 Phone: " +
+    phone;
+
+  message +=
+    "%0A📍 Address: " +
+    address;
+
+  /*
+   * IMPORTANT:
+   * Replace 91XXXXXXXXXX with your WhatsApp number.
+   */
+  let whatsappNumber = "91XXXXXXXXXX";
+
+  let url =
+    "https://wa.me/" +
+    whatsappNumber +
+    "?text=" +
+    message;
+
+  window.open(url, "_blank");
+}
+
+updateCart();
+
+</script>
+
+</body>
+</html>
