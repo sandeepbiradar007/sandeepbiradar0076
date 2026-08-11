@@ -484,17 +484,10 @@ function placeOrder(){
     return;
   }
 
-  const name=document
-    .getElementById("name").value.trim();
-
-  const phone=document
-    .getElementById("phone").value.trim();
-
-  const address=document
-    .getElementById("address").value.trim();
-
-  const payment=document
-    .getElementById("payment").value;
+  const name=document.getElementById("name").value.trim();
+  const phone=document.getElementById("phone").value.trim();
+  const address=document.getElementById("address").value.trim();
+  const payment=document.getElementById("payment").value;
 
   if(!name || !phone || !address){
     alert("Please enter your name, mobile number and address.");
@@ -508,27 +501,101 @@ function placeOrder(){
     return;
   }
 
-  const message =
-    "🛒 NEW ORDER\n\n"+
-    "Name: "+name+"\n"+
-    "Mobile: "+phone+"\n"+
-    "Address: "+address+"\n"+
-    "Payment: "+payment;
+  let orderItems="";
+  let subtotal=0;
 
-  const whatsappNumber = "919705335701";
+  cart.forEach(item=>{
+    const itemTotal=item.price * item.qty;
+    subtotal += itemTotal;
 
-  alert(
-    "Order placed successfully! 🎉\n\n"+
-    "Thank you "+name+"!"
+    orderItems +=
+      "• "+item.name+
+      " × "+item.qty+
+      " = ₹"+itemTotal+"\n";
+  });
+
+  const delivery = subtotal > 0 ? 30 : 0;
+  const total = subtotal + delivery;
+
+  if(!navigator.geolocation){
+    sendOrderWithoutLocation();
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+
+    function(position){
+
+      const lat=position.coords.latitude;
+      const lon=position.coords.longitude;
+
+      const locationLink=
+        "https://www.google.com/maps?q="+lat+","+lon;
+
+      const message =
+        "🛒 NEW ORDER\n\n"+
+        "Products:\n"+
+        orderItems+
+        "\n"+
+        "Subtotal: ₹"+subtotal+"\n"+
+        "Delivery: ₹"+delivery+"\n"+
+        "Total: ₹"+total+"\n\n"+
+        "Name: "+name+"\n"+
+        "Mobile: "+phone+"\n"+
+        "Address: "+address+"\n"+
+        "📍 Current Location:\n"+
+        locationLink+"\n"+
+        "Payment: "+payment.toUpperCase();
+
+      const whatsappNumber="919705335701";
+
+      alert(
+        "Order placed successfully! 🎉\n\n"+
+        "Please tap Send on WhatsApp to send your order."
+      );
+
+      window.open(
+        "https://wa.me/"+whatsappNumber+
+        "?text="+encodeURIComponent(message),
+        "_blank"
+      );
+    },
+
+    function(){
+      sendOrderWithoutLocation();
+    }
   );
 
-  window.open(
-    "https://wa.me/"+whatsappNumber+
-    "?text="+encodeURIComponent(message),
-    "_blank"
-  );
+  function sendOrderWithoutLocation(){
+
+    const message =
+      "🛒 NEW ORDER\n\n"+
+      "Products:\n"+
+      orderItems+
+      "\n"+
+      "Subtotal: ₹"+subtotal+"\n"+
+      "Delivery: ₹"+delivery+"\n"+
+      "Total: ₹"+total+"\n\n"+
+      "Name: "+name+"\n"+
+      "Mobile: "+phone+"\n"+
+      "Address: "+address+"\n"+
+      "📍 Current Location: Not shared\n"+
+      "Payment: "+payment.toUpperCase();
+
+    const whatsappNumber="919705335701";
+
+    alert(
+      "Order placed successfully! 🎉\n\n"+
+      "Location was not shared. Please tap Send on WhatsApp."
+    );
+
+    window.open(
+      "https://wa.me/"+whatsappNumber+
+      "?text="+encodeURIComponent(message),
+      "_blank"
+    );
+  }
 }
-
 displayProducts();
 updateCart();
 
