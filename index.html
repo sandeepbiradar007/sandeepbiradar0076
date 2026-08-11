@@ -284,19 +284,8 @@ footer{
 
 <script>
 
+
 const products = [
-
-{
- name:"Rice 5 KG",
- price:350,
- image:"https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=500&q=80"
-},
-
-{
- name:"Wheat Atta 5 KG",
- price:280,
- image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=500&q=80"
-},
 
 {
  name:"Milk 1 Litre",
@@ -305,15 +294,9 @@ const products = [
 },
 
 {
- name:"Apples 1 KG",
- price:140,
- image:"https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=500&q=80"
-},
-
-{
- name:"Banana 1 Dozen",
- price:70,
- image:"https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=500&q=80"
+ name:"Bread",
+ price:40,
+ image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=500&q=80"
 },
 
 {
@@ -323,21 +306,20 @@ const products = [
 },
 
 {
- name:"Potato 1 KG",
- price:40,
- image:"https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=500&q=80"
+ name:"Banana 1 Dozen",
+ price:70,
+ image:"https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=500&q=80"
 },
 
 {
- name:"Cooking Oil 1 L",
- price:150,
- image:"https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=500&q=80"
+ name:"Potato 1 KG",
+ price:40,
+ image:"https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=500&q=80"
 }
 
 ];
 
 let cart=[];
-
 function displayProducts(list=products){
 
   const box=document.getElementById("products");
