@@ -499,56 +499,7 @@ function placeOrder(){
   const delivery = subtotal > 0 ? 30 : 0;
   const total = subtotal + delivery;
 
-  if(!navigator.geolocation){
-    sendOrderWithoutLocation();
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-
-    function(position){
-
-      const lat=position.coords.latitude;
-      const lon=position.coords.longitude;
-
-      const locationLink=
-        "https://www.google.com/maps?q="+lat+","+lon;
-
-      const message =
-        "🛒 NEW ORDER\n\n"+
-        "Products:\n"+
-        orderItems+
-        "\n"+
-        "Subtotal: ₹"+subtotal+"\n"+
-        "Delivery: ₹"+delivery+"\n"+
-        "Total: ₹"+total+"\n\n"+
-        "Name: "+name+"\n"+
-        "Mobile: "+phone+"\n"+
-        "Address: "+address+"\n"+
-        "📍 Current Location:\n"+
-        locationLink+"\n"+
-        "Payment: "+payment.toUpperCase();
-
-      const whatsappNumber="919705335701";
-
-      alert(
-        "Order placed successfully! 🎉\n\n"+
-        "Please tap Send on WhatsApp to send your order."
-      );
-
-      window.open(
-        "https://wa.me/"+whatsappNumber+
-        "?text="+encodeURIComponent(message),
-        "_blank"
-      );
-    },
-
-    function(){
-      sendOrderWithoutLocation();
-    }
-  );
-
-  function sendOrderWithoutLocation(){
+  function openWhatsApp(locationText){
 
     const message =
       "🛒 NEW ORDER\n\n"+
@@ -561,20 +512,46 @@ function placeOrder(){
       "Name: "+name+"\n"+
       "Mobile: "+phone+"\n"+
       "Address: "+address+"\n"+
-      "📍 Current Location: Not shared\n"+
+      locationText+
       "Payment: "+payment.toUpperCase();
 
     const whatsappNumber="919705335701";
 
-    alert(
-      "Order placed successfully! 🎉\n\n"+
-      "Location was not shared. Please tap Send on WhatsApp."
+    window.location.href =
+      "https://wa.me/"+whatsappNumber+
+      "?text="+encodeURIComponent(message);
+  }
+
+  if(navigator.geolocation){
+
+    navigator.geolocation.getCurrentPosition(
+
+      function(position){
+
+        const lat=position.coords.latitude;
+        const lon=position.coords.longitude;
+
+        const locationLink=
+          "https://www.google.com/maps?q="+lat+","+lon;
+
+        openWhatsApp(
+          "📍 Current Location:\n"+
+          locationLink+"\n"
+        );
+      },
+
+      function(){
+
+        openWhatsApp(
+          "📍 Current Location: Not shared\n"
+        );
+      }
     );
 
-    window.open(
-      "https://wa.me/"+whatsappNumber+
-      "?text="+encodeURIComponent(message),
-      "_blank"
+  }else{
+
+    openWhatsApp(
+      "📍 Current Location: Not available\n"
     );
   }
 }
