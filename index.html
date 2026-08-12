@@ -240,6 +240,10 @@ footer{
     </div>
 
     <div class="total">
+      Handling Charge: ₹<span id="handlingCharge">0</span>
+    </div>
+
+    <div class="total">
       Total: ₹<span id="total">0</span>
     </div>
 
@@ -284,9 +288,7 @@ footer{
 
 <script>
 
-
 const products = [
-
 
 {
  name:"Heritage Daily Health Toned Milk 500 ml",
@@ -299,7 +301,7 @@ const products = [
  price:66,
  image:"IMG_20260811_192811.png"
 },
- 
+
 {
  name:"Amul Taaza Milky Milk 500 ml",
  price:30,
@@ -323,8 +325,8 @@ const products = [
  price:55,
  image:"IMG_20260812_143822.png"
 },
-  
-  {
+
+{
  name:"Amul Dahi 700 g",
  price:65,
  image:"IMG_20260812_151518.png"
@@ -335,7 +337,7 @@ const products = [
  price:50,
  image:"IMG_20260812_151633.png"
 },
-  
+
 {
  name:"Tomato 1 KG",
  price:50,
@@ -357,6 +359,8 @@ const products = [
 ];
 
 let cart=[];
+
+
 function displayProducts(list=products){
 
   const box=document.getElementById("products");
@@ -393,6 +397,7 @@ function displayProducts(list=products){
   });
 }
 
+
 function addToCart(index){
 
   const product=products[index];
@@ -414,6 +419,7 @@ function addToCart(index){
 
   alert(product.name+" added to cart!");
 }
+
 
 function updateCart(){
 
@@ -454,13 +460,23 @@ function updateCart(){
 
   });
 
-  let delivery = subtotal>0 ? 30 : 0;
+  const delivery = subtotal > 0 ? 30 : 0;
+
+  const handlingCharge = subtotal > 0 ? 5 : 0;
+
+  const total = subtotal + delivery + handlingCharge;
 
   document.getElementById("cartCount").innerText=count;
+
   document.getElementById("subtotal").innerText=subtotal;
+
   document.getElementById("delivery").innerText=delivery;
-  document.getElementById("total").innerText=subtotal+delivery;
+
+  document.getElementById("handlingCharge").innerText=handlingCharge;
+
+  document.getElementById("total").innerText=total;
 }
+
 
 function changeQty(index,change){
 
@@ -473,6 +489,7 @@ function changeQty(index,change){
   updateCart();
 }
 
+
 function goCart(){
 
   document.getElementById("cart")
@@ -481,6 +498,7 @@ function goCart(){
   });
 
 }
+
 
 function searchProducts(){
 
@@ -496,46 +514,85 @@ function searchProducts(){
   displayProducts(filtered);
 }
 
+
 function placeOrder(){
 
   if(cart.length===0){
+
     alert("Please add products to cart first.");
+
     return;
   }
 
-  const name=document.getElementById("name").value.trim();
-  const phone=document.getElementById("phone").value.trim();
-  const address=document.getElementById("address").value.trim();
-  const payment=document.getElementById("payment").value;
+  const name=document
+    .getElementById("name")
+    .value
+    .trim();
+
+  const phone=document
+    .getElementById("phone")
+    .value
+    .trim();
+
+  const address=document
+    .getElementById("address")
+    .value
+    .trim();
+
+  const payment=document
+    .getElementById("payment")
+    .value;
+
 
   if(!name || !phone || !address){
-    alert("Please enter your name, mobile number and address.");
+
+    alert(
+      "Please enter your name, mobile number and address."
+    );
+
     return;
   }
 
+
   if(payment==="upi"){
+
     alert(
       "UPI payment option selected. Real online payment gateway needs to be connected separately."
     );
+
     return;
-}
+  }
+
 
   let orderItems="";
   let subtotal=0;
 
+
   cart.forEach(item=>{
+
     const itemTotal=item.price * item.qty;
+
     subtotal += itemTotal;
 
     orderItems +=
       "• "+item.name+
       " × "+item.qty+
       " = ₹"+itemTotal+"\n";
+
   });
 
-  const delivery = subtotal > 0 ? 30 : 0;
-const handlingCharge = subtotal > 0 ? 5 : 0;
-const total = subtotal + delivery + handlingCharge;
+
+  const delivery =
+    subtotal > 0 ? 30 : 0;
+
+  const handlingCharge =
+    subtotal > 0 ? 5 : 0;
+
+  const total =
+    subtotal +
+    delivery +
+    handlingCharge;
+
 
   function openWhatsApp(locationText){
 
@@ -546,6 +603,7 @@ const total = subtotal + delivery + handlingCharge;
       "\n"+
       "Subtotal: ₹"+subtotal+"\n"+
       "Delivery: ₹"+delivery+"\n"+
+      "Handling Charge: ₹"+handlingCharge+"\n"+
       "Total: ₹"+total+"\n\n"+
       "Name: "+name+"\n"+
       "Mobile: "+phone+"\n"+
@@ -553,12 +611,16 @@ const total = subtotal + delivery + handlingCharge;
       locationText+
       "Payment: "+payment.toUpperCase();
 
+
     const whatsappNumber="919705335701";
+
 
     window.location.href =
       "https://wa.me/"+whatsappNumber+
       "?text="+encodeURIComponent(message);
+
   }
+
 
   if(navigator.geolocation){
 
@@ -566,24 +628,39 @@ const total = subtotal + delivery + handlingCharge;
 
       function(position){
 
-        const lat=position.coords.latitude;
-        const lon=position.coords.longitude;
+        const lat=
+          position.coords.latitude;
+
+        const lon=
+          position.coords.longitude;
+
 
         const locationLink=
-          "https://www.google.com/maps?q="+lat+","+lon;
+          "https://www.google.com/maps?q="+
+          lat+
+          ","+
+          lon;
+
 
         openWhatsApp(
+
           "📍 Current Location:\n"+
-          locationLink+"\n"
+          locationLink+
+          "\n"
+
         );
+
       },
+
 
       function(){
 
         openWhatsApp(
           "📍 Current Location: Not shared\n"
         );
+
       }
+
     );
 
   }else{
@@ -591,9 +668,14 @@ const total = subtotal + delivery + handlingCharge;
     openWhatsApp(
       "📍 Current Location: Not available\n"
     );
+
   }
+
 }
+
+
 displayProducts();
+
 updateCart();
 
 </script>
