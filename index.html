@@ -279,7 +279,34 @@ footer{
 
     </div>
   </div>
+  
+<div class="cart" id="feedback">
 
+  <h2>⭐ Give Feedback</h2>
+
+  <select id="feedbackRating">
+    <option value="">Select Rating</option>
+    <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+    <option value="4">⭐⭐⭐⭐ 4 Stars</option>
+    <option value="3">⭐⭐⭐ 3 Stars</option>
+    <option value="2">⭐⭐ 2 Stars</option>
+    <option value="1">⭐ 1 Star</option>
+  </select>
+
+  <textarea
+    id="feedbackText"
+    placeholder="Tell us about your experience..."
+  ></textarea>
+
+  <button
+    class="place-order"
+    onclick="sendFeedback()"
+  >
+    Send Feedback
+  </button>
+
+</div>
+  
 </div>
 
 <footer>
@@ -677,7 +704,36 @@ function placeOrder(){
 displayProducts();
 
 updateCart();
+  
+function sendFeedback(){
 
+  const rating =
+    document.getElementById("feedbackRating").value;
+
+  const feedback =
+    document.getElementById("feedbackText").value.trim();
+
+  if(!rating){
+    alert("Please select a rating.");
+    return;
+  }
+
+  if(!feedback){
+    alert("Please write your feedback.");
+    return;
+  }
+
+  const message =
+    "⭐ QUICKBASKET FEEDBACK\n\n"+
+    "Rating: "+rating+"/5\n"+
+    "Feedback: "+feedback;
+
+  const whatsappNumber="919705335701";
+
+  window.location.href =
+    "https://wa.me/"+whatsappNumber+
+    "?text="+encodeURIComponent(message);
+}
 </script>
 
 </body>
