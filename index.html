@@ -85,6 +85,10 @@ h2{
   margin-bottom:12px;
 }
 
+.section-title{
+  margin-top:25px;
+}
+
 .products{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -108,6 +112,7 @@ h2{
 
 .product h3{
   margin-top:8px;
+  font-size:16px;
 }
 
 .price{
@@ -127,6 +132,16 @@ h2{
   font-weight:bold;
 }
 
+.deal-title{
+  background:#fff3cd;
+  padding:14px;
+  border-radius:12px;
+  margin-top:20px;
+  margin-bottom:12px;
+  font-size:20px;
+  font-weight:bold;
+}
+
 .cart{
   background:white;
   margin-top:25px;
@@ -138,8 +153,14 @@ h2{
 .cart-item{
   display:flex;
   justify-content:space-between;
+  gap:10px;
   padding:10px 0;
   border-bottom:1px solid #eee;
+}
+
+.cart-item button{
+  padding:4px 9px;
+  margin:0 3px;
 }
 
 .total{
@@ -194,6 +215,7 @@ footer{
 
 <header>
   <div class="top">
+
     <div>
       <div class="logo">🛒 QuickBasket</div>
       <div class="location">📍 Fast Grocery Delivery</div>
@@ -202,8 +224,10 @@ footer{
     <button class="cart-btn" onclick="goCart()">
       🛒 Cart (<span id="cartCount">0</span>)
     </button>
+
   </div>
 </header>
+
 
 <div class="container">
 
@@ -211,6 +235,7 @@ footer{
     <h1>Grocery at your doorstep 🛍️</h1>
     <p>Fresh groceries delivered quickly.</p>
   </div>
+
 
   <input
     class="search"
@@ -220,16 +245,27 @@ footer{
     onkeyup="searchProducts()"
   >
 
+
   <h2>Popular Products</h2>
 
   <div class="products" id="products"></div>
 
+
+  <div class="deal-title">
+    🔥 Daily Vegetable Deals
+  </div>
+
+  <div class="products" id="vegetables"></div>
+
+
   <div class="cart" id="cart">
+
     <h2>🛒 Your Cart</h2>
 
     <div id="cartItems">
       <p>Your cart is empty.</p>
     </div>
+
 
     <div class="total">
       Subtotal: ₹<span id="subtotal">0</span>
@@ -246,6 +282,7 @@ footer{
     <div class="total">
       Total: ₹<span id="total">0</span>
     </div>
+
 
     <div class="checkout">
 
@@ -273,47 +310,58 @@ footer{
         <option value="upi">📱 UPI Payment</option>
       </select>
 
-      <button class="place-order" onclick="placeOrder()">
+      <button
+        class="place-order"
+        onclick="placeOrder()"
+      >
         Place Order
       </button>
 
     </div>
+
   </div>
-  
-<div class="cart" id="feedback">
 
-  <h2>⭐ Give Feedback</h2>
 
-  <select id="feedbackRating">
-    <option value="">Select Rating</option>
-    <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
-    <option value="4">⭐⭐⭐⭐ 4 Stars</option>
-    <option value="3">⭐⭐⭐ 3 Stars</option>
-    <option value="2">⭐⭐ 2 Stars</option>
-    <option value="1">⭐ 1 Star</option>
-  </select>
+  <div class="cart" id="feedback">
 
-  <textarea
-    id="feedbackText"
-    placeholder="Tell us about your experience..."
-  ></textarea>
+    <h2>⭐ Give Feedback</h2>
 
-  <button
-    class="place-order"
-    onclick="sendFeedback()"
-  >
-    Send Feedback
-  </button>
+    <select id="feedbackRating">
+      <option value="">Select Rating</option>
+      <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+      <option value="4">⭐⭐⭐⭐ 4 Stars</option>
+      <option value="3">⭐⭐⭐ 3 Stars</option>
+      <option value="2">⭐⭐ 2 Stars</option>
+      <option value="1">⭐ 1 Star</option>
+    </select>
+
+    <textarea
+      id="feedbackText"
+      placeholder="Tell us about your experience..."
+    ></textarea>
+
+    <button
+      class="place-order"
+      onclick="sendFeedback()"
+    >
+      Send Feedback
+    </button>
+
+  </div>
 
 </div>
-  
-</div>
+
 
 <footer>
   © 2026 QuickBasket Grocery Delivery
 </footer>
 
+
 <script>
+
+/* =========================
+   NORMAL GROCERY PRODUCTS
+========================= */
 
 const products = [
 
@@ -385,8 +433,208 @@ const products = [
 
 ];
 
+
+/* =========================
+   VEGETABLE DAILY PRICES
+   रोज सिर्फ इन numbers को बदलना
+========================= */
+
+const vegetablePrices = {
+
+ onion:40,
+ tomato:30,
+ potato:30,
+ carrot:60,
+ beetroot:50,
+ greenChilli:20,
+ cucumber:40,
+ brinjal:40,
+ cabbage:40,
+ cauliflower:40,
+ capsicum:50,
+ bottleGourd:40,
+ ridgeGourd:50,
+ bitterGourd:60,
+ ladyFinger:50,
+ beans:50,
+ sweetCorn:25,
+ garlic:40,
+ ginger:30,
+ radish:40,
+ spinach:20,
+ coriander:15,
+ sweetPotato:50,
+ pumpkin:35,
+ drumstick:35
+
+};
+
+
+/* =========================
+   VEGETABLES
+========================= */
+
+const vegetables = [
+
+{
+ name:"Onion 1 KG",
+ price:vegetablePrices.onion,
+ image:"onion.jpg"
+},
+
+{
+ name:"Tomato 1 KG",
+ price:vegetablePrices.tomato,
+ image:"tomato.jpg"
+},
+
+{
+ name:"Potato 1 KG",
+ price:vegetablePrices.potato,
+ image:"potato.jpg"
+},
+
+{
+ name:"Carrot 1 KG",
+ price:vegetablePrices.carrot,
+ image:"carrot.jpg"
+},
+
+{
+ name:"Beetroot 1 KG",
+ price:vegetablePrices.beetroot,
+ image:"beetroot.jpg"
+},
+
+{
+ name:"Green Chilli 250 g",
+ price:vegetablePrices.greenChilli,
+ image:"green-chilli.jpg"
+},
+
+{
+ name:"Cucumber 1 KG",
+ price:vegetablePrices.cucumber,
+ image:"cucumber.jpg"
+},
+
+{
+ name:"Brinjal 1 KG",
+ price:vegetablePrices.brinjal,
+ image:"brinjal.jpg"
+},
+
+{
+ name:"Cabbage 1 KG",
+ price:vegetablePrices.cabbage,
+ image:"cabbage.jpg"
+},
+
+{
+ name:"Cauliflower 1 Piece",
+ price:vegetablePrices.cauliflower,
+ image:"cauliflower.jpg"
+},
+
+{
+ name:"Capsicum 500 g",
+ price:vegetablePrices.capsicum,
+ image:"capsicum.jpg"
+},
+
+{
+ name:"Bottle Gourd 1 Piece",
+ price:vegetablePrices.bottleGourd,
+ image:"bottle-gourd.jpg"
+},
+
+{
+ name:"Ridge Gourd 1 KG",
+ price:vegetablePrices.ridgeGourd,
+ image:"ridge-gourd.jpg"
+},
+
+{
+ name:"Bitter Gourd 1 KG",
+ price:vegetablePrices.bitterGourd,
+ image:"bitter-gourd.jpg"
+},
+
+{
+ name:"Lady Finger 1 KG",
+ price:vegetablePrices.ladyFinger,
+ image:"lady-finger.jpg"
+},
+
+{
+ name:"Green Beans 500 g",
+ price:vegetablePrices.beans,
+ image:"beans.jpg"
+},
+
+{
+ name:"Sweet Corn 1 Piece",
+ price:vegetablePrices.sweetCorn,
+ image:"sweet-corn.jpg"
+},
+
+{
+ name:"Garlic 250 g",
+ price:vegetablePrices.garlic,
+ image:"garlic.jpg"
+},
+
+{
+ name:"Ginger 250 g",
+ price:vegetablePrices.ginger,
+ image:"ginger.jpg"
+},
+
+{
+ name:"Radish 1 KG",
+ price:vegetablePrices.radish,
+ image:"radish.jpg"
+},
+
+{
+ name:"Spinach 1 Bunch",
+ price:vegetablePrices.spinach,
+ image:"spinach.jpg"
+},
+
+{
+ name:"Coriander 1 Bunch",
+ price:vegetablePrices.coriander,
+ image:"coriander.jpg"
+},
+
+{
+ name:"Sweet Potato 1 KG",
+ price:vegetablePrices.sweetPotato,
+ image:"sweet-potato.jpg"
+},
+
+{
+ name:"Pumpkin 1 KG",
+ price:vegetablePrices.pumpkin,
+ image:"pumpkin.jpg"
+},
+
+{
+ name:"Drumstick 500 g",
+ price:vegetablePrices.drumstick,
+ image:"drumstick.jpg"
+}
+
+];
+
+
 let cart=[];
 
+
+/* =========================
+   DISPLAY NORMAL PRODUCTS
+========================= */
 
 function displayProducts(list=products){
 
@@ -394,9 +642,10 @@ function displayProducts(list=products){
 
   box.innerHTML="";
 
-  list.forEach((p,index)=>{
+  list.forEach(p=>{
 
     box.innerHTML += `
+
       <div class="product">
 
         <img
@@ -413,62 +662,140 @@ function displayProducts(list=products){
 
         <button
           class="add"
-          onclick="addToCart(${products.indexOf(p)})"
+          onclick="addProductToCart('${p.name.replace(/'/g,"\\'")}')"
         >
           Add to Cart
         </button>
 
       </div>
+
     `;
 
   });
+
 }
 
 
-function addToCart(index){
+/* =========================
+   DISPLAY VEGETABLES
+========================= */
 
-  const product=products[index];
+function displayVegetables(){
 
-  const existing=cart.find(
-    item=>item.name===product.name
-  );
+  const box=document.getElementById("vegetables");
+
+  box.innerHTML="";
+
+  vegetables.forEach(p=>{
+
+    box.innerHTML += `
+
+      <div class="product">
+
+        <img
+          class="product-img"
+          src="${p.image}"
+          alt="${p.name}"
+        >
+
+        <h3>${p.name}</h3>
+
+        <div class="price">
+          ₹${p.price}
+        </div>
+
+        <button
+          class="add"
+          onclick="addProductToCart('${p.name.replace(/'/g,"\\'")}')"
+        >
+          Add to Cart
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+function addProductToCart(productName){
+
+  const allProducts =
+    products.concat(vegetables);
+
+  const product =
+    allProducts.find(
+      item=>item.name===productName
+    );
+
+  if(!product){
+    return;
+  }
+
+  const existing =
+    cart.find(
+      item=>item.name===product.name
+    );
 
   if(existing){
+
     existing.qty++;
+
   }else{
+
     cart.push({
       ...product,
       qty:1
     });
+
   }
 
   updateCart();
 
   alert(product.name+" added to cart!");
+
 }
 
 
+/* =========================
+   UPDATE CART
+========================= */
+
 function updateCart(){
 
-  const box=document.getElementById("cartItems");
+  const box=
+    document.getElementById("cartItems");
 
   box.innerHTML="";
 
   let subtotal=0;
   let count=0;
 
+
   if(cart.length===0){
 
-    box.innerHTML="<p>Your cart is empty.</p>";
+    box.innerHTML=
+      "<p>Your cart is empty.</p>";
 
   }
 
+
   cart.forEach((item,index)=>{
 
-    subtotal += item.price * item.qty;
+    subtotal +=
+      item.price * item.qty;
+
     count += item.qty;
 
+
     box.innerHTML += `
+
       <div class="cart-item">
 
         <div>
@@ -477,98 +804,218 @@ function updateCart(){
         </div>
 
         <div>
-          <button onclick="changeQty(${index},-1)">−</button>
+
+          <button
+            onclick="changeQty(${index},-1)"
+          >
+            −
+          </button>
+
           ${item.qty}
-          <button onclick="changeQty(${index},1)">+</button>
+
+          <button
+            onclick="changeQty(${index},1)"
+          >
+            +
+          </button>
+
         </div>
 
       </div>
+
     `;
 
   });
 
-  const delivery = subtotal > 0 ? 30 : 0;
 
-  const handlingCharge = subtotal > 0 ? 5 : 0;
+  const delivery =
+    subtotal > 0 ? 30 : 0;
 
-  const total = subtotal + delivery + handlingCharge;
+  const handlingCharge =
+    subtotal > 0 ? 5 : 0;
 
-  document.getElementById("cartCount").innerText=count;
+  const total =
+    subtotal +
+    delivery +
+    handlingCharge;
 
-  document.getElementById("subtotal").innerText=subtotal;
 
-  document.getElementById("delivery").innerText=delivery;
+  document.getElementById(
+    "cartCount"
+  ).innerText=count;
 
-  document.getElementById("handlingCharge").innerText=handlingCharge;
+  document.getElementById(
+    "subtotal"
+  ).innerText=subtotal;
 
-  document.getElementById("total").innerText=total;
+  document.getElementById(
+    "delivery"
+  ).innerText=delivery;
+
+  document.getElementById(
+    "handlingCharge"
+  ).innerText=handlingCharge;
+
+  document.getElementById(
+    "total"
+  ).innerText=total;
+
 }
 
+
+/* =========================
+   CHANGE QUANTITY
+========================= */
 
 function changeQty(index,change){
 
   cart[index].qty += change;
 
   if(cart[index].qty<=0){
+
     cart.splice(index,1);
+
   }
 
   updateCart();
+
 }
 
+
+/* =========================
+   GO TO CART
+========================= */
 
 function goCart(){
 
   document.getElementById("cart")
-  .scrollIntoView({
-    behavior:"smooth"
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchProducts(){
+
+  const text =
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase();
+
+
+  const allProducts =
+    products.concat(vegetables);
+
+
+  const filtered =
+    allProducts.filter(
+      p=>p.name
+        .toLowerCase()
+        .includes(text)
+    );
+
+
+  const normalProducts =
+    filtered.filter(
+      p=>products.includes(p)
+    );
+
+
+  const vegetableProducts =
+    filtered.filter(
+      p=>vegetables.includes(p)
+    );
+
+
+  displayProducts(normalProducts);
+
+  const vegetableBox =
+    document.getElementById("vegetables");
+
+  vegetableBox.innerHTML="";
+
+
+  vegetableProducts.forEach(p=>{
+
+    vegetableBox.innerHTML += `
+
+      <div class="product">
+
+        <img
+          class="product-img"
+          src="${p.image}"
+          alt="${p.name}"
+        >
+
+        <h3>${p.name}</h3>
+
+        <div class="price">
+          ₹${p.price}
+        </div>
+
+        <button
+          class="add"
+          onclick="addProductToCart('${p.name.replace(/'/g,"\\'")}')"
+        >
+          Add to Cart
+        </button>
+
+      </div>
+
+    `;
+
   });
 
 }
 
 
-function searchProducts(){
-
-  const text=document
-    .getElementById("search")
-    .value
-    .toLowerCase();
-
-  const filtered=products.filter(
-    p=>p.name.toLowerCase().includes(text)
-  );
-
-  displayProducts(filtered);
-}
-
+/* =========================
+   PLACE ORDER
+========================= */
 
 function placeOrder(){
 
   if(cart.length===0){
 
-    alert("Please add products to cart first.");
+    alert(
+      "Please add products to cart first."
+    );
 
     return;
   }
 
-  const name=document
-    .getElementById("name")
-    .value
-    .trim();
 
-  const phone=document
-    .getElementById("phone")
-    .value
-    .trim();
+  const name =
+    document
+      .getElementById("name")
+      .value
+      .trim();
 
-  const address=document
-    .getElementById("address")
-    .value
-    .trim();
 
-  const payment=document
-    .getElementById("payment")
-    .value;
+  const phone =
+    document
+      .getElementById("phone")
+      .value
+      .trim();
+
+
+  const address =
+    document
+      .getElementById("address")
+      .value
+      .trim();
+
+
+  const payment =
+    document
+      .getElementById("payment")
+      .value;
 
 
   if(!name || !phone || !address){
@@ -597,14 +1044,17 @@ function placeOrder(){
 
   cart.forEach(item=>{
 
-    const itemTotal=item.price * item.qty;
+    const itemTotal =
+      item.price * item.qty;
 
     subtotal += itemTotal;
+
 
     orderItems +=
       "• "+item.name+
       " × "+item.qty+
-      " = ₹"+itemTotal+"\n";
+      " = ₹"+itemTotal+
+      "\n";
 
   });
 
@@ -612,8 +1062,10 @@ function placeOrder(){
   const delivery =
     subtotal > 0 ? 30 : 0;
 
+
   const handlingCharge =
     subtotal > 0 ? 5 : 0;
+
 
   const total =
     subtotal +
@@ -628,23 +1080,35 @@ function placeOrder(){
       "Products:\n"+
       orderItems+
       "\n"+
-      "Subtotal: ₹"+subtotal+"\n"+
-      "Delivery: ₹"+delivery+"\n"+
-      "Handling Charge: ₹"+handlingCharge+"\n"+
-      "Total: ₹"+total+"\n\n"+
-      "Name: "+name+"\n"+
-      "Mobile: "+phone+"\n"+
-      "Address: "+address+"\n"+
+      "Subtotal: ₹"+subtotal+
+      "\n"+
+      "Delivery: ₹"+delivery+
+      "\n"+
+      "Handling Charge: ₹"+
+      handlingCharge+
+      "\n"+
+      "Total: ₹"+total+
+      "\n\n"+
+      "Name: "+name+
+      "\n"+
+      "Mobile: "+phone+
+      "\n"+
+      "Address: "+address+
+      "\n"+
       locationText+
-      "Payment: "+payment.toUpperCase();
+      "Payment: "+
+      payment.toUpperCase();
 
 
-    const whatsappNumber="919705335701";
+    const whatsappNumber=
+      "919705335701";
 
 
     window.location.href =
-      "https://wa.me/"+whatsappNumber+
-      "?text="+encodeURIComponent(message);
+      "https://wa.me/"+
+      whatsappNumber+
+      "?text="+
+      encodeURIComponent(message);
 
   }
 
@@ -655,14 +1119,14 @@ function placeOrder(){
 
       function(position){
 
-        const lat=
+        const lat =
           position.coords.latitude;
 
-        const lon=
+        const lon =
           position.coords.longitude;
 
 
-        const locationLink=
+        const locationLink =
           "https://www.google.com/maps?q="+
           lat+
           ","+
@@ -701,40 +1165,75 @@ function placeOrder(){
 }
 
 
-displayProducts();
+/* =========================
+   FEEDBACK
+========================= */
 
-updateCart();
-  
 function sendFeedback(){
 
   const rating =
-    document.getElementById("feedbackRating").value;
+    document
+      .getElementById("feedbackRating")
+      .value;
+
 
   const feedback =
-    document.getElementById("feedbackText").value.trim();
+    document
+      .getElementById("feedbackText")
+      .value
+      .trim();
+
 
   if(!rating){
-    alert("Please select a rating.");
+
+    alert(
+      "Please select a rating."
+    );
+
     return;
   }
 
+
   if(!feedback){
-    alert("Please write your feedback.");
+
+    alert(
+      "Please write your feedback."
+    );
+
     return;
   }
+
 
   const message =
     "⭐ QUICKBASKET FEEDBACK\n\n"+
-    "Rating: "+rating+"/5\n"+
+    "Rating: "+rating+
+    "/5\n"+
     "Feedback: "+feedback;
 
-  const whatsappNumber="919705335701";
+
+  const whatsappNumber =
+    "919705335701";
+
 
   window.location.href =
-    "https://wa.me/"+whatsappNumber+
-    "?text="+encodeURIComponent(message);
+    "https://wa.me/"+
+    whatsappNumber+
+    "?text="+
+    encodeURIComponent(message);
+
 }
-  
+
+
+/* =========================
+   START WEBSITE
+========================= */
+
+displayProducts();
+
+displayVegetables();
+
+updateCart();
+
 </script>
 
 </body>
