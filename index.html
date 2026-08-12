@@ -534,7 +534,8 @@ function placeOrder(){
   });
 
   const delivery = subtotal > 0 ? 30 : 0;
-  const total = subtotal + delivery;
+const handlingCharge = subtotal > 0 ? 5 : 0;
+const total = subtotal + delivery + handlingCharge;
 
   function openWhatsApp(locationText){
 
