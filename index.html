@@ -188,6 +188,7 @@ header{
   border-radius:12px;
   text-align:center;
   color:#777;
+  grid-column:1/-1;
 }
 
 .cart{
@@ -269,6 +270,7 @@ footer{
 <body>
 
 <header>
+
   <div class="top">
 
     <div>
@@ -281,937 +283,1312 @@ footer{
     </button>
 
   </div>
+
 </header>
+
 
 <div class="container">
 
-<input
-  class="search"
-  id="search"
-  type="text"
-  placeholder="🔍 Search products..."
-  oninput="searchProducts()"
->
-
-<div class="categories">
-
-<button class="category-btn active" onclick="showCategory('all',this)">
-<span>🛍️</span>
-All
-</button>
-
-<button class="category-btn" onclick="showCategory('dairy',this)">
-<span>🥛</span>
-Milk
-</button>
-
-<button class="category-btn" onclick="showCategory('vegetables',this)">
-<span>🥦</span>
-Vegetables
-</
+  <input
+    class="search"
+    id="search"
+    type="text"
+    placeholder="🔍 Search products..."
+    oninput="searchProducts()"
+  >
 
 
-  /* =========================
-   DAIRY
-========================= */
+  <div class="categories">
+
+    <button class="category-btn active"
+      onclick="showCategory('all',this)">
+      <span>🛍️</span>
+      All
+    </button>
+
+    <button class="category-btn"
+      onclick="showCategory('dairy',this)">
+      <span>🥛</span>
+      Milk
+    </button>
+
+    <button class="category-btn"
+      onclick="showCategory('vegetables',this)">
+      <span>🥦</span>
+      Vegetables
+    </button>
+
+    <button class="category-btn"
+      onclick="showCategory('fruits',this)">
+      <span>🍎</span>
+      Fruits
+    </button>
+
+    <button class="category-btn"
+      onclick="showCategory('bakery',this)">
+      <span>🍞</span>
+      Bakery
+    </button>
+
+    <button class="category-btn"
+      onclick="showCategory('household',this)">
+      <span>🧹</span>
+      Household
+    </button>
+
+    <button class="category-btn"
+      onclick="showCategory('electronics',this)">
+      <span>📱</span>
+      Electronics
+    </button>
+
+    <button class="category-btn"
+      onclick="showCategory('other',this)">
+      <span>🛒</span>
+      Other
+    </button>
+
+  </div>
+
+
+  <div class="banner">
+
+    <h1>Grocery at your doorstep 🛍️</h1>
+
+    <p>
+      Fresh groceries delivered quickly.
+    </p>
+
+  </div>
+
+
+  <div class="section-head">
+
+    <h2 id="categoryTitle">
+      🛍️ All Products
+    </h2>
+
+    <small id="productCount">
+      Products
+    </small>
+
+  </div>
+
+
+  <div
+    class="products"
+    id="products">
+  </div>
+
+
+  <!-- CART -->
+
+  <div class="cart" id="cart">
+
+    <h2>🛒 Your Cart</h2>
+
+    <div id="cartItems">
+      <p>Your cart is empty.</p>
+    </div>
+
+    <div class="total">
+      Subtotal: ₹<span id="subtotal">0</span>
+    </div>
+
+    <div class="total">
+      Delivery: ₹<span id="delivery">0</span>
+    </div>
+
+    <div class="total">
+      Handling Charge: ₹<span id="handlingCharge">0</span>
+    </div>
+
+    <div class="total">
+      Total: ₹<span id="total">0</span>
+    </div>
+
+
+    <div style="margin-top:20px;">
+
+      <h2>📍 Delivery Details</h2>
+
+      <input
+        type="text"
+        id="name"
+        placeholder="Your Name"
+      >
+
+      <input
+        type="tel"
+        id="phone"
+        placeholder="Mobile Number"
+      >
+
+      <textarea
+        id="address"
+        placeholder="Enter complete delivery address"
+      ></textarea>
+
+      <select id="payment">
+
+        <option value="cod">
+          💵 Cash on Delivery
+        </option>
+
+        <option value="upi">
+          📱 UPI Payment
+        </option>
+
+      </select>
+
+      <button
+        class="place-order"
+        onclick="placeOrder()">
+        Place Order
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- FEEDBACK -->
+
+  <div class="cart">
+
+    <h2>⭐ Give Feedback</h2>
+
+    <select id="feedbackRating">
+
+      <option value="">
+        Select Rating
+      </option>
+
+      <option value="5">
+        ⭐⭐⭐⭐⭐ 5 Stars
+      </option>
+
+      <option value="4">
+        ⭐⭐⭐⭐ 4 Stars
+      </option>
+
+      <option value="3">
+        ⭐⭐⭐ 3 Stars
+      </option>
+
+      <option value="2">
+        ⭐⭐ 2 Stars
+      </option>
+
+      <option value="1">
+        ⭐ 1 Star
+      </option>
+
+    </select>
+
+    <textarea
+      id="feedbackText"
+      placeholder="Tell us about your experience...">
+    </textarea>
+
+    <button
+      class="place-order"
+      onclick="sendFeedback()">
+      Send Feedback
+    </button>
+
+  </div>
+
+</div>
+
+
+<footer>
+  © 2026 QuickBasket Grocery Delivery
+</footer>
+
+
+<script>
+
+/* =====================================================
+   🥛 DAIRY PRODUCTS
+===================================================== */
 
 const dairyProducts = [
 
-{
-name:"Heritage Daily Health Toned Milk 500 ml",
-search:"Heritage Daily Health Toned Milk 500 ml हेरिटेज दूध मिल्क",
-price:33,
-image:"IMG_20260811_192811.png"
-},
+  {
+    name:"Heritage Daily Health Toned Milk 500 ml",
+    search:"Heritage Daily Health Toned Milk 500 ml हेरिटेज दूध मिल्क",
+    price:33,
+    image:"IMG_20260811_192811.png"
+  },
 
-{
-name:"Heritage Daily Health Toned Milk 1 Litre",
-search:"Heritage Daily Health Toned Milk 1 Litre हेरिटेज दूध मिल्क",
-price:66,
-image:"IMG_20260811_192811.png"
-},
+  {
+    name:"Heritage Daily Health Toned Milk 1 Litre",
+    search:"Heritage Daily Health Toned Milk 1 Litre हेरिटेज दूध मिल्क",
+    price:66,
+    image:"IMG_20260811_192811.png"
+  },
 
-{
-name:"Amul Taaza Milky Milk 500 ml",
-search:"Amul Taaza Milky Milk 500 ml अमूल दूध मिल्क",
-price:30,
-image:"IMG_20260811_123753.png"
-},
+  {
+    name:"Amul Taaza Milky Milk 500 ml",
+    search:"Amul Taaza Milky Milk 500 ml अमूल दूध मिल्क",
+    price:30,
+    image:"IMG_20260811_123753.png"
+  },
 
-{
-name:"Amul Taaza Milky Milk 1 Litre",
-search:"Amul Taaza Milky Milk 1 Litre अमूल दूध मिल्क",
-price:60,
-image:"IMG_20260811_123753.png"
-},
+  {
+    name:"Amul Taaza Milky Milk 1 Litre",
+    search:"Amul Taaza Milky Milk 1 Litre अमूल दूध मिल्क",
+    price:60,
+    image:"IMG_20260811_123753.png"
+  },
 
-{
-name:"Amul Dahi 700 g",
-search:"Amul Dahi 700 g अमूल दही curd",
-price:65,
-image:"IMG_20260812_151518.png"
-},
+  {
+    name:"Amul Dahi 700 g",
+    search:"Amul Dahi 700 g अमूल दही curd",
+    price:65,
+    image:"IMG_20260812_151518.png"
+  },
 
-{
-name:"Heritage Total Curd 500 g",
-search:"Heritage Total Curd 500 g हेरिटेज दही curd",
-price:50,
-image:"IMG_20260812_151633.png"
-}
+  {
+    name:"Heritage Total Curd 500 g",
+    search:"Heritage Total Curd 500 g हेरिटेज दही curd",
+    price:50,
+    image:"IMG_20260812_151633.png"
+  }
 
 ];
 
 
-/* =========================
-   VEGETABLES
-   DAILY PRICE CHANGE HERE
-========================= */
+/* =====================================================
+   🥦 VEGETABLES
+   ⭐ DAILY RATE CHANGE ONLY HERE
+===================================================== */
 
 const vegetables = [
 
-{
-name:"Green Chilli 250 g",
-search:"Green Chilli 250 g हरी मिर्च",
-price:30,
-image:"IMG_20260812_212834.png"
-},
+  {
+    name:"Green Chilli 250 g",
+    search:"Green Chilli 250 g हरी मिर्च mirchi",
+    price:30,
+    image:"IMG_20260812_212834.png"
+  },
 
-{
-name:"Capsicum 500 g",
-search:"Capsicum 500 g शिमला मिर्च",
-price:50,
-image:"IMG_20260812_213001.png"
-},
+  {
+    name:"Capsicum 500 g",
+    search:"Capsicum 500 g शिमला मिर्च",
+    price:50,
+    image:"IMG_20260812_213001.png"
+  },
 
-{
-name:"Tomato 1 KG",
-search:"Tomato 1 KG टमाटर",
-price:50,
-image:"IMG_20260812_213053.png"
-},
+  {
+    name:"Tomato 1 KG",
+    search:"Tomato 1 KG टमाटर tamatar",
+    price:50,
+    image:"IMG_20260812_213053.png"
+  },
 
-{
-name:"Carrot 1 KG",
-search:"Carrot 1 KG गाजर",
-price:60,
-image:"IMG_20260812_213129.png"
-},
+  {
+    name:"Carrot 1 KG",
+    search:"Carrot 1 KG गाजर",
+    price:60,
+    image:"IMG_20260812_213129.png"
+  },
 
-{
-name:"Potato 1 KG",
-search:"Potato 1 KG आलू",
-price:40,
-image:"IMG_20260812_213426.png"
-},
+  {
+    name:"Potato 1 KG",
+    search:"Potato 1 KG आलू aloo",
+    price:40,
+    image:"IMG_20260812_213426.png"
+  },
 
-{
-name:"Onion 1 KG",
-search:"Onion 1 KG प्याज प्याज़",
-price:40,
-image:"IMG_20260812_213603.png"
-},
+  {
+    name:"Onion 1 KG",
+    search:"Onion 1 KG प्याज प्याज़ onion",
+    price:40,
+    image:"IMG_20260812_213603.png"
+  },
 
-{
-name:"Bottle Gourd 1 KG",
-search:"Bottle Gourd 1 KG लौकी",
-price:40,
-image:"IMG_20260812_213731.png"
-},
+  {
+    name:"Bottle Gourd 1 KG",
+    search:"Bottle Gourd 1 KG लौकी lauki",
+    price:40,
+    image:"IMG_20260812_213731.png"
+  },
 
-{
-name:"Lady Finger 500 g",
-search:"Lady Finger 500 g Bhindi भिंडी",
-price:40,
-image:"IMG_20260812_213807.png"
-},
+  {
+    name:"Lady Finger 500 g",
+    search:"Lady Finger 500 g Bhindi भिंडी",
+    price:40,
+    image:"IMG_20260812_213807.png"
+  },
 
-{
-name:"Ginger 250 g",
-search:"Ginger 250 g अदरक",
-price:30,
-image:"IMG_20260812_214026.png"
-},
+  {
+    name:"Ginger 250 g",
+    search:"Ginger 250 g अदरक adrak",
+    price:30,
+    image:"IMG_20260812_214026.png"
+  },
 
-{
-name:"Cucumber 1 KG",
-search:"Cucumber 1 KG खीरा",
-price:40,
-image:"IMG_20260812_214148.png"
-},
+  {
+    name:"Cucumber 1 KG",
+    search:"Cucumber 1 KG खीरा kheera",
+    price:40,
+    image:"IMG_20260812_214148.png"
+  },
 
-{
-name:"Green Beans 500 g",
-search:"Green Beans 500 g हरी बीन्स",
-price:50,
-image:"IMG_20260812_214448.png"
-},
+  {
+    name:"Green Beans 500 g",
+    search:"Green Beans 500 g हरी बीन्स beans",
+    price:50,
+    image:"IMG_20260812_214448.png"
+  },
 
-{
-name:"Garlic 250 g",
-search:"Garlic 250 g लहसुन",
-price:40,
-image:"IMG_20260812_214520.png"
-},
+  {
+    name:"Garlic 250 g",
+    search:"Garlic 250 g लहसुन lehsun",
+    price:40,
+    image:"IMG_20260812_214520.png"
+  },
 
-{
-name:"Cabbage 1 KG",
-search:"Cabbage 1 KG पत्ता गोभी",
-price:40,
-image:"IMG_20260812_214608.png"
-},
+  {
+    name:"Cabbage 1 KG",
+    search:"Cabbage 1 KG पत्ता गोभी patta gobhi",
+    price:40,
+    image:"IMG_20260812_214608.png"
+  },
 
-{
-name:"Sweet Corn 1 Piece",
-search:"Sweet Corn 1 Piece स्वीट कॉर्न मकई",
-price:30,
-image:"IMG_20260812_214713.png"
-},
+  {
+    name:"Sweet Corn 1 Piece",
+    search:"Sweet Corn 1 Piece स्वीट कॉर्न मकई corn",
+    price:30,
+    image:"IMG_20260812_214713.png"
+  },
 
-{
-name:"Radish 1 KG",
-search:"Radish 1 KG मूली",
-price:40,
-image:"IMG_20260812_214832.png"
-},
+  {
+    name:"Radish 1 KG",
+    search:"Radish 1 KG मूली muli",
+    price:40,
+    image:"IMG_20260812_214832.png"
+  },
 
-{
-name:"Brinjal 1 KG",
-search:"Brinjal 1 KG बैंगन",
-price:50,
-image:"IMG_20260812_214937.png"
-},
+  {
+    name:"Brinjal 1 KG",
+    search:"Brinjal 1 KG बैंगन baingan",
+    price:50,
+    image:"IMG_20260812_214937.png"
+  },
 
-{
-name:"Coriander 1 Bunch",
-search:"Coriander 1 Bunch धनिया",
-price:20,
-image:"IMG_20260812_215325.png"
-},
+  {
+    name:"Coriander 1 Bunch",
+    search:"Coriander 1 Bunch धनिया dhaniya",
+    price:20,
+    image:"IMG_20260812_215325.png"
+  },
 
-{
-name:"Drumstick 500 g",
-search:"Drumstick 500 g सहजन",
-price:50,
-image:"IMG_20260812_215445.png"
-},
+  {
+    name:"Drumstick 500 g",
+    search:"Drumstick 500 g सहजन sahjan",
+    price:50,
+    image:"IMG_20260812_215445.png"
+  },
 
-{
-name:"Pumpkin 1 KG",
-search:"Pumpkin 1 KG कद्दू",
-price:40,
-image:"IMG_20260812_215618.png"
-},
+  {
+    name:"Pumpkin 1 KG",
+    search:"Pumpkin 1 KG कद्दू kaddu",
+    price:40,
+    image:"IMG_20260812_215618.png"
+  },
 
-{
-name:"Sweet Potato 1 KG",
-search:"Sweet Potato 1 KG शकरकंद",
-price:50,
-image:"IMG_20260812_215734.png"
-},
+  {
+    name:"Sweet Potato 1 KG",
+    search:"Sweet Potato 1 KG शकरकंद shakarkand",
+    price:50,
+    image:"IMG_20260812_215734.png"
+  },
 
-{
-name:"Spinach 1 Bunch",
-search:"Spinach 1 Bunch पालक",
-price:20,
-image:"IMG_20260812_215821.png"
-},
+  {
+    name:"Spinach 1 Bunch",
+    search:"Spinach 1 Bunch पालक palak",
+    price:20,
+    image:"IMG_20260812_215821.png"
+  },
 
-{
-name:"Beetroot 1 KG",
-search:"Beetroot 1 KG चुकंदर",
-price:60,
-image:"IMG_20260812_215955.png"
-},
+  {
+    name:"Beetroot 1 KG",
+    search:"Beetroot 1 KG चुकंदर chukandar",
+    price:60,
+    image:"IMG_20260812_215955.png"
+  },
 
-{
-name:"Cauliflower 1 Piece",
-search:"Cauliflower 1 Piece फूलगोभी",
-price:50,
-image:"IMG_20260812_220104.png"
-},
+  {
+    name:"Cauliflower 1 Piece",
+    search:"Cauliflower 1 Piece फूलगोभी gobhi",
+    price:50,
+    image:"IMG_20260812_220104.png"
+  },
 
-{
-name:"Ridge Gourd 1 KG",
-search:"Ridge Gourd 1 KG तुरई",
-price:50,
-image:"IMG_20260812_220214.png"
-},
+  {
+    name:"Ridge Gourd 1 KG",
+    search:"Ridge Gourd 1 KG तुरई turai",
+    price:50,
+    image:"IMG_20260812_220214.png"
+  },
 
-{
-name:"Bitter Gourd 1 KG",
-search:"Bitter Gourd 1 KG करेला",
-price:60,
-image:"IMG_20260812_220312.png"
-}
+  {
+    name:"Bitter Gourd 1 KG",
+    search:"Bitter Gourd 1 KG करेला karela",
+    price:60,
+    image:"IMG_20260812_220312.png"
+  }
 
 ];
 
 
-/* =========================
-   BAKERY
-========================= */
+/* =====================================================
+   🍎 FRUITS
+===================================================== */
+
+const fruitsProducts = [];
+
+
+/* =====================================================
+   🍞 BAKERY
+===================================================== */
 
 const bakeryProducts = [
 
-{
-name:"Modern White Bread 400 g",
-search:"Modern White Bread 400 g मॉडर्न व्हाइट ब्रेड",
-price:60,
-image:"IMG_20260812_143847.png"
-},
+  {
+    name:"Modern White Bread 400 g",
+    search:"Modern White Bread 400 g मॉडर्न ब्रेड bread",
+    price:60,
+    image:"IMG_20260812_143847.png"
+  },
 
-{
-name:"English Oven Milk Bread 400 g",
-search:"English Oven Milk Bread 400 g इंग्लिश ओवन मिल्क ब्रेड",
-price:55,
-image:"IMG_20260812_143822.png"
-}
+  {
+    name:"English Oven Milk Bread 400 g",
+    search:"English Oven Milk Bread 400 g इंग्लिश ओवन ब्रेड bread",
+    price:55,
+    image:"IMG_20260812_143822.png"
+  }
 
 ];
 
 
-/* =========================
-   EMPTY CATEGORIES
-========================= */
+/* =====================================================
+   🧹 HOUSEHOLD
+===================================================== */
 
-const fruitsProducts=[];
-const householdProducts=[];
-const electronicsProducts=[];
-const otherProducts=[];
+const householdProducts = [];
 
 
-/* =========================
+/* =====================================================
+   📱 ELECTRONICS
+===================================================== */
+
+const electronicsProducts = [];
+
+
+/* =====================================================
+   🛒 OTHER
+===================================================== */
+
+const otherProducts = [];
+
+
+/* =====================================================
    ALL PRODUCTS
-========================= */
+===================================================== */
 
 function allProducts(){
 
-return [
-...dairyProducts,
-...vegetables,
-...fruitsProducts,
-...bakeryProducts,
-...householdProducts,
-...electronicsProducts,
-...otherProducts
-];
+  return [
+
+    ...dairyProducts,
+    ...vegetables,
+    ...fruitsProducts,
+    ...bakeryProducts,
+    ...householdProducts,
+    ...electronicsProducts,
+    ...otherProducts
+
+  ];
 
 }
 
 
-/* =========================
+/* =====================================================
    PRODUCT IDs
-========================= */
+===================================================== */
 
 let idCounter=0;
 
 allProducts().forEach(product=>{
-product.id=idCounter++;
+
+  product.id=idCounter++;
+
 });
 
 
 let cart=[];
+
 let currentCategory="all";
 
 
-/* =========================
+/* =====================================================
    PRODUCT CARD
-   CARD PAR SIRF ENGLISH
-========================= */
+   ⭐ CARD PAR SIRF ENGLISH
+===================================================== */
 
 function productCard(product){
 
-return `
+  return `
 
-<div class="product">
+    <div class="product">
 
-<img
-class="product-img"
-src="${product.image}"
-alt="${product.name}"
->
+      <img
+        class="product-img"
+        src="${product.image}"
+        alt="${product.name}"
+      >
 
-<h3>
-${product.name}
-</h3>
+      <h3>
+        ${product.name}
+      </h3>
 
-<div class="price">
-₹${product.price}
-</div>
+      <div class="price">
+        ₹${product.price}
+      </div>
 
-<button
-class="add"
-onclick="addToCart(${product.id})"
->
-ADD
-</button>
+      <button
+        class="add"
+        onclick="addToCart(${product.id})"
+      >
+        ADD
+      </button>
 
-</div>
+    </div>
 
-`;
+  `;
 
 }
 
 
-/* =========================
-   DISPLAY
-========================= */
+/* =====================================================
+   DISPLAY PRODUCTS
+===================================================== */
 
 function displayProducts(list){
 
-const box=document.getElementById("products");
+  const box=
+    document.getElementById("products");
 
-box.innerHTML="";
+  box.innerHTML="";
 
-if(list.length===0){
 
-box.innerHTML=`
-<div class="empty">
-No products found.
-</div>
-`;
+  if(list.length===0){
 
-document.getElementById("productCount").innerText="0 Products";
+    box.innerHTML=`
 
-return;
+      <div class="empty">
+        No products found.
+      </div>
+
+    `;
+
+    document.getElementById("productCount")
+      .innerText="0 Products";
+
+    return;
+
+  }
+
+
+  list.forEach(product=>{
+
+    box.innerHTML +=
+      productCard(product);
+
+  });
+
+
+  document.getElementById("productCount")
+    .innerText=
+    list.length+" Products";
+
 }
 
-list.forEach(product=>{
-box.innerHTML+=productCard(product);
-});
 
-document.getElementById("productCount").innerText=
-list.length+" Products";
-
-}
-
-
-/* =========================
+/* =====================================================
    CATEGORY
-========================= */
+===================================================== */
 
 function showCategory(category,button){
 
-currentCategory=category;
-
-document
-.querySelectorAll(".category-btn")
-.forEach(btn=>{
-btn.classList.remove("active");
-});
-
-button.classList.add("active");
-
-document.getElementById("search").value="";
-
-let list=[];
-let title="";
+  currentCategory=category;
 
 
-if(category==="all"){
-list=allProducts();
-title="🛍️ All Products";
-}
+  document
+    .querySelectorAll(".category-btn")
+    .forEach(btn=>{
 
-if(category==="dairy"){
-list=dairyProducts;
-title="🥛 Milk & Dairy";
-}
+      btn.classList.remove("active");
 
-if(category==="vegetables"){
-list=vegetables;
-title="🥦 Vegetables";
-}
-
-if(category==="fruits"){
-list=fruitsProducts;
-title="🍎 Fruits";
-}
-
-if(category==="bakery"){
-list=bakeryProducts;
-title="🍞 Bakery";
-}
-
-if(category==="household"){
-list=householdProducts;
-title="🧹 Household";
-}
-
-if(category==="electronics"){
-list=electronicsProducts;
-title="📱 Electronics";
-}
-
-if(category==="other"){
-list=otherProducts;
-title="🛒 Other";
-}
-
-document.getElementById("categoryTitle").innerText=title;
-
-displayProducts(list);
-
-}
+    });
 
 
-/* =========================
-   SEARCH
-   HINDI + ENGLISH
-========================= */
+  button.classList.add("active");
 
-function searchProducts(){
 
-const text=
-document.getElementById("search")
-.value
-.toLowerCase()
-.trim();
+  document.getElementById("search")
+    .value="";
 
-if(text===""){
 
-showCurrentCategory();
+  let list=[];
+  let title="";
 
-return;
-}
 
-const results=allProducts().filter(product=>{
+  if(category==="all"){
 
-return product.search
-.toLowerCase()
-.includes(text);
+    list=allProducts();
+    title="🛍️ All Products";
 
-});
+  }
 
-document.getElementById("categoryTitle").innerText=
-"🔍 Search Results";
 
-displayProducts(results);
+  if(category==="dairy"){
+
+    list=dairyProducts;
+    title="🥛 Milk & Dairy";
+
+  }
+
+
+  if(category==="vegetables"){
+
+    list=vegetables;
+    title="🥦 Vegetables";
+
+  }
+
+
+  if(category==="fruits"){
+
+    list=fruitsProducts;
+    title="🍎 Fruits";
+
+  }
+
+
+  if(category==="bakery"){
+
+    list=bakeryProducts;
+    title="🍞 Bakery";
+
+  }
+
+
+  if(category==="household"){
+
+    list=householdProducts;
+    title="🧹 Household";
+
+  }
+
+
+  if(category==="electronics"){
+
+    list=electronicsProducts;
+    title="📱 Electronics";
+
+  }
+
+
+  if(category==="other"){
+
+    list=otherProducts;
+    title="🛒 Other";
+
+  }
+
+
+  document.getElementById("categoryTitle")
+    .innerText=title;
+
+
+  displayProducts(list);
 
 }
 
+
+/* =====================================================
+   CURRENT CATEGORY
+===================================================== */
 
 function showCurrentCategory(){
 
-let list=[];
+  let list=[];
 
-if(currentCategory==="all")
-list=allProducts();
 
-if(currentCategory==="dairy")
-list=dairyProducts;
+  if(currentCategory==="all")
+    list=allProducts();
 
-if(currentCategory==="vegetables")
-list=vegetables;
+  if(currentCategory==="dairy")
+    list=dairyProducts;
 
-if(currentCategory==="fruits")
-list=fruitsProducts;
+  if(currentCategory==="vegetables")
+    list=vegetables;
 
-if(currentCategory==="bakery")
-list=bakeryProducts;
+  if(currentCategory==="fruits")
+    list=fruitsProducts;
 
-if(currentCategory==="household")
-list=householdProducts;
+  if(currentCategory==="bakery")
+    list=bakeryProducts;
 
-if(currentCategory==="electronics")
-list=electronicsProducts;
+  if(currentCategory==="household")
+    list=householdProducts;
 
-if(currentCategory==="other")
-list=otherProducts;
+  if(currentCategory==="electronics")
+    list=electronicsProducts;
 
-displayProducts(list);
+  if(currentCategory==="other")
+    list=otherProducts;
+
+
+  displayProducts(list);
 
 }
 
-/* =========================
+
+/* =====================================================
+   SEARCH
+   ⭐ HINDI + ENGLISH SEARCH
+===================================================== */
+
+function searchProducts(){
+
+  const text=
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  if(text===""){
+
+    showCurrentCategory();
+
+    return;
+
+  }
+
+
+  const results=
+    allProducts().filter(product=>{
+
+      return product.search
+        .toLowerCase()
+        .includes(text);
+
+    });
+
+
+  document.getElementById("categoryTitle")
+    .innerText=
+    "🔍 Search Results";
+
+
+  displayProducts(results);
+
+}
+
+
+/* =====================================================
    ADD TO CART
-========================= */
+===================================================== */
 
 function addToCart(id){
 
-const product=
-allProducts().find(item=>item.id===id);
+  const product=
+    allProducts().find(
+      item=>item.id===id
+    );
 
-if(!product)return;
 
-const existing=
-cart.find(item=>item.id===id);
+  if(!product)
+    return;
 
-if(existing){
 
-existing.qty++;
+  const existing=
+    cart.find(
+      item=>item.id===id
+    );
 
-}else{
 
-cart.push({
-...product,
-qty:1
-});
+  if(existing){
+
+    existing.qty++;
+
+  }
+
+  else{
+
+    cart.push({
+
+      ...product,
+
+      qty:1
+
+    });
+
+  }
+
+
+  updateCart();
+
+
+  alert(
+    product.name+
+    " added to cart!"
+  );
 
 }
 
-updateCart();
 
-alert(product.name+" added to cart!");
-
-}
-
-
-/* =========================
+/* =====================================================
    UPDATE CART
-========================= */
+===================================================== */
 
 function updateCart(){
 
-const box=document.getElementById("cartItems");
+  const box=
+    document.getElementById("cartItems");
 
-box.innerHTML="";
+  box.innerHTML="";
 
-let subtotal=0;
-let count=0;
 
-if(cart.length===0){
+  let subtotal=0;
+  let count=0;
 
-box.innerHTML="<p>Your cart is empty.</p>";
+
+  if(cart.length===0){
+
+    box.innerHTML=
+      "<p>Your cart is empty.</p>";
+
+  }
+
+
+  cart.forEach((item,index)=>{
+
+    const itemTotal=
+      item.price*item.qty;
+
+
+    subtotal += itemTotal;
+
+    count += item.qty;
+
+
+    box.innerHTML += `
+
+      <div class="cart-item">
+
+        <div>
+
+          <b>
+            ${item.name}
+          </b>
+
+          <br>
+
+          ₹${item.price} × ${item.qty}
+
+        </div>
+
+
+        <div class="qty">
+
+          <button
+            onclick="changeQty(${index},-1)">
+            −
+          </button>
+
+          ${item.qty}
+
+          <button
+            onclick="changeQty(${index},1)">
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+
+  const delivery=
+    subtotal>0 ? 30 : 0;
+
+
+  const handling=
+    subtotal>0 ? 5 : 0;
+
+
+  const total=
+    subtotal+
+    delivery+
+    handling;
+
+
+  document.getElementById("cartCount")
+    .innerText=count;
+
+
+  document.getElementById("subtotal")
+    .innerText=subtotal;
+
+
+  document.getElementById("delivery")
+    .innerText=delivery;
+
+
+  document.getElementById("handlingCharge")
+    .innerText=handling;
+
+
+  document.getElementById("total")
+    .innerText=total;
 
 }
 
-cart.forEach((item,index)=>{
 
-const itemTotal=item.price*item.qty;
-
-subtotal+=itemTotal;
-count+=item.qty;
-
-box.innerHTML+=`
-
-<div class="cart-item">
-
-<div>
-<b>${item.name}</b>
-<br>
-₹${item.price} × ${item.qty}
-</div>
-
-<div class="qty">
-
-<button onclick="changeQty(${index},-1)">
-−
-</button>
-
-${item.qty}
-
-<button onclick="changeQty(${index},1)">
-+
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-
-const delivery=subtotal>0?30:0;
-
-const handling=subtotal>0?5:0;
-
-const total=
-subtotal+
-delivery+
-handling;
-
-document.getElementById("cartCount").innerText=count;
-
-document.getElementById("subtotal").innerText=subtotal;
-
-document.getElementById("delivery").innerText=delivery;
-
-document.getElementById("handlingCharge").innerText=handling;
-
-document.getElementById("total").innerText=total;
-
-}
-
-
-/* =========================
+/* =====================================================
    QUANTITY
-========================= */
+===================================================== */
 
 function changeQty(index,change){
 
-cart[index].qty+=change;
+  cart[index].qty += change;
 
-if(cart[index].qty<=0){
 
-cart.splice(index,1);
+  if(cart[index].qty<=0){
+
+    cart.splice(index,1);
+
+  }
+
+
+  updateCart();
 
 }
 
-updateCart();
 
-}
-
-
-/* =========================
-   GO CART
-========================= */
+/* =====================================================
+   GO TO CART
+===================================================== */
 
 function goCart(){
 
-document
-.getElementById("cart")
-.scrollIntoView({
-behavior:"smooth"
-});
+  document
+    .getElementById("cart")
+    .scrollIntoView({
+
+      behavior:"smooth"
+
+    });
 
 }
 
 
-/* =========================
+/* =====================================================
    PLACE ORDER
-========================= */
+===================================================== */
 
 function placeOrder(){
 
-if(cart.length===0){
+  if(cart.length===0){
 
-alert("Please add products to cart first.");
+    alert(
+      "Please add products to cart first."
+    );
 
-return;
+    return;
+
+  }
+
+
+  const name=
+    document
+      .getElementById("name")
+      .value
+      .trim();
+
+
+  const phone=
+    document
+      .getElementById("phone")
+      .value
+      .trim();
+
+
+  const address=
+    document
+      .getElementById("address")
+      .value
+      .trim();
+
+
+  const payment=
+    document
+      .getElementById("payment")
+      .value;
+
+
+  if(!name || !phone || !address){
+
+    alert(
+      "Please enter your name, mobile number and address."
+    );
+
+    return;
+
+  }
+
+
+  if(payment==="upi"){
+
+    alert(
+      "UPI payment gateway is not connected yet."
+    );
+
+    return;
+
+  }
+
+
+  let orderItems="";
+
+  let subtotal=0;
+
+
+  cart.forEach(item=>{
+
+    const itemTotal=
+      item.price*item.qty;
+
+
+    subtotal += itemTotal;
+
+
+    orderItems +=
+      "• "+
+      item.name+
+      " × "+
+      item.qty+
+      " = ₹"+
+      itemTotal+
+      "\n";
+
+  });
+
+
+  const delivery=
+    subtotal>0 ? 30 : 0;
+
+
+  const handling=
+    subtotal>0 ? 5 : 0;
+
+
+  const total=
+    subtotal+
+    delivery+
+    handling;
+
+
+  function openWhatsApp(locationText){
+
+    const message=
+
+      "🛒 NEW QUICKBASKET ORDER\n\n"+
+
+      "Products:\n"+
+      orderItems+
+
+      "\nSubtotal: ₹"+
+      subtotal+
+
+      "\nDelivery: ₹"+
+      delivery+
+
+      "\nHandling Charge: ₹"+
+      handling+
+
+      "\nTotal: ₹"+
+      total+
+
+      "\n\nName: "+
+      name+
+
+      "\nMobile: "+
+      phone+
+
+      "\nAddress: "+
+      address+
+
+      "\n"+
+      locationText+
+
+      "Payment: "+
+      payment.toUpperCase();
+
+
+    const whatsappNumber=
+      "919705335701";
+
+
+    window.location.href=
+      "https://wa.me/"+
+      whatsappNumber+
+      "?text="+
+      encodeURIComponent(message);
+
+  }
+
+
+  if(navigator.geolocation){
+
+    navigator.geolocation.getCurrentPosition(
+
+      function(position){
+
+        const lat=
+          position.coords.latitude;
+
+
+        const lon=
+          position.coords.longitude;
+
+
+        const locationLink=
+          "https://www.google.com/maps?q="+
+          lat+
+          ","+
+          lon;
+
+
+        openWhatsApp(
+
+          "📍 Current Location:\n"+
+          locationLink+
+          "\n"
+
+        );
+
+      },
+
+
+      function(){
+
+        openWhatsApp(
+          "📍 Current Location: Not shared\n"
+        );
+
+      }
+
+    );
+
+  }
+
+  else{
+
+    openWhatsApp(
+      "📍 Current Location: Not available\n"
+    );
+
+  }
 
 }
 
 
-const name=
-document.getElementById("name")
-.value.trim();
-
-const phone=
-document.getElementById("phone")
-.value.trim();
-
-const address=
-document.getElementById("address")
-.value.trim();
-
-const payment=
-document.getElementById("payment").value;
-
-
-if(!name || !phone || !address){
-
-alert(
-"Please enter your name, mobile number and address."
-);
-
-return;
-
-}
-
-
-if(payment==="upi"){
-
-alert(
-"UPI payment gateway is not connected yet."
-);
-
-return;
-
-}
-
-
-let orderItems="";
-let subtotal=0;
-
-
-cart.forEach(item=>{
-
-const itemTotal=
-item.price*item.qty;
-
-subtotal+=itemTotal;
-
-orderItems+=
-"• "+
-item.name+
-" × "+
-item.qty+
-" = ₹"+
-itemTotal+
-"\n";
-
-});
-
-
-const delivery=subtotal>0?30:0;
-
-const handling=subtotal>0?5:0;
-
-const total=
-subtotal+
-delivery+
-handling;
-
-
-function openWhatsApp(locationText){
-
-const message=
-
-"🛒 NEW QUICKBASKET ORDER\n\n"+
-
-"Products:\n"+
-orderItems+
-
-"\nSubtotal: ₹"+
-subtotal+
-
-"\nDelivery: ₹"+
-delivery+
-
-"\nHandling Charge: ₹"+
-handling+
-
-"\nTotal: ₹"+
-total+
-
-"\n\nName: "+
-name+
-
-"\nMobile: "+
-phone+
-
-"\nAddress: "+
-address+
-
-"\n"+
-locationText+
-
-"Payment: "+
-payment.toUpperCase();
-
-
-const whatsappNumber="919705335701";
-
-window.location.href=
-"https://wa.me/"+
-whatsappNumber+
-"?text="+
-encodeURIComponent(message);
-
-}
-
-
-if(navigator.geolocation){
-
-navigator.geolocation.getCurrentPosition(
-
-function(position){
-
-const lat=
-position.coords.latitude;
-
-const lon=
-position.coords.longitude;
-
-const locationLink=
-"https://www.google.com/maps?q="+
-lat+
-","+
-lon;
-
-openWhatsApp(
-"📍 Current Location:\n"+
-locationLink+
-"\n"
-);
-
-},
-
-function(){
-
-openWhatsApp(
-"📍 Current Location: Not shared\n"
-);
-
-}
-
-);
-
-}else{
-
-openWhatsApp(
-"📍 Current Location: Not available\n"
-);
-
-}
-
-}
-
-
-/* =========================
+/* =====================================================
    FEEDBACK
-========================= */
+===================================================== */
 
 function sendFeedback(){
 
-const rating=
-document.getElementById("feedbackRating").value;
-
-const feedback=
-document.getElementById("feedbackText")
-.value.trim();
+  const rating=
+    document
+      .getElementById("feedbackRating")
+      .value;
 
 
-if(!rating){
+  const feedback=
+    document
+      .getElementById("feedbackText")
+      .value
+      .trim();
 
-alert("Please select a rating.");
 
-return;
+  if(!rating){
+
+    alert(
+      "Please select a rating."
+    );
+
+    return;
+
+  }
+
+
+  if(!feedback){
+
+    alert(
+      "Please write your feedback."
+    );
+
+    return;
+
+  }
+
+
+  const message=
+
+    "⭐ QUICKBASKET FEEDBACK\n\n"+
+
+    "Rating: "+
+    rating+
+    "/5\n"+
+
+    "Feedback: "+
+    feedback;
+
+
+  const whatsappNumber=
+    "919705335701";
+
+
+  window.location.href=
+    "https://wa.me/"+
+    whatsappNumber+
+    "?text="+
+    encodeURIComponent(message);
 
 }
 
 
-if(!feedback){
+/* =====================================================
+   START WEBSITE
+===================================================== */
 
-alert("Please write your feedback.");
-
-return;
-
-}
-
-
-const message=
-
-"⭐ QUICKBASKET FEEDBACK\n\n"+
-
-"Rating: "+
-rating+
-"/5\n"+
-
-"Feedback: "+
-feedback;
-
-
-const whatsappNumber="919705335701";
-
-
-window.location.href=
-"https://wa.me/"+
-whatsappNumber+
-"?text="+
-encodeURIComponent(message);
-
-}
-
-
-/* =========================
-   START
-========================= */
-
-displayProducts(allProducts());
+displayProducts(
+  allProducts()
+);
 
 updateCart();
 
