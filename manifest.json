@@ -1,10 +1,18 @@
 {
-  "name": "QuickBasket Grocery Delivery",
-  "short_name": "QuickBasket",
+  "name": "RoyalXQuick Grocery Delivery",
+  "short_name": "RoyalXQuick",
   "description": "Fast grocery delivery",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#008a4c",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "1786646663690.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
 }
