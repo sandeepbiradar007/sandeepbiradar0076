@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>QuickBasket - Grocery Delivery</title>
+<title>QuickBasket</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -15,16 +16,18 @@
 }
 
 body{
-  background:#f5f5f5;
+  background:#f6f6f6;
   color:#222;
 }
 
+/* HEADER */
+
 header{
-  background:#fff;
-  padding:15px;
+  background:white;
+  padding:12px 15px;
   position:sticky;
   top:0;
-  z-index:10;
+  z-index:100;
   box-shadow:0 2px 8px #ddd;
 }
 
@@ -42,84 +45,139 @@ header{
 
 .location{
   font-size:12px;
-  color:#666;
+  color:#777;
+  margin-top:3px;
 }
 
 .cart-btn{
+  border:0;
   background:#008a4c;
   color:white;
-  border:0;
-  padding:10px 14px;
+  padding:10px 13px;
   border-radius:10px;
   font-weight:bold;
 }
 
+/* SEARCH */
+
 .container{
-  max-width:900px;
+  max-width:1000px;
   margin:auto;
-  padding:15px;
-}
-
-.banner{
-  background:#dff7e8;
-  padding:22px;
-  border-radius:15px;
-  margin-bottom:18px;
-}
-
-.banner h1{
-  color:#006b3c;
-  margin-bottom:8px;
+  padding:12px;
 }
 
 .search{
   width:100%;
   padding:14px;
   border:1px solid #ddd;
-  border-radius:10px;
-  margin-bottom:18px;
-  font-size:16px;
-}
-
-.category{
-  margin-top:28px;
-}
-
-.category-title{
-  background:white;
-  padding:14px;
   border-radius:12px;
+  font-size:16px;
   margin-bottom:12px;
-  box-shadow:0 2px 6px #ddd;
-  font-size:20px;
-  font-weight:bold;
 }
+
+/* CATEGORY BAR */
+
+.categories{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:5px 2px 14px;
+  scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+  display:none;
+}
+
+.category-btn{
+  min-width:82px;
+  background:white;
+  border:1px solid #eee;
+  border-radius:12px;
+  padding:9px 8px;
+  text-align:center;
+  font-size:12px;
+  font-weight:bold;
+  box-shadow:0 1px 5px #ddd;
+  cursor:pointer;
+}
+
+.category-btn span{
+  display:block;
+  font-size:27px;
+  margin-bottom:4px;
+}
+
+.category-btn.active{
+  background:#dff7e8;
+  border:2px solid #008a4c;
+  color:#006b3c;
+}
+
+/* BANNER */
+
+.banner{
+  background:#dff7e8;
+  padding:18px;
+  border-radius:15px;
+  margin-bottom:15px;
+}
+
+.banner h1{
+  color:#006b3c;
+  font-size:22px;
+  margin-bottom:6px;
+}
+
+.banner p{
+  color:#555;
+}
+
+/* CATEGORY TITLE */
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:8px 0 12px;
+}
+
+.section-head h2{
+  font-size:20px;
+}
+
+.section-head small{
+  color:#008a4c;
+}
+
+/* PRODUCTS */
 
 .products{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:12px;
+  gap:10px;
 }
 
 .product{
   background:white;
   border-radius:14px;
-  padding:12px;
-  box-shadow:0 2px 8px #ddd;
+  padding:10px;
+  box-shadow:0 2px 7px #ddd;
 }
 
 .product-img{
   width:100%;
-  height:130px;
+  height:125px;
   object-fit:cover;
   border-radius:10px;
   background:#eee;
 }
 
 .product h3{
+  font-size:14px;
+  line-height:1.35;
   margin-top:8px;
-  font-size:16px;
-  line-height:1.3;
+  min-height:38px;
 }
 
 .price{
@@ -134,53 +192,59 @@ header{
   border:0;
   background:#008a4c;
   color:white;
-  padding:10px;
+  padding:9px;
   border-radius:8px;
   font-weight:bold;
 }
 
-.no-products{
+.empty{
   background:white;
-  padding:15px;
-  border-radius:10px;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
   color:#777;
 }
 
+/* CART */
+
 .cart{
   background:white;
-  margin-top:25px;
   padding:18px;
   border-radius:15px;
+  margin-top:22px;
   box-shadow:0 2px 8px #ddd;
+}
+
+.cart h2{
+  margin-bottom:12px;
 }
 
 .cart-item{
   display:flex;
   justify-content:space-between;
-  gap:10px;
+  gap:8px;
   padding:10px 0;
   border-bottom:1px solid #eee;
+  font-size:14px;
 }
 
-.cart-item button{
+.qty button{
   padding:4px 9px;
-  margin:0 3px;
+  margin:0 2px;
 }
 
 .total{
-  font-size:18px;
+  margin-top:12px;
+  font-size:17px;
   font-weight:bold;
-  margin-top:15px;
 }
 
-.checkout{
-  margin-top:20px;
-}
-
-input,textarea,select{
+input,
+textarea,
+select{
   width:100%;
   padding:13px;
-  margin:7px 0 12px;
+  margin:7px 0 10px;
   border:1px solid #ccc;
   border-radius:8px;
   font-size:15px;
@@ -203,375 +267,50 @@ textarea{
 
 footer{
   text-align:center;
-  padding:30px;
   color:#777;
+  padding:30px;
 }
 
+/* DESKTOP */
+
 @media(min-width:650px){
+
   .products{
     grid-template-columns:repeat(4,1fr);
   }
+
+  .category-btn{
+    min-width:110px;
+  }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+
 <header>
+
   <div class="top">
 
     <div>
-      <div class="logo">🛒 QuickBasket</div>
-      <div class="location">📍 Fast Grocery Delivery</div>
-    </div>
 
-    <button class="cart-btn" onclick="goCart()">
-      🛒 Cart (<span id="cartCount">0</span>)
-    </button>
+      <div class="logo">
+        🛒 QuickBasket
+      </div>
 
-  </div>
-</header>
-
-<div class="container">
-
-  <div class="banner">
-    <h1>Grocery at your doorstep 🛍️</h1>
-    <p>Fresh groceries delivered quickly.</p>
-  </div>
-
-  <input
-    class="search"
-    type="text"
-    id="search"
-    placeholder="Search in Hindi or English..."
-    onkeyup="searchProducts()"
-  >
-
-  <!-- MILK & DAIRY -->
-
-  <div class="category">
-
-    <div class="category-title">
-      🥛 दूध और डेयरी (Milk & Dairy)
-    </div>
-
-    <div class="products" id="dairy"></div>
-
-  </div>
-
-
-  <!-- VEGETABLES -->
-
-  <div class="category">
-
-    <div class="category-title">
-      🥦 सब्ज़ियाँ (Vegetables) — 🔥 Daily Deals
-    </div>
-
-    <div class="products" id="vegetables"></div>
-
-  </div>
-
-
-  <!-- BAKERY -->
-
-  <div class="category">
-
-    <div class="category-title">
-      🍞 ब्रेड और बेकरी (Bread & Bakery)
-    </div>
-
-    <div class="products" id="bakery"></div>
-
-  </div>
-
-
-  <!-- FRUITS -->
-
-  <div class="category">
-
-    <div class="category-title">
-      🍎 फल (Fruits)
-    </div>
-
-    <div class="products" id="fruits"></div>
-
-  </div>
-
-
-  <!-- HOUSEHOLD -->
-
-  <div class="category">
-
-    <div class="category-title">
-      🧹 घर का सामान (Household)
-    </div>
-
-    <div class="products" id="household"></div>
-
-  </div>
-
-
-  <!-- ELECTRONICS -->
-
-  <div class="category">
-
-    <div class="category-title">
-      📱 इलेक्ट्रॉनिक्स (Electronics)
-    </div>
-
-    <div class="products" id="electronics"></div>
-
-  </div>
-
-
-  <!-- OTHER -->
-
-  <div class="category">
-
-    <div class="category-title">
-      🛒 अन्य सामान (Other)
-    </div>
-
-    <div class="products" id="other"></div>
-
-  </div>
-
-
-  <!-- CART -->
-
-  <div class="cart" id="cart">
-
-    <h2>🛒 Your Cart</h2>
-
-    <div id="cartItems">
-      <p>Your cart is empty.</p>
-    </div>
-
-    <div class="total">
-      Subtotal: ₹<span id="subtotal">0</span>
-    </div>
-
-    <div class="total">
-      Delivery: ₹<span id="delivery">0</span>
-    </div>
-
-    <div class="total">
-      Handling Charge: ₹<span id="handlingCharge">0</span>
-    </div>
-
-    <div class="total">
-      Total: ₹<span id="total">0</span>
-    </div>
-
-    <div class="checkout">
-
-      <h2>📍 Delivery Details</h2>
-
-      <input
-        type="text"
-        id="name"
-        placeholder="Your Name"
-      >
-
-      <input
-        type="tel"
-        id="phone"
-        placeholder="Mobile Number"
-      >
-
-      <textarea
-        id="address"
-        placeholder="Enter complete delivery address"
-      ></textarea>
-
-      <select id="payment">
-        <option value="cod">💵 Cash on Delivery</option>
-        <option value="upi">📱 UPI Payment</option>
-      </select>
-
-      <button
-        class="place-order"
-        onclick="placeOrder()"
-      >
-        Place Order
-      </button>
+      <div class="location">
+        📍 Fast Grocery Delivery
+      </div>
 
     </div>
-
-  </div>
-
-
-  <!-- FEEDBACK -->
-
-  <div class="cart" id="feedback">
-
-    <h2>⭐ Give Feedback</h2>
-
-    <select id="feedbackRating">
-
-      <option value="">
-        Select Rating
-      </option>
-
-      <option value="5">
-        ⭐⭐⭐⭐⭐ 5 Stars
-      </option>
-
-      <option value="4">
-        ⭐⭐⭐⭐ 4 Stars
-      </option>
-
-      <option value="3">
-        ⭐⭐⭐ 3 Stars
-      </option>
-
-      <option value="2">
-        ⭐⭐ 2 Stars
-      </option>
-
-      <option value="1">
-        ⭐ 1 Star
-      </option>
-
-    </select>
-
-    <textarea
-      id="feedbackText"
-      placeholder="Tell us about your experience..."
-    ></textarea>
 
     <button
-      class="place-order"
-      onclick="sendFeedback()"
+      class="cart-btn"
+      onclick="goCart()"
     >
-      Send Feedback
-    </button>
-
-  </div>
-
-</div>
-
-<footer>
-  © 2026 QuickBasket Grocery Delivery
-</footer>
-
-
-<script>
-
-/* ================================
-   🥛 MILK & DAIRY
-================================ */
-
-const dairyProducts = [
-
-{
- name:"हेरिटेज डेली हेल्थ टोंड मिल्क (Heritage Daily Health Toned Milk) 500 ml",
- search:"heritage daily health toned milk doodh दूध",
- price:33,
- image:"IMG_20260811_192811.png"
-},
-
-{
- name:"हेरिटेज डेली हेल्थ टोंड मिल्क (Heritage Daily Health Toned Milk) 1 Litre",
- search:"heritage daily health toned milk doodh दूध",
- price:66,
- image:"IMG_20260811_192811.png"
-},
-
-{
- name:"अमूल ताज़ा मिल्की मिल्क (Amul Taaza Milky Milk) 500 ml",
- search:"amul taaza milky milk doodh दूध",
- price:30,
- image:"IMG_20260811_123753.png"
-},
-
-{
- name:"अमूल ताज़ा मिल्की मिल्क (Amul Taaza Milky Milk) 1 Litre",
- search:"amul taaza milky milk doodh दूध",
- price:60,
- image:"IMG_20260811_123753.png"
-},
-
-{
- name:"अमूल दही (Amul Dahi) 700 g",
- search:"amul dahi curd दही",
- price:65,
- image:"IMG_20260812_151518.png"
-},
-
-{
- name:"हेरिटेज टोटल कर्ड (Heritage Total Curd) 500 g",
- search:"heritage total curd dahi दही",
- price:50,
- image:"IMG_20260812_151633.png"
-}
-
-];
-
-
-/* ================================
-   🥦 VEGETABLES
-   रोज़ का RATE यहाँ बदलना है
-================================ */
-
-const vegetables = [
-
-{
- name:"हरी मिर्च (Green Chilli) 250 g",
- search:"green chilli hari mirch हरी मिर्च",
- price:30,
- image:"IMG_20260812_212834.png"
-},
-
-{
- name:"शिमला मिर्च (Capsicum) 500 g",
- search:"capsicum shimla mirch शिमला मिर्च",
- price:50,
- image:"IMG_20260812_213001.png"
-},
-
-{
- name:"टमाटर (Tomato) 1 KG",
- search:"tomato tamatar टमाटर",
- price:50,
- image:"IMG_20260812_213053.png"
-},
-
-{
- name:"गाजर (Carrot) 1 KG",
- search:"carrot gajar गाजर",
- price:60,
- image:"IMG_20260812_213129.png"
-},
-
-{
- name:"आलू (Potato) 1 KG",
- search:"potato aloo आलू",
- price:40,
- image:"IMG_20260812_213426.png"
-},
-
-{
- name:"प्याज़ (Onion) 1 KG",
- search:"onion pyaz प्याज प्याज़",
- price:40,
- image:"IMG_20260812_213603.png"
-},
-
-{
- name:"लौकी (Bottle Gourd) 1 KG",
- search:"bottle gourd lauki लौकी",
- price:40,
- image:"IMG_20260812_213731.png"
-},
-
-{
- name:"भिंडी (Lady Finger) 500 g",
- search:"lady finger bhindi भिंडी",
- price:40,
- image:"IMG_20260812_213807.png"
-},
-
-{
- name:"अदरक (Ginger) 
+      🛒 Cart
+      (<span id="cartCount">0
