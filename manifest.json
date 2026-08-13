@@ -1,0 +1,10 @@
+{
+  "name": "QuickBasket Grocery Delivery",
+  "short_name": "QuickBasket",
+  "description": "Fast grocery delivery",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#008a4c",
+  "orientation": "portrait"
+}
