@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>QuickBasket</title>
+<title>QuickBasket - Grocery Delivery</title>
 
 <style>
 
@@ -19,8 +19,6 @@ body{
   background:#f6f6f6;
   color:#222;
 }
-
-/* HEADER */
 
 header{
   background:white;
@@ -58,8 +56,6 @@ header{
   font-weight:bold;
 }
 
-/* SEARCH */
-
 .container{
   max-width:1000px;
   margin:auto;
@@ -74,8 +70,6 @@ header{
   font-size:16px;
   margin-bottom:12px;
 }
-
-/* CATEGORY BAR */
 
 .categories{
   display:flex;
@@ -99,7 +93,6 @@ header{
   font-size:12px;
   font-weight:bold;
   box-shadow:0 1px 5px #ddd;
-  cursor:pointer;
 }
 
 .category-btn span{
@@ -113,8 +106,6 @@ header{
   border:2px solid #008a4c;
   color:#006b3c;
 }
-
-/* BANNER */
 
 .banner{
   background:#dff7e8;
@@ -133,8 +124,6 @@ header{
   color:#555;
 }
 
-/* CATEGORY TITLE */
-
 .section-head{
   display:flex;
   justify-content:space-between;
@@ -149,8 +138,6 @@ header{
 .section-head small{
   color:#008a4c;
 }
-
-/* PRODUCTS */
 
 .products{
   display:grid;
@@ -177,7 +164,13 @@ header{
   font-size:14px;
   line-height:1.35;
   margin-top:8px;
-  min-height:38px;
+}
+
+.product small{
+  display:block;
+  color:#777;
+  font-size:11px;
+  margin-top:3px;
 }
 
 .price{
@@ -204,8 +197,6 @@ header{
   text-align:center;
   color:#777;
 }
-
-/* CART */
 
 .cart{
   background:white;
@@ -271,8 +262,6 @@ footer{
   padding:30px;
 }
 
-/* DESKTOP */
-
 @media(min-width:650px){
 
   .products{
@@ -288,9 +277,7 @@ footer{
 </style>
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -313,4 +300,1382 @@ footer{
       onclick="goCart()"
     >
       🛒 Cart
-      (<span id="cartCount">0
+      (<span id="cartCount">0</span>)
+    </button>
+
+  </div>
+
+</header>
+
+<div class="container">
+
+<input
+  class="search"
+  id="search"
+  type="text"
+  placeholder="🔍 Search in Hindi or English..."
+  oninput="searchProducts()"
+>
+
+<div class="categories">
+
+<button
+  class="category-btn active"
+  onclick="showCategory('all',this)"
+>
+<span>🛍️</span>
+All
+</button>
+
+<button
+  class="category-btn"
+  onclick="showCategory('dairy',this)"
+>
+<span>🥛</span>
+दूध
+</button>
+
+<button
+  class="category-btn"
+  onclick="showCategory('vegetables',this)"
+>
+<span>🥦</span>
+सब्ज़ियाँ
+</button>
+
+<button
+  class="category-btn"
+  onclick="showCategory('fruits',this)"
+>
+<span>🍎</span>
+फल
+</button>
+
+<button
+  class="category-btn"
+  onclick="showCategory('bakery',this)"
+>
+<span>🍞</span>
+बेकरी
+</button>
+
+<button
+  class="category-btn"
+  onclick="showCategory('household',this)"
+>
+<span>🧹</span>
+घर का सामान
+</button>
+
+<button
+  class="category-btn"
+  onclick="showCategory('electronics',this)"
+>
+<span>📱</span>
+इलेक्ट्रॉनिक्स
+</button>
+
+<button
+  class="category-btn"
+  onclick="showCategory('other',this)"
+>
+<span>🛒</span>
+अन्य
+</button>
+
+</div>
+
+<div class="banner">
+
+<h1>
+Grocery at your doorstep 🛍️
+</h1>
+
+<p>
+Fresh groceries delivered quickly.
+</p>
+
+</div>
+
+<div class="section-head">
+
+<h2 id="categoryTitle">
+🛍️ All Products
+</h2>
+
+<small id="productCount">
+Products
+</small>
+
+</div>
+
+<div
+  class="products"
+  id="products"
+></div>
+
+  
+  <!-- CART -->
+
+<div class="cart" id="cart">
+
+  <h2>🛒 Your Cart</h2>
+
+  <div id="cartItems">
+    <p>Your cart is empty.</p>
+  </div>
+
+  <div class="total">
+    Subtotal: ₹<span id="subtotal">0</span>
+  </div>
+
+  <div class="total">
+    Delivery: ₹<span id="delivery">0</span>
+  </div>
+
+  <div class="total">
+    Handling Charge: ₹<span id="handlingCharge">0</span>
+  </div>
+
+  <div class="total">
+    Total: ₹<span id="total">0</span>
+  </div>
+
+  <div style="margin-top:20px;">
+
+    <h2>📍 Delivery Details</h2>
+
+    <input
+      type="text"
+      id="name"
+      placeholder="Your Name"
+    >
+
+    <input
+      type="tel"
+      id="phone"
+      placeholder="Mobile Number"
+    >
+
+    <textarea
+      id="address"
+      placeholder="Enter complete delivery address"
+    ></textarea>
+
+    <select id="payment">
+
+      <option value="cod">
+        💵 Cash on Delivery
+      </option>
+
+      <option value="upi">
+        📱 UPI Payment
+      </option>
+
+    </select>
+
+    <button
+      class="place-order"
+      onclick="placeOrder()"
+    >
+      Place Order
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- FEEDBACK -->
+
+<div class="cart">
+
+  <h2>⭐ Give Feedback</h2>
+
+  <select id="feedbackRating">
+
+    <option value="">
+      Select Rating
+    </option>
+
+    <option value="5">
+      ⭐⭐⭐⭐⭐ 5 Stars
+    </option>
+
+    <option value="4">
+      ⭐⭐⭐⭐ 4 Stars
+    </option>
+
+    <option value="3">
+      ⭐⭐⭐ 3 Stars
+    </option>
+
+    <option value="2">
+      ⭐⭐ 2 Stars
+    </option>
+
+    <option value="1">
+      ⭐ 1 Star
+    </option>
+
+  </select>
+
+  <textarea
+    id="feedbackText"
+    placeholder="Tell us about your experience..."
+  ></textarea>
+
+  <button
+    class="place-order"
+    onclick="sendFeedback()"
+  >
+    Send Feedback
+  </button>
+
+</div>
+
+</div>
+
+
+<footer>
+  © 2026 QuickBasket Grocery Delivery
+</footer>
+
+
+<script>
+
+/* ================================
+   🥛 DAIRY PRODUCTS
+================================ */
+
+const dairyProducts = [
+
+{
+ name:"हेरिटेज डेली हेल्थ टोंड मिल्क 500 ml",
+ english:"Heritage Daily Health Toned Milk 500 ml",
+ price:33,
+ image:"IMG_20260811_192811.png"
+},
+
+{
+ name:"हेरिटेज डेली हेल्थ टोंड मिल्क 1 Litre",
+ english:"Heritage Daily Health Toned Milk 1 Litre",
+ price:66,
+ image:"IMG_20260811_192811.png"
+},
+
+{
+ name:"अमूल ताज़ा मिल्की मिल्क 500 ml",
+ english:"Amul Taaza Milky Milk 500 ml",
+ price:30,
+ image:"IMG_20260811_123753.png"
+},
+
+{
+ name:"अमूल ताज़ा मिल्की मिल्क 1 Litre",
+ english:"Amul Taaza Milky Milk 1 Litre",
+ price:60,
+ image:"IMG_20260811_123753.png"
+},
+
+{
+ name:"अमूल दही 700 g",
+ english:"Amul Dahi 700 g",
+ price:65,
+ image:"IMG_20260812_151518.png"
+},
+
+{
+ name:"हेरिटेज टोटल कर्ड 500 g",
+ english:"Heritage Total Curd 500 g",
+ price:50,
+ image:"IMG_20260812_151633.png"
+}
+
+];
+
+
+/* ================================
+   🥦 VEGETABLES
+   DAILY RATE CHANGE HERE
+================================ */
+
+const vegetables = [
+
+{
+ name:"हरी मिर्च 250 g",
+ english:"Green Chilli 250 g",
+ price:30,
+ image:"IMG_20260812_212834.png"
+},
+
+{
+ name:"शिमला मिर्च 500 g",
+ english:"Capsicum 500 g",
+ price:50,
+ image:"IMG_20260812_213001.png"
+},
+
+{
+ name:"टमाटर 1 KG",
+ english:"Tomato 1 KG",
+ price:50,
+ image:"IMG_20260812_213053.png"
+},
+
+{
+ name:"गाजर 1 KG",
+ english:"Carrot 1 KG",
+ price:60,
+ image:"IMG_20260812_213129.png"
+},
+
+{
+ name:"आलू 1 KG",
+ english:"Potato 1 KG",
+ price:40,
+ image:"IMG_20260812_213426.png"
+},
+
+{
+ name:"प्याज़ 1 KG",
+ english:"Onion 1 KG",
+ price:40,
+ image:"IMG_20260812_213603.png"
+},
+
+{
+ name:"लौकी 1 KG",
+ english:"Bottle Gourd 1 KG",
+ price:40,
+ image:"IMG_20260812_213731.png"
+},
+
+{
+ name:"भिंडी 500 g",
+ english:"Lady Finger 500 g",
+ price:40,
+ image:"IMG_20260812_213807.png"
+},
+
+{
+ name:"अदरक 250 g",
+ english:"Ginger 250 g",
+ price:30,
+ image:"IMG_20260812_214026.png"
+},
+
+{
+ name:"खीरा 1 KG",
+ english:"Cucumber 1 KG",
+ price:40,
+ image:"IMG_20260812_214148.png"
+},
+
+{
+ name:"हरी बीन्स 500 g",
+ english:"Green Beans 500 g",
+ price:50,
+ image:"IMG_20260812_214448.png"
+},
+
+{
+ name:"लहसुन 250 g",
+ english:"Garlic 250 g",
+ price:40,
+ image:"IMG_20260812_214520.png"
+},
+
+{
+ name:"पत्ता गोभी 1 KG",
+ english:"Cabbage 1 KG",
+ price:40,
+ image:"IMG_20260812_214608.png"
+},
+
+{
+ name:"स्वीट कॉर्न 1 Piece",
+ english:"Sweet Corn 1 Piece",
+ price:30,
+ image:"IMG_20260812_214713.png"
+},
+
+{
+ name:"मूली 1 KG",
+ english:"Radish 1 KG",
+ price:40,
+ image:"IMG_20260812_214832.png"
+},
+
+{
+ name:"बैंगन 1 KG",
+ english:"Brinjal 1 KG",
+ price:50,
+ image:"IMG_20260812_214937.png"
+},
+
+{
+ name:"धनिया 1 Bunch",
+ english:"Coriander 1 Bunch",
+ price:20,
+ image:"IMG_20260812_215325.png"
+},
+
+{
+ name:"सहजन 500 g",
+ english:"Drumstick 500 g",
+ price:50,
+ image:"IMG_20260812_215445.png"
+},
+
+{
+ name:"कद्दू 1 KG",
+ english:"Pumpkin 1 KG",
+ price:40,
+ image:"IMG_20260812_215618.png"
+},
+
+{
+ name:"शकरकंद 1 KG",
+ english:"Sweet Potato 1 KG",
+ price:50,
+ image:"IMG_20260812_215734.png"
+},
+
+{
+ name:"पालक 1 Bunch",
+ english:"Spinach 1 Bunch",
+ price:20,
+ image:"IMG_20260812_215821.png"
+},
+
+{
+ name:"चुकंदर 1 KG",
+ english:"Beetroot 1 KG",
+ price:60,
+ image:"IMG_20260812_215955.png"
+},
+
+{
+ name:"फूलगोभी 1 Piece",
+ english:"Cauliflower 1 Piece",
+ price:50,
+ image:"IMG_20260812_220104.png"
+},
+
+{
+ name:"तुरई 1 KG",
+ english:"Ridge Gourd 1 KG",
+ price:50,
+ image:"IMG_20260812_220214.png"
+},
+
+{
+ name:"करेला 1 KG",
+ english:"Bitter Gourd 1 KG",
+ price:60,
+ image:"IMG_20260812_220312.png"
+}];
+
+
+/* ================================
+   🍎 FRUITS
+================================ */
+
+const fruitsProducts = [];
+
+
+/* ================================
+   🍞 BAKERY
+================================ */
+
+const bakeryProducts = [
+
+{
+ name:"मॉडर्न व्हाइट ब्रेड 400 g",
+ english:"Modern White Bread 400 g",
+ price:60,
+ image:"IMG_20260812_143847.png"
+},
+
+{
+ name:"इंग्लिश ओवन मिल्क ब्रेड 400 g",
+ english:"English Oven Milk Bread 400 g",
+ price:55,
+ image:"IMG_20260812_143822.png"
+}
+
+];
+
+
+/* ================================
+   🧹 HOUSEHOLD
+================================ */
+
+const householdProducts = [];
+
+
+/* ================================
+   📱 ELECTRONICS
+================================ */
+
+const electronicsProducts = [];
+
+
+/* ================================
+   🛒 OTHER
+================================ */
+
+const otherProducts = [];
+
+
+/* ================================
+   ALL PRODUCTS
+================================ */
+
+function allProducts(){
+
+  return [
+    ...dairyProducts,
+    ...vegetables,
+    ...fruitsProducts,
+    ...bakeryProducts,
+    ...householdProducts,
+    ...electronicsProducts,
+    ...otherProducts
+  ];
+
+}
+
+
+/* ================================
+   PRODUCT ID
+================================ */
+
+let idCounter=0;
+
+allProducts().forEach(product=>{
+
+  product.id=idCounter++;
+
+});
+
+
+  let cart=[];
+
+let currentCategory="all";
+
+
+/* ================================
+   PRODUCT CARD
+================================ */
+
+function productCard(product){
+
+  return `
+
+  <div class="product">
+
+    <img
+      class="product-img"
+      src="${product.image}"
+      alt="${product.english}"
+    >
+
+    <h3>
+      ${product.name}
+    </h3>
+
+    <small>
+      ${product.english}
+    </small>
+
+    <div class="price">
+      ₹${product.price}
+    </div>
+
+    <button
+      class="add"
+      onclick="addToCart(${product.id})"
+    >
+      ADD
+    </button>
+
+  </div>
+
+  `;
+
+}
+
+
+/* ================================
+   DISPLAY PRODUCTS
+================================ */
+
+function displayProducts(list){
+
+  const box=
+    document.getElementById("products");
+
+  box.innerHTML="";
+
+
+  if(list.length===0){
+
+    box.innerHTML=`
+
+      <div class="empty">
+        इस category में अभी कोई product नहीं है.
+      </div>
+
+    `;
+
+    document.getElementById("productCount")
+      .innerText="0 Products";
+
+    return;
+
+  }
+
+
+  list.forEach(product=>{
+
+    box.innerHTML +=
+      productCard(product);
+
+  });
+
+
+  document.getElementById("productCount")
+    .innerText=
+    list.length+" Products";
+
+}
+
+
+/* ================================
+   CATEGORY
+================================ */
+
+function showCategory(category,button){
+
+  currentCategory=category;
+
+
+  document
+    .querySelectorAll(".category-btn")
+    .forEach(btn=>{
+
+      btn.classList.remove("active");
+
+    });
+
+
+  button.classList.add("active");
+
+
+  let list=[];
+
+
+  if(category==="all"){
+
+    list=allProducts();
+
+    document.getElementById("categoryTitle")
+      .innerText="🛍️ All Products";
+
+  }
+
+
+  if(category==="dairy"){
+
+    list=dairyProducts;
+
+    document.getElementById("categoryTitle")
+      .innerText="🥛 दूध और डेयरी";
+
+  }
+
+
+  if(category==="vegetables"){
+
+    list=vegetables;
+
+    document.getElementById("categoryTitle")
+      .innerText="🥦 सब्ज़ियाँ — Daily Deals";
+
+  }
+
+
+  if(category==="fruits"){
+
+    list=fruitsProducts;
+
+    document.getElementById("categoryTitle")
+      .innerText="🍎 फल";
+
+  }
+
+
+  if(category==="bakery"){
+
+    list=bakeryProducts;
+
+    document.getElementById("categoryTitle")
+      .innerText="🍞 ब्रेड और बेकरी";
+
+  }
+
+
+  if(category==="household"){
+
+    list=householdProducts;
+
+    document.getElementById("categoryTitle")
+      .innerText="🧹 घर का सामान";
+
+  }
+
+
+  if(category==="electronics"){
+
+    list=electronicsProducts;
+
+    document.getElementById("categoryTitle")
+      .innerText="📱 इलेक्ट्रॉनिक्स";
+
+  }
+
+
+  if(category==="other"){
+
+    list=otherProducts;
+
+    document.getElementById("categoryTitle")
+      .innerText="🛒 अन्य सामान";
+
+  }
+
+
+  document.getElementById("search")
+    .value="";
+
+
+  displayProducts(list);
+
+}
+
+
+/* ================================
+   SEARCH
+================================ */
+
+function searchProducts(){
+
+  const text=
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  if(text===""){
+
+    if(currentCategory==="all"){
+
+      displayProducts(
+        allProducts()
+      );
+
+    }
+
+    else if(currentCategory==="dairy"){
+
+      displayProducts(
+        dairyProducts
+      );
+
+    }
+
+    else if(currentCategory==="vegetables"){
+
+      displayProducts(
+        vegetables
+      );
+
+    }
+
+    else if(currentCategory==="fruits"){
+
+      displayProducts(
+        fruitsProducts
+      );
+
+    }
+
+    else if(currentCategory==="bakery"){
+
+      displayProducts(
+        bakeryProducts
+      );
+
+    }
+
+    else if(currentCategory==="household"){
+
+      displayProducts(
+        householdProducts
+      );
+
+    }
+
+    else if(currentCategory==="electronics"){
+
+      displayProducts(
+        electronicsProducts
+      );
+
+    }
+
+    else if(currentCategory==="other"){
+
+      displayProducts(
+        otherProducts
+      );
+
+    }
+
+    return;
+
+  }
+
+
+  const results=
+    allProducts().filter(product=>{
+
+      return (
+
+        product.name
+          .toLowerCase()
+          .includes(text)
+
+        ||
+
+        product.english
+          .toLowerCase()
+          .includes(text)
+
+      );
+
+    });
+
+
+  document.getElementById("categoryTitle")
+    .innerText="🔍 Search Results";
+
+
+  displayProducts(results);
+
+}
+
+
+/* ================================
+   ADD TO CART
+================================ */
+
+function addToCart(id){
+
+  const product=
+    allProducts().find(
+      item=>item.id===id
+    );
+
+
+  if(!product){
+
+    return;
+
+  }
+
+
+  const existing=
+    cart.find(
+      item=>item.id===id
+    );
+
+
+  if(existing){
+
+    existing.qty++;
+
+  }
+
+  else{
+
+    cart.push({
+
+      ...product,
+
+      qty:1
+
+    });
+
+  }
+
+
+  updateCart();
+
+
+  alert(
+    product.name+
+    " cart में add हो गया!"
+  );
+
+}
+
+
+/* ================================
+   UPDATE CART
+================================ */
+
+function updateCart(){
+
+  const box=
+    document.getElementById("cartItems");
+
+  box.innerHTML="";
+
+
+  let subtotal=0;
+
+  let count=0;
+
+
+  if(cart.length===0){
+
+    box.innerHTML=
+      "<p>Your cart is empty.</p>";
+
+  }
+
+
+  cart.forEach((item,index)=>{
+
+    subtotal +=
+      item.price*item.qty;
+
+    count +=
+      item.qty;
+
+
+    box.innerHTML += `
+
+    <div class="cart-item">
+
+      <div>
+
+        <b>
+          ${item.name}
+        </b>
+
+        <br>
+
+        ₹${item.price}
+        ×
+        ${item.qty}
+
+      </div>
+
+
+      <div class="qty">
+
+        <button
+          onclick="changeQty(${index},-1)"
+        >
+          −
+        </button>
+
+        ${item.qty}
+
+        <button
+          onclick="changeQty(${index},1)"
+        >
+          +
+        </button>
+
+      </div>
+
+    </div>
+
+    `;
+
+  });
+
+
+  const delivery=
+    subtotal>0 ? 30 : 0;
+
+
+  const handling=
+    subtotal>0 ? 5 : 0;
+
+
+  const total=
+    subtotal+
+    delivery+
+    handling;
+
+
+  document.getElementById("cartCount")
+    .innerText=count;
+
+
+  document.getElementById("subtotal")
+    .innerText=subtotal;
+
+
+  document.getElementById("delivery")
+    .innerText=delivery;
+
+
+  document.getElementById("handlingCharge")
+    .innerText=handling;
+
+
+  document.getElementById("total")
+    .innerText=total;
+
+}
+
+
+/* ================================
+   CHANGE QUANTITY
+================================ */
+
+function changeQty(index,change){
+
+  cart[index].qty += change;
+
+
+  if(cart[index].qty<=0){
+
+    cart.splice(index,1);
+
+  }
+
+
+  updateCart();
+
+}
+
+
+/* ================================
+   GO TO CART
+================================ */
+
+function goCart(){
+
+  document
+    .getElementById("cart")
+    .scrollIntoView({
+
+      behavior:"smooth"
+
+    });
+
+}
+
+
+/* ================================
+   PLACE ORDER
+================================ */
+
+function placeOrder(){
+
+  if(cart.length===0){
+
+    alert(
+      "Please add products to cart first."
+    );
+
+    return;
+
+  }
+
+
+  const name=
+    document
+      .getElementById("name")
+      .value
+      .trim();
+
+
+  const phone=
+    document
+      .getElementById("phone")
+      .value
+      .trim();
+
+
+  const address=
+    document
+      .getElementById("address")
+      .value
+      .trim();
+
+
+  const payment=
+    document
+      .getElementById("payment")
+      .value;
+
+
+  if(!name || !phone || !address){
+
+    alert(
+      "Please enter your name, mobile number and address."
+    );
+
+    return;
+
+  }
+
+
+  if(payment==="upi"){
+
+    alert(
+      "UPI payment option selected. Real online payment gateway needs to be connected separately."
+    );
+
+    return;
+
+  }
+
+
+  let orderItems="";
+
+  let subtotal=0;
+
+
+  cart.forEach(item=>{
+
+    const itemTotal=
+      item.price*item.qty;
+
+
+    subtotal +=
+      itemTotal;
+
+
+    orderItems +=
+      "• "+
+      item.english+
+      " × "+
+      item.qty+
+      " = ₹"+
+      itemTotal+
+      "\n";
+
+  });
+
+
+  const delivery=
+    subtotal>0 ? 30 : 0;
+
+
+  const handling=
+    subtotal>0 ? 5 : 0;
+
+
+  const total=
+    subtotal+
+    delivery+
+    handling;
+
+
+  function openWhatsApp(locationText){
+
+    const message=
+
+      "🛒 NEW QUICKBASKET ORDER\n\n"+
+
+      "Products:\n"+
+      orderItems+
+
+      "\nSubtotal: ₹"+
+      subtotal+
+
+      "\nDelivery: ₹"+
+      delivery+
+
+      "\nHandling Charge: ₹"+
+      handling+
+
+      "\nTotal: ₹"+
+      total+
+
+      "\n\nName: "+
+      name+
+
+      "\nMobile: "+
+      phone+
+
+      "\nAddress: "+
+      address+
+
+      "\n"+
+      locationText+
+
+      "Payment: "+
+      payment.toUpperCase();
+
+
+    const whatsappNumber=
+      "919705335701";
+
+
+    window.location.href=
+      "https://wa.me/"+
+      whatsappNumber+
+      "?text="+
+      encodeURIComponent(message);
+
+  }
+
+
+  if(navigator.geolocation){
+
+    navigator.geolocation.getCurrentPosition(
+
+      function(position){
+
+        const lat=
+          position.coords.latitude;
+
+
+        const lon=
+          position.coords.longitude;
+
+
+        const locationLink=
+          "https://www.google.com/maps?q="+
+          lat+
+          ","+
+          lon;
+
+
+        openWhatsApp(
+
+          "📍 Current Location:\n"+
+          locationLink+
+          "\n"
+
+        );
+
+      },
+
+
+      function(){
+
+        openWhatsApp(
+          "📍 Current Location: Not shared\n"
+        );
+
+      }
+
+    );
+
+  }
+
+  else{
+
+    openWhatsApp(
+      "📍 Current Location: Not available\n"
+    );
+
+  }
+
+}
+
+
+/* ================================
+   FEEDBACK
+================================ */
+
+function sendFeedback(){
+
+  const rating=
+    document
+      .getElementById("feedbackRating")
+      .value;
+
+
+  const feedback=
+    document
+      .getElementById("feedbackText")
+      .value
+      .trim();
+
+
+  if(!rating){
+
+    alert(
+      "Please select a rating."
+    );
+
+    return;
+
+  }
+
+
+  if(!feedback){
+
+    alert(
+      "Please write your feedback."
+    );
+
+    return;
+
+  }
+
+
+  const message=
+
+    "⭐ QUICKBASKET FEEDBACK\n\n"+
+
+    "Rating: "+
+    rating+
+    "/5\n"+
+
+    "Feedback: "+
+    feedback;
+
+
+  const whatsappNumber=
+    "919705335701";
+
+
+  window.location.href=
+    "https://wa.me/"+
+    whatsappNumber+
+    "?text="+
+    encodeURIComponent(message);
+
+}
+
+
+/* ================================
+   START WEBSITE
+================================ */
+
+displayProducts(
+  allProducts()
+);
+
+updateCart();
+
+</script>
+
+</body>
+</html>
