@@ -4,19 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RoyalXQuick - Fast Grocery Delivery</title>
+<title>RoyalXQuick - Grocery Delivery</title>
 
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#008a4c">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-touch-fullscreen" content="yes">
 
 <link rel="icon" type="image/jpeg" href="./1786646663690.jpeg">
 <link rel="apple-touch-icon" href="./1786646663690.jpeg">
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -25,110 +21,72 @@
 }
 
 body{
-  background:#f7f8f7;
+  background:#f4f7fb;
   color:#222;
-  padding-bottom:70px;
 }
 
 /* HEADER */
-
 header{
-  background:#008a4c;
-  color:white;
+  background:white;
+  padding:12px 15px;
   position:sticky;
   top:0;
-  z-index:1000;
-  box-shadow:0 2px 10px #bbb;
+  z-index:100;
+  box-shadow:0 2px 10px #ddd;
 }
 
-.header-main{
+.top{
   display:flex;
+  justify-content:space-between;
   align-items:center;
   gap:10px;
-  padding:9px 10px;
-}
-
-.menu{
-  font-size:25px;
-}
-
-.logo-area{
-  min-width:155px;
 }
 
 .logo{
-  font-size:20px;
+  font-size:23px;
   font-weight:bold;
-}
-
-.logo span{
-  color:#ffd600;
-}
-
-.tagline{
-  font-size:10px;
-  margin-top:2px;
-}
-
-.search-box{
-  flex:1;
-  position:relative;
-}
-
-.search-box input{
-  width:100%;
-  height:42px;
-  border:0;
-  border-radius:8px;
-  padding:0 12px 0 40px;
-  font-size:14px;
-  outline:none;
-}
-
-.search-icon{
-  position:absolute;
-  left:13px;
-  top:11px;
-  color:#777;
+  color:#008a4c;
 }
 
 .location{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  font-size:11px;
-  min-width:125px;
-}
-
-.location b{
   font-size:12px;
+  color:#777;
+  margin-top:4px;
 }
 
-.cart-top{
-  background:#087c47;
-  border:1px solid rgba(255,255,255,.3);
+.cart-btn{
+  border:0;
+  background:#008a4c;
   color:white;
-  border-radius:9px;
-  padding:8px 9px;
+  padding:10px 13px;
+  border-radius:10px;
   font-weight:bold;
 }
 
-/* CONTAINER */
-
+/* MAIN */
 .container{
-  max-width:1200px;
+  max-width:1100px;
   margin:auto;
-  padding:10px;
+  padding:12px;
 }
 
-/* CATEGORIES */
+.search{
+  width:100%;
+  padding:14px;
+  border:1px solid #ddd;
+  border-radius:14px;
+  font-size:16px;
+  margin-bottom:12px;
+  background:white;
+}
 
+/* CATEGORY */
 .categories{
   display:flex;
-  gap:7px;
+  gap:10px;
   overflow-x:auto;
+  padding:5px 2px 14px;
   scrollbar-width:none;
-  padding:2px 0 8px;
 }
 
 .categories::-webkit-scrollbar{
@@ -136,329 +94,94 @@ header{
 }
 
 .category-btn{
-  min-width:75px;
-  height:96px;
+  min-width:82px;
   background:white;
   border:1px solid #eee;
-  border-radius:10px;
-  padding:7px 5px;
+  border-radius:14px;
+  padding:9px 8px;
   text-align:center;
-  box-shadow:0 2px 6px #ddd;
-  flex-shrink:0;
-  font-size:11px;
+  font-size:12px;
+  font-weight:bold;
+  box-shadow:0 2px 7px #ddd;
 }
 
 .category-btn span{
   display:block;
-  font-size:35px;
-  height:55px;
-  line-height:50px;
-}
-
-.category-btn.active{
-  color:#008a4c;
-  border-bottom:3px solid #008a4c;
-}
-
-.category-btn.active span{
-  background:#008a4c;
-  color:white;
-  border-radius:50%;
-  width:42px;
-  height:42px;
-  line-height:42px;
-  margin:auto;
-  font-size:23px;
-}
-
-/* HERO */
-
-.hero{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:8px;
-  margin:7px 0 13px;
-}
-
-.hero-box{
-  min-height:185px;
-  border-radius:13px;
-  overflow:hidden;
-  position:relative;
-  padding:20px 15px;
-}
-
-.fresh{
-  background:linear-gradient(100deg,#ecf9df,#dff3d5);
-}
-
-.delivery-banner{
-  background:linear-gradient(100deg,#fff4df,#ffe9c4);
-}
-
-.hero h1{
-  color:#087c42;
   font-size:27px;
-  line-height:1.1;
-  max-width:220px;
-}
-
-.hero h2{
-  color:#ff5b18;
-  font-size:23px;
-  margin-bottom:5px;
-}
-
-.hero p{
-  margin-top:15px;
-  font-size:15px;
-  line-height:1.4;
-}
-
-.discount{
-  color:#ef3c20;
-  font-weight:bold;
-  font-size:20px;
-  margin-top:10px;
-}
-
-.shop-btn{
-  margin-top:12px;
-  background:#008a4c;
-  color:white;
-  border:0;
-  border-radius:7px;
-  padding:10px 17px;
-  font-weight:bold;
-}
-
-.vegetable-art{
-  position:absolute;
-  right:0;
-  bottom:0;
-  font-size:95px;
-}
-
-.delivery-art{
-  position:absolute;
-  right:4px;
-  bottom:0;
-  font-size:78px;
-}
-
-/* DOTS */
-
-.dots{
-  text-align:center;
-  margin-top:-23px;
-  position:relative;
-  z-index:2;
-}
-
-.dots span{
-  display:inline-block;
-  width:8px;
-  height:8px;
-  background:#ccc;
-  border-radius:50%;
-  margin:2px;
-}
-
-.dots span:first-child{
-  background:#008a4c;
-}
-
-/* SECTION */
-
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:14px 3px 9px;
-}
-
-.section-title h2{
-  font-size:18px;
-}
-
-.section-title small{
-  color:#087c47;
-  font-weight:bold;
-}
-
-/* DEALS */
-
-.deals{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  overflow:hidden;
-}
-
-.deal-card{
-  background:white;
-  border-radius:11px;
-  padding:8px;
-  box-shadow:0 2px 6px #ddd;
-  position:relative;
-}
-
-.offer{
-  position:absolute;
-  top:7px;
-  left:7px;
-  background:#e52b32;
-  color:white;
-  padding:4px 6px;
-  border-radius:5px;
-  font-size:10px;
-  font-weight:bold;
-}
-
-.heart{
-  position:absolute;
-  right:7px;
-  top:6px;
-  font-size:20px;
-  color:#777;
-}
-
-.deal-img{
-  width:100%;
-  height:125px;
-  object-fit:contain;
-  margin-top:8px;
-}
-
-.deal-size{
-  font-size:11px;
-  color:#555;
-  margin-top:3px;
-}
-
-.deal-price{
-  color:#008a4c;
-  font-size:18px;
-  font-weight:bold;
-  margin-top:5px;
-}
-
-.old-price{
-  color:#888;
-  text-decoration:line-through;
-  font-size:12px;
-  margin-left:4px;
-}
-
-.deal-add{
-  float:right;
-  border:1px solid #79b994;
-  background:white;
-  color:#087c47;
-  border-radius:6px;
-  padding:6px 9px;
-  font-weight:bold;
-}
-
-.save{
-  color:#e83c36;
-  font-size:11px;
-  font-weight:bold;
-  margin-top:5px;
-  clear:both;
-}
-
-.lowest{
-  background:#eff9ed;
-  color:#488c45;
-  font-size:10px;
-  text-align:center;
-  padding:6px;
-  margin-top:6px;
-  border-radius:6px;
-}
-
-.rating{
-  font-size:10px;
-  color:#555;
-  margin-top:7px;
-}
-
-/* FEATURES */
-
-.features{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
-  margin:13px 0;
-}
-
-.feature{
-  background:#eff8ed;
-  padding:10px 5px;
-  border-radius:8px;
-  text-align:center;
-  font-size:11px;
-  color:#3c7540;
-}
-
-.feature-icon{
-  font-size:25px;
   margin-bottom:4px;
 }
 
-/* SHOP CATEGORY */
+.category-btn.active{
+  background:#dff7e8;
+  border:2px solid #008a4c;
+  color:#006b3c;
+}
 
-.shop-categories{
+/* BANNER */
+.banner{
+  background:linear-gradient(135deg,#e5fff0,#fff);
+  border:2px solid #b8e8cb;
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:18px;
   display:flex;
-  gap:12px;
-  overflow-x:auto;
-  scrollbar-width:none;
-  padding:3px 0 8px;
-}
-
-.shop-categories::-webkit-scrollbar{
-  display:none;
-}
-
-.shop-cat{
-  min-width:78px;
-  text-align:center;
-  flex-shrink:0;
-}
-
-.shop-cat-img{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background:white;
-  box-shadow:0 2px 7px #ddd;
-  display:flex;
-  justify-content:center;
   align-items:center;
-  font-size:40px;
-  margin:auto;
+  justify-content:space-between;
+  gap:12px;
+  box-shadow:0 3px 12px #ddd;
 }
 
-.shop-cat p{
-  font-size:11px;
-  margin-top:6px;
+.banner h1{
+  color:#006b3c;
+  font-size:21px;
+  margin-bottom:6px;
+}
+
+.banner p{
+  color:#555;
+  font-size:14px;
+  margin-bottom:5px;
+}
+
+.banner small{
+  color:#008a4c;
+  font-weight:bold;
+}
+
+.banner-icon{
+  font-size:35px;
+}
+
+/* SECTION */
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:8px 0 12px;
+}
+
+.section-head h2{
+  font-size:20px;
+}
+
+.section-head small{
+  color:#008a4c;
+  font-weight:bold;
 }
 
 /* PRODUCTS */
-
 .products{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
 }
 
 .product{
   background:white;
-  border-radius:12px;
-  padding:8px;
-  box-shadow:0 2px 7px #ddd;
-  position:relative;
+  border-radius:16px;
+  padding:10px;
+  box-shadow:0 2px 9px #ddd;
+  overflow:hidden;
   cursor:pointer;
   transition:.15s;
 }
@@ -469,121 +192,60 @@ header{
 
 .product-img{
   width:100%;
-  height:150px;
-  object-fit:contain;
-  border-radius:9px;
-  background:#fafafa;
+  height:145px;
+  object-fit:cover;
+  border-radius:12px;
+  background:#eee;
 }
 
-.product-name{
-  font-size:13px;
-  font-weight:bold;
-  line-height:1.3;
-  min-height:35px;
-  margin-top:6px;
+.product h3{
+  font-size:14px;
+  line-height:1.35;
+  margin-top:8px;
+  min-height:38px;
 }
 
-.product-size{
-  color:#777;
-  font-size:11px;
-  margin-top:3px;
-}
-
-.product-bottom{
+.price-row{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-top:5px;
-}
-
-.product-price{
-  color:#008a4c;
-  font-size:18px;
-  font-weight:bold;
-}
-
-.add-small{
-  border:1px solid #76b78e;
-  background:white;
-  color:#008a4c;
-  border-radius:6px;
-  padding:6px 10px;
-  font-weight:bold;
-}
-
-.product-info{
-  display:flex;
   justify-content:space-between;
-  font-size:10px;
-  color:#666;
   margin-top:6px;
 }
 
-.best-price{
-  background:#eff9ed;
-  color:#478d47;
-  padding:5px;
-  text-align:center;
-  border-radius:5px;
-  font-size:10px;
-  margin-top:6px;
+.price{
+  color:#008a4c;
+  font-size:19px;
+  font-weight:bold;
 }
 
-.empty{
-  grid-column:1/-1;
+.add{
+  width:100%;
+  border:2px solid #008a4c;
   background:white;
-  padding:30px;
-  text-align:center;
-  border-radius:12px;
+  color:#008a4c;
+  padding:9px;
+  border-radius:10px;
+  font-weight:bold;
+  margin-top:7px;
+  cursor:pointer;
 }
 
-/* LOWER BANNER */
-
-.lower-banner{
-  margin:15px 0;
-  border-radius:12px;
-  min-height:100px;
-  padding:18px;
-  background:linear-gradient(100deg,#e8f6d9,#f7fbe9);
-  position:relative;
-  overflow:hidden;
-}
-
-.lower-banner h2{
-  color:#087c47;
-  font-size:21px;
-}
-
-.lower-banner p{
-  font-size:12px;
-  margin-top:5px;
-}
-
-.order-now{
-  position:absolute;
-  right:18px;
-  top:30px;
+.add:active{
   background:#008a4c;
   color:white;
-  border:0;
-  padding:10px 15px;
-  border-radius:7px;
-  font-weight:bold;
 }
 
 /* CART */
-
 .cart{
   background:white;
-  border-radius:14px;
-  padding:15px;
-  margin-top:15px;
-  box-shadow:0 2px 8px #ddd;
+  padding:18px;
+  border-radius:17px;
+  margin-top:22px;
+  box-shadow:0 2px 9px #ddd;
 }
 
 .cart h2{
-  font-size:20px;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 .cart-item{
@@ -592,584 +254,463 @@ header{
   gap:8px;
   padding:12px 0;
   border-bottom:1px solid #eee;
-  font-size:13px;
+  font-size:14px;
 }
 
 .qty button{
   padding:5px 10px;
+  margin:0 2px;
   border:1px solid #ccc;
   background:white;
   border-radius:6px;
 }
 
 .total{
-  margin-top:8px;
-  font-weight:bold;
-}
-
-input,textarea,select{
-  width:100%;
-  padding:12px;
-  margin:6px 0 9px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:14px;
-}
-
-textarea{
-  min-height:85px;
-}
-
-.place-order{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:8px;
-  background:#008a4c;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-}
-
-/* FEEDBACK */
-
-.feedback-card{
-  background:white;
-  border-radius:12px;
-  padding:12px;
-  margin-top:9px;
-  box-shadow:0 2px 6px #ddd;
-}
-
-.feedback-name{
-  font-weight:bold;
-}
-
-.feedback-stars{
-  color:#f5b400;
-  margin:4px 0;
-}
-
-.feedback-text{
-  font-size:13px;
-  line-height:1.4;
-}
-
-.feedback-date{
-  color:#999;
-  font-size:10px;
-  margin-top:5px;
-}
-
-/* BOTTOM NAV */
-
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:62px;
-  background:white;
-  border-top:1px solid #ddd;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  z-index:1000;
-}
-
-.bottom-item{
-  text-align:center;
-  color:#555;
-  font-size:10px;
-  cursor:pointer;
-}
-
-.bottom-item .icon{
-  font-size:23px;
-  display:block;
-}
-
-.bottom-item.active{
-  color:#008a4c;
-  font-weight:bold;
-}
-
-/* PRODUCT MODAL */
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  z-index:2000;
-  align-items:flex-end;
-  justify-content:center;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  background:white;
-  width:100%;
-  max-width:600px;
-  border-radius:20px 20px 0 0;
-  padding:18px;
-  max-height:90vh;
-  overflow-y:auto;
-}
-
-.close-modal{
-  float:right;
-  border:0;
-  background:#eee;
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  font-size:18px;
-}
-
-.modal-img{
-  width:100%;
-  height:260px;
-  object-fit:contain;
-  margin-top:5px;
-}
-
-.modal-title{
-  font-size:21px;
-  margin-top:8px;
-}
-
-.modal-price{
-  color:#008a4c;
-  font-size:24px;
-  font-weight:bold;
-  margin:8px 0;
-}
-
-.modal-add{
-  width:100%;
-  background:#008a4c;
-  color:white;
-  border:0;
-  border-radius:9px;
-  padding:14px;
+  margin-top:10px;
   font-size:17px;
   font-weight:bold;
 }
 
-/* DESKTOP */
+input,
+textarea,
+select{
+  width:100%;
+  padding:13px;
+  margin:7px 0 10px;
+  border:1px solid #ccc;
+  border-radius:9px;
+  font-size:15px;
+}
 
-@media(min-width:700px){
+textarea{
+  min-height:90px;
+}
 
-  .container{
-    padding:15px;
-  }
+.place-order{
+  width:100%;
+  padding:14px;
+  border:0;
+  background:#008a4c;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  border-radius:10px;
+}
 
-  .header-main{
-    max-width:1200px;
-    margin:auto;
-  }
+/* FEEDBACK */
+.feedback-card{
+  background:white;
+  border-radius:14px;
+  padding:14px;
+  margin-top:10px;
+  box-shadow:0 2px 7px #ddd;
+}
+
+.feedback-name{
+  font-weight:bold;
+  font-size:16px;
+}
+
+.feedback-stars{
+  color:#f5b400;
+  font-size:18px;
+  margin:4px 0;
+}
+
+.feedback-text{
+  color:#444;
+  font-size:14px;
+  line-height:1.4;
+}
+
+.feedback-date{
+  font-size:11px;
+  color:#999;
+  margin-top:5px;
+}
+
+/* =====================================
+   PRODUCT DETAIL SCREEN
+===================================== */
+
+.product-detail{
+  position:fixed;
+  inset:0;
+  background:#f5f6f8;
+  z-index:1000;
+  display:none;
+  overflow-y:auto;
+}
+
+.product-detail.show{
+  display:block;
+}
+
+.detail-top{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:white;
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 15px;
+  box-shadow:0 2px 8px #ddd;
+}
+
+.detail-top button{
+  border:0;
+  background:white;
+  font-size:28px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+}
+
+.detail-actions{
+  display:flex;
+  gap:8px;
+}
+
+.detail-image-box{
+  background:white;
+  padding:18px;
+  text-align:center;
+}
+
+.detail-image{
+  width:100%;
+  max-width:430px;
+  height:330px;
+  object-fit:contain;
+  border-radius:14px;
+  background:#f8f9fa;
+}
+
+.dots{
+  color:#bbb;
+  letter-spacing:5px;
+  margin-top:8px;
+}
+
+.dots span{
+  color:#555;
+}
+
+.detail-content{
+  padding:10px;
+}
+
+.shelf-row{
+  background:white;
+  border-radius:14px;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+
+.shelf-title{
+  background:#f0f1f5;
+  padding:12px;
+  color:#697080;
+  font-size:14px;
+}
+
+.shelf-value{
+  padding:14px;
+  font-weight:bold;
+}
+
+.detail-card{
+  background:white;
+  border-radius:17px;
+  padding:18px;
+  margin-bottom:12px;
+}
+
+.bought{
+  color:#65717d;
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.detail-rating{
+  color:#f5b400;
+  font-size:17px;
+  margin-bottom:10px;
+}
+
+.detail-title{
+  font-size:24px;
+  line-height:1.2;
+  margin-bottom:10px;
+}
+
+.select-unit{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:12px;
+}
+
+.unit-options{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+}
+
+.unit-option{
+  min-width:155px;
+  padding:14px;
+  border:1px solid #ddd;
+  border-radius:17px;
+  background:white;
+}
+
+.unit-option.selected{
+  border:2px solid #54a853;
+  background:#efffeb;
+}
+
+.unit-name{
+  font-weight:bold;
+  font-size:18px;
+}
+
+.unit-price{
+  font-size:22px;
+  font-weight:bold;
+  margin:8px 0;
+}
+
+.mrp{
+  color:#777;
+  font-size:13px;
+  text-decoration:line-through;
+}
+
+.offer{
+  color:#2877d4;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.offer-price{
+  color:#777;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.offer-box{
+  padding:14px;
+  border-top:1px solid #eee;
+  margin-top:15px;
+}
+
+.offer-box strong{
+  font-size:19px;
+}
+
+.brand-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:15px;
+  padding-top:15px;
+  border-top:1px solid #eee;
+}
+
+.brand-icon{
+  width:55px;
+  height:55px;
+  border-radius:12px;
+  object-fit:contain;
+  background:#fafafa;
+}
+
+.replacement{
+  background:white;
+  padding:18px;
+  border-radius:17px;
+  margin-bottom:90px;
+  font-weight:bold;
+}
+
+.detail-bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:20;
+  background:white;
+  padding:10px 15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  box-shadow:0 -2px 10px #ccc;
+}
+
+.detail-bottom-price{
+  font-weight:bold;
+}
+
+.detail-bottom-price small{
+  display:block;
+  color:#777;
+}
+
+.detail-add{
+  background:#188b13;
+  color:white;
+  border:0;
+  padding:16px 28px;
+  border-radius:13px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.close-detail{
+  font-size:26px;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  color:#777;
+  padding:30px;
+}
+
+/* RESPONSIVE */
+@media(min-width:650px){
 
   .products{
     grid-template-columns:repeat(4,1fr);
-  }
-
-}
-
-/* MOBILE */
-
-@media(max-width:600px){
-
-  .header-main{
-    gap:7px;
-  }
-
-  .logo-area{
-    min-width:145px;
-  }
-
-  .logo{
-    font-size:18px;
-  }
-
-  .location{
-    display:none;
-  }
-
-  .search-box{
-    min-width:100px;
-  }
-
-  .hero{
-    grid-template-columns:1.7fr 1fr;
-  }
-
-  .hero-box{
-    min-height:165px;
-  }
-
-  .hero h1{
-    font-size:22px;
-  }
-
-  .hero h2{
-    font-size:19px;
-  }
-
-  .vegetable-art{
-    font-size:68px;
-  }
-
-  .delivery-art{
-    font-size:55px;
-  }
-
-  .deals{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .deal-img{
-    height:100px;
-  }
-
-  .deal-card{
-    padding:6px;
-  }
-
-  .deal-price{
-    font-size:15px;
-  }
-
-  .deal-add{
-    padding:5px 7px;
-    font-size:10px;
-  }
-
-  .products{
-    grid-template-columns:repeat(2,1fr);
-    gap:9px;
-  }
-
-  .product-img{
-    height:145px;
-  }
-
-  .product-name{
-    font-size:12px;
-  }
-
-  .features{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .feature{
-    font-size:9px;
-  }
-
-}
-
-/* VERY SMALL */
-
-@media(max-width:390px){
-
-  .logo-area{
-    min-width:115px;
-  }
-
-  .logo{
-    font-size:15px;
-  }
-
-  .search-box input{
-    font-size:11px;
-  }
-
-  .cart-top{
-    padding:7px;
   }
 
   .category-btn{
-    min-width:68px;
+    min-width:110px;
+  }
+}
+
+@media(max-width:500px){
+
+  .banner{
+    padding:15px 10px;
+  }
+
+  .banner h1{
+    font-size:17px;
+  }
+
+  .banner p{
+    font-size:12px;
+  }
+
+  .banner-icon{
+    font-size:27px;
   }
 
   .product-img{
-    height:125px;
+    height:135px;
   }
 
-}
+  .detail-image{
+    height:300px;
+  }
 
+  .detail-title{
+    font-size:22px;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
+<div class="top">
 
-<div class="header-main">
-
-<div class="menu">☰</div>
-
-<div class="logo-area">
-<div class="logo">👑 RoyalX<span>Quick</span></div>
-<div class="tagline">Fast. Fresh. Delivered.</div>
-</div>
-
-<div class="search-box">
-<span class="search-icon">🔍</span>
-<input
-id="search"
-type="text"
-placeholder="Search in Hindi or English..."
-oninput="searchProducts()">
-</div>
-
-<div class="location">
-📍
 <div>
-Deliver to<br>
-<b>Your Location</b>
-</div>
+<div class="logo">🛒 RoyalXQuick</div>
+<div class="location">📍 Fast Grocery Delivery</div>
 </div>
 
-<button class="cart-top" onclick="goCart()">
-🛒 <span id="cartCount">0</span>
+<button class="cart-btn" onclick="goCart()">
+🛒 Cart (<span id="cartCount">0</span>)
 </button>
 
 </div>
-
 </header>
-
 
 <div class="container">
 
-
-<!-- CATEGORIES -->
+<input
+class="search"
+id="search"
+type="text"
+placeholder="🔍 Search products..."
+oninput="searchProducts()"
+>
 
 <div class="categories">
 
 <button class="category-btn active" onclick="showCategory('all',this)">
-<span>▦</span>
-All
+<span>🛍️</span>All
 </button>
 
 <button class="category-btn" onclick="showCategory('dairy',this)">
-<span>🥛</span>
-Dairy
+<span>🥛</span>Milk
 </button>
 
 <button class="category-btn" onclick="showCategory('vegetables',this)">
-<span>🥦</span>
-Vegetables
+<span>🥦</span>Vegetables
 </button>
 
 <button class="category-btn" onclick="showCategory('fruits',this)">
-<span>🍎</span>
-Fruits
+<span>🍎</span>Fruits
 </button>
 
 <button class="category-btn" onclick="showCategory('bakery',this)">
-<span>🍞</span>
-Bakery
+<span>🍞</span>Bakery
 </button>
 
-<button class="category-btn" onclick="showCategory('household',this)">
-<span>🧴</span>
-Household
+<button class="category-btn" onclick="showCategory('kirana',this)">
+<span>🛒</span>Kirana
 </button>
 
 <button class="category-btn" onclick="showCategory('drinks',this)">
-<span>🥤</span>
-Beverages
-</button>
-
-<button class="category-btn" onclick="showCategory('electronics',this)">
-<span>📱</span>
-Electronics
-</button>
-
-<button class="category-btn" onclick="showCategory('more',this)">
-<span>•••</span>
-More
+<span>🥤</span>Drinks
 </button>
 
 </div>
 
+<div class="banner">
 
-<!-- HERO -->
+<div class="banner-icon">🛒</div>
 
-<div class="hero">
-
-<div class="hero-box fresh">
-
-<h1>SUPER<br>FRESH WEEK</h1>
-
-<p>
-Up to <b>40% OFF</b><br>
-On Top Products
-</p>
-
-<button class="shop-btn" onclick="showCategory('all',document.querySelector('.category-btn'))">
-SHOP NOW
-</button>
-
-<div class="vegetable-art">
-🥬🥦🥕🍅
+<div>
+<h1>🚀 RoyalXQuick Grocery</h1>
+<p>Fresh groceries delivered to your doorstep ❤️</p>
+<small>⚡ Fast & Easy Grocery Delivery</small>
 </div>
+
+<div class="banner-icon">🥦</div>
 
 </div>
 
+<div class="section-head">
 
-<div class="hero-box delivery-banner">
+<h2 id="categoryTitle">
+🛍️ All Products
+</h2>
 
-<h2>FREE DELIVERY</h2>
-
-<p>On Orders Above</p>
-
-<div class="discount">₹499</div>
-
-<div class="delivery-art">🛵</div>
-
-</div>
+<small id="productCount">
+Products
+</small>
 
 </div>
-
-
-<div class="dots">
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-</div>
-
-
-<!-- TODAY DEALS -->
-
-<div class="section-title">
-
-<h2>🔥 TODAY'S TOP DEALS</h2>
-
-<small>View All Deals ›</small>
-
-</div>
-
-
-<div class="deals" id="deals"></div>
-
-
-<!-- FEATURES -->
-
-<div class="features">
-
-<div class="feature">
-<div class="feature-icon">🚀</div>
-<b>10 Mins Delivery</b><br>
-Lightning fast delivery
-</div>
-
-<div class="feature">
-<div class="feature-icon">🏅</div>
-<b>Best Quality</b><br>
-Fresh & genuine products
-</div>
-
-<div class="feature">
-<div class="feature-icon">🏷️</div>
-<b>Best Prices</b><br>
-Lowest price promise
-</div>
-
-<div class="feature">
-<div class="feature-icon">🛡️</div>
-<b>Safe & Secure</b><br>
-100% secure payments
-</div>
-
-</div>
-
-
-<!-- SHOP CATEGORY -->
-
-<div class="section-title">
-<h2>SHOP BY CATEGORY</h2>
-</div>
-
-<div class="shop-categories">
-
-<div class="shop-cat" onclick="selectCategory('dairy')">
-<div class="shop-cat-img">🥛</div>
-<p>Dairy</p>
-</div>
-
-<div class="shop-cat" onclick="selectCategory('vegetables')">
-<div class="shop-cat-img">🥦</div>
-<p>Vegetables</p>
-</div>
-
-<div class="shop-cat" onclick="selectCategory('fruits')">
-<div class="shop-cat-img">🍎</div>
-<p>Fruits</p>
-</div>
-
-<div class="shop-cat" onclick="selectCategory('bakery')">
-<div class="shop-cat-img">🍞</div>
-<p>Bakery</p>
-</div>
-
-<div class="shop-cat" onclick="selectCategory('household')">
-<div class="shop-cat-img">🧴</div>
-<p>Household</p>
-</div>
-
-<div class="shop-cat" onclick="selectCategory('drinks')">
-<div class="shop-cat-img">🥤</div>
-<p>Beverages</p>
-</div>
-
-<div class="shop-cat" onclick="selectCategory('electronics')">
-<div class="shop-cat-img">📱</div>
-<p>Electronics</p>
-</div>
-
-<div class="shop-cat">
-<div class="shop-cat-img">•••</div>
-<p>More</p>
-</div>
-
-</div>
-
-
-<!-- PRODUCTS -->
-
-<div class="section-title">
-
-<h2 id="categoryTitle">🛍️ All Products</h2>
-
-<small id="productCount">0 Products</small>
-
-</div>
-
 
 <div class="products" id="products"></div>
-
-
-<!-- LOWER BANNER -->
-
-<div class="lower-banner">
-
-<h2>Fresh Products<br>Delivered Daily!</h2>
-
-<p>Best quality, best prices, on time.</p>
-
-<button class="order-now" onclick="goCart()">
-ORDER NOW
-</button>
-
-</div>
-
 
 <!-- CART -->
 
@@ -1197,24 +738,18 @@ Handling Charge: ₹<span id="handlingCharge">0</span>
 Total: ₹<span id="total">0</span>
 </div>
 
-
 <div style="margin-top:20px">
 
 <h2>📍 Delivery Details</h2>
 
-<input
-type="text"
-id="name"
-placeholder="Your Name">
+<input type="text" id="name" placeholder="Your Name">
 
-<input
-type="tel"
-id="phone"
-placeholder="Mobile Number">
+<input type="tel" id="phone" placeholder="Mobile Number">
 
 <textarea
 id="address"
-placeholder="Enter complete delivery address"></textarea>
+placeholder="Enter complete delivery address">
+</textarea>
 
 <select id="payment">
 
@@ -1228,18 +763,13 @@ placeholder="Enter complete delivery address"></textarea>
 
 </select>
 
-<button
-class="place-order"
-onclick="placeOrder()">
-
+<button class="place-order" onclick="placeOrder()">
 Place Order
-
 </button>
 
 </div>
 
 </div>
-
 
 <!-- FEEDBACK -->
 
@@ -1250,134 +780,261 @@ Place Order
 <input
 type="text"
 id="feedbackName"
-placeholder="Your Name">
+placeholder="Your Name"
+>
 
 <select id="feedbackRating">
 
-<option value="">Select Rating</option>
+<option value="">
+Select Rating
+</option>
 
-<option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
-<option value="4">⭐⭐⭐⭐ 4 Stars</option>
-<option value="3">⭐⭐⭐ 3 Stars</option>
-<option value="2">⭐⭐ 2 Stars</option>
-<option value="1">⭐ 1 Star</option>
+<option value="5">
+⭐⭐⭐⭐⭐ 5 Stars
+</option>
+
+<option value="4">
+⭐⭐⭐⭐ 4 Stars
+</option>
+
+<option value="3">
+⭐⭐⭐ 3 Stars
+</option>
+
+<option value="2">
+⭐⭐ 2 Stars
+</option>
+
+<option value="1">
+⭐ 1 Star
+</option>
 
 </select>
 
 <textarea
 id="feedbackText"
-placeholder="Tell us about your experience..."></textarea>
+placeholder="Tell us about your experience...">
+</textarea>
 
-<button
-class="place-order"
-onclick="sendFeedback()">
-
+<button class="place-order" onclick="sendFeedback()">
 ⭐ Submit Feedback
-
 </button>
 
-<div
-id="feedbackList"
-style="margin-top:20px">
-</div>
+<div id="feedbackList" style="margin-top:20px"></div>
 
-</div>
-
-
-</div>
-
-
-<!-- BOTTOM NAV -->
-
-<div class="bottom-nav">
-
-<div class="bottom-item active" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-<span class="icon">⌂</span>
-Home
-</div>
-
-<div class="bottom-item" onclick="document.querySelector('.categories').scrollIntoView({behavior:'smooth'})">
-<span class="icon">▦</span>
-Categories
-</div>
-
-<div class="bottom-item" onclick="document.getElementById('search').focus();window.scrollTo({top:0,behavior:'smooth'})">
-<span class="icon">⌕</span>
-Search
-</div>
-
-<div class="bottom-item" onclick="goCart()">
-<span class="icon">🛒</span>
-Cart
-</div>
-
-<div class="bottom-item" onclick="goCart()">
-<span class="icon">♙</span>
-Account
 </div>
 
 </div>
 
+<footer>
+© 2026 RoyalXQuick Grocery Delivery
+</footer>
 
-<!-- PRODUCT DETAIL POPUP -->
 
-<div class="modal" id="productModal">
+<!-- =====================================
+     PRODUCT DETAIL SCREEN
+===================================== -->
 
-<div class="modal-box">
+<div class="product-detail" id="productDetail">
 
-<button
-class="close-modal"
-onclick="closeProductModal()">
-×
+<div class="detail-top">
+
+<button onclick="closeProduct()">
+‹
 </button>
+
+<div class="detail-actions">
+
+<button onclick="toggleFavorite()">
+♡
+</button>
+
+<button onclick="shareProduct()">
+↗
+</button>
+
+</div>
+
+</div>
+
+<div class="detail-image-box">
 
 <img
-id="modalImage"
-class="modal-img"
+id="detailImage"
+class="detail-image"
 src=""
-alt="Product">
+alt=""
+>
 
-<h2
-id="modalTitle"
-class="modal-title">
-</h2>
-
-<div
-id="modalPrice"
-class="modal-price">
+<div class="dots">
+<span>●</span> ● ● ● ● ● ●
 </div>
 
-<p id="modalDescription">
-Fresh and quality grocery product.
-</p>
+</div>
+
+<div class="detail-content">
+
+<div class="shelf-row">
+
+<div class="shelf-title">
+Shelf Life
+</div>
+
+<div class="shelf-value" id="detailShelf">
+9 months
+</div>
+
+</div>
+
+<div class="detail-card">
+
+<div class="bought">
+🕘 Available for fast delivery
+</div>
+
+<div class="detail-rating">
+⭐ ⭐ ⭐ ⭐ ⭐
+<span style="color:#777;font-size:14px;">
+4.5 (2,719)
+</span>
+</div>
+
+<h1 class="detail-title" id="detailTitle">
+Product Name
+</h1>
+
+<div class="select-unit">
+Select Unit
+</div>
+
+<div class="unit-options">
+
+<div class="unit-option selected">
+
+<div class="unit-name" id="detailUnit">
+1 Unit
+</div>
+
+<div class="unit-price">
+₹<span id="detailPrice">0</span>
+</div>
+
+<div class="mrp">
+MRP ₹<span id="detailMrp">0</span>
+</div>
+
+<div class="offer">
+Best Price
+</div>
+
+<div class="offer-price">
+Inclusive of all taxes
+</div>
+
+</div>
+
+<div class="unit-option">
+
+<div class="unit-name">
+2 × Unit
+</div>
+
+<div class="unit-price">
+₹<span id="detailDoublePrice">0</span>
+</div>
+
+<div class="mrp">
+Save more
+</div>
+
+<div class="offer">
+Special offer
+</div>
+
+</div>
+
+</div>
+
+<div class="offer-box">
+
+<strong>
+💰 Best Price Guarantee
+</strong>
 
 <br>
 
+<span style="color:#777;">
+Fresh products at competitive prices.
+</span>
+
+</div>
+
+<div class="brand-row">
+
+<img
+src="./1786646663690.jpeg"
+class="brand-icon"
+>
+
+<div>
+<strong id="detailBrand">
+RoyalXQuick
+</strong>
+
+<br>
+
+<span style="color:#777;">
+Explore all products
+</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="replacement">
+📦 &nbsp; 72 hours only replacement
+</div>
+
+</div>
+
+<div class="detail-bottom">
+
+<div class="detail-bottom-price">
+
+<small id="bottomUnit">
+1 Unit
+</small>
+
+₹<span id="bottomPrice">
+0
+</span>
+
+<br>
+
+<small>
+Inclusive of all taxes
+</small>
+
+</div>
+
 <button
-id="modalAdd"
-class="modal-add">
-
-🛒 ADD TO CART
-
+class="detail-add"
+onclick="addDetailToCart()"
+>
+Add to cart
 </button>
 
 </div>
 
 </div>
-
-
-<footer style="text-align:center;padding:25px;color:#777">
-
-© 2026 RoyalXQuick Grocery Delivery
-
-</footer>
 
 
 <script>
 
-/* =========================
-VEGETABLE PRICES
-========================= */
+/* =========================================
+   VEGETABLE PRICES
+========================================= */
 
 const VEGETABLE_PRICES = {
 
@@ -1410,9 +1067,9 @@ const VEGETABLE_PRICES = {
 };
 
 
-/* =========================
-DAIRY
-========================= */
+/* =========================================
+   DAIRY
+========================================= */
 
 const dairyProducts=[
 
@@ -1461,9 +1118,9 @@ image:"IMG_20260812_151633.png"
 ];
 
 
-/* =========================
-VEGETABLES
-========================= */
+/* =========================================
+   VEGETABLES
+========================================= */
 
 const vegetables=[
 
@@ -1524,12 +1181,11 @@ product.price=VEGETABLE_PRICES[product.name] || 0;
 });
 
 
-/* =========================
-OTHER PRODUCTS
-========================= */
+/* =========================================
+   OTHER PRODUCTS
+========================================= */
 
 const fruitsProducts=[];
-
 
 const bakeryProducts=[
 
@@ -1636,14 +1292,14 @@ image:"IMG-20260813-WA0015.jpg"
 
 ];
 
-
 const householdProducts=[];
 const electronicsProducts=[];
+const otherProducts=[];
 
 
-/* =========================
-ALL PRODUCTS
-========================= */
+/* =========================================
+   ALL PRODUCTS
+========================================= */
 
 function allProducts(){
 
@@ -1656,12 +1312,15 @@ return [
 ...kiranaProducts,
 ...drinksProducts,
 ...householdProducts,
-...electronicsProducts
+...electronicsProducts,
+...otherProducts
 
 ];
 
 }
 
+
+/* GIVE EVERY PRODUCT AN ID */
 
 let idCounter=0;
 
@@ -1672,57 +1331,48 @@ product.id=idCounter++;
 
 let cart=[];
 let currentCategory="all";
+let selectedProduct=null;
 
 
-/* =========================
-PRODUCT CARD
-========================= */
+/* =========================================
+   PRODUCT CARD
+   WHOLE CARD IS CLICKABLE
+========================================= */
 
 function productCard(product){
 
 return `
 
-<div class="product"
-onclick="openProduct(${product.id})">
+<div
+class="product"
+onclick="openProduct(${product.id})"
+>
 
 <img
 class="product-img"
 src="${product.image}"
 alt="${product.name}"
-onerror="this.src='./1786646663690.jpeg'">
+onerror="this.src='./1786646663690.jpeg'"
+>
 
-<div class="product-name">
+<h3>
 ${product.name}
-</div>
+</h3>
 
-<div class="product-size">
-Fresh & Quality Product
-</div>
+<div class="price-row">
 
-<div class="product-bottom">
-
-<div class="product-price">
+<div class="price">
 ₹${product.price}
 </div>
 
+</div>
+
 <button
-class="add-small"
-onclick="event.stopPropagation();addToCart(${product.id})">
-
-ADD
-
+class="add"
+onclick="event.stopPropagation(); addToCart(${product.id})"
+>
+➕ ADD
 </button>
-
-</div>
-
-<div class="product-info">
-<span>⭐ 4.5</span>
-<span>⚡ Fast delivery</span>
-</div>
-
-<div class="best-price">
-Best Price
-</div>
 
 </div>
 
@@ -1731,9 +1381,9 @@ Best Price
 }
 
 
-/* =========================
-DISPLAY PRODUCTS
-========================= */
+/* =========================================
+   DISPLAY PRODUCTS
+========================================= */
 
 function displayProducts(list){
 
@@ -1765,9 +1415,9 @@ list.length+" Products";
 }
 
 
-/* =========================
-CATEGORY
-========================= */
+/* =========================================
+   CATEGORY
+========================================= */
 
 function getCategoryList(category){
 
@@ -1786,17 +1436,11 @@ return fruitsProducts;
 if(category==="bakery")
 return bakeryProducts;
 
-if(category==="household")
-return householdProducts;
+if(category==="kirana")
+return kiranaProducts;
 
 if(category==="drinks")
 return drinksProducts;
-
-if(category==="electronics")
-return electronicsProducts;
-
-if(category==="more")
-return [...kiranaProducts];
 
 return [];
 
@@ -1808,18 +1452,22 @@ function getCategoryTitle(category){
 const titles={
 
 all:"🛍️ All Products",
-dairy:"🥛 Dairy Products",
+
+dairy:"🥛 Milk & Dairy",
+
 vegetables:"🥦 Vegetables",
+
 fruits:"🍎 Fruits",
+
 bakery:"🍞 Bakery",
-household:"🧴 Household",
-drinks:"🥤 Beverages",
-electronics:"📱 Electronics",
-more:"🛒 Kirana"
+
+kirana:"🛒 Kirana",
+
+drinks:"🥤 Drinks"
 
 };
 
-return titles[category] || "🛍️ All Products";
+return titles[category]||"🛍️ All Products";
 
 }
 
@@ -1834,9 +1482,7 @@ document
 btn.classList.remove("active");
 });
 
-if(button){
 button.classList.add("active");
-}
 
 document.getElementById("search").value="";
 
@@ -1848,32 +1494,19 @@ displayProducts(getCategoryList(category));
 }
 
 
-function selectCategory(category){
+function showCurrentCategory(){
 
-const buttons=document.querySelectorAll(".category-btn");
+document.getElementById("categoryTitle").innerText=
+getCategoryTitle(currentCategory);
 
-let index={
-
-all:0,
-dairy:1,
-vegetables:2,
-fruits:3,
-bakery:4,
-household:5,
-drinks:6,
-electronics:7,
-more:8
-
-}[category];
-
-showCategory(category,buttons[index]);
+displayProducts(getCategoryList(currentCategory));
 
 }
 
 
-/* =========================
-SEARCH
-========================= */
+/* =========================================
+   SEARCH
+========================================= */
 
 function searchProducts(){
 
@@ -1886,10 +1519,7 @@ document
 
 if(text===""){
 
-showCategory(
-currentCategory,
-document.querySelector(".category-btn.active")
-);
+showCurrentCategory();
 
 return;
 
@@ -1912,139 +1542,239 @@ displayProducts(results);
 }
 
 
-/* =========================
-PRODUCT CLICK / DETAIL
-========================= */
+/* =========================================
+   PRODUCT DETAIL
+========================================= */
 
 function openProduct(id){
 
 const product=
 allProducts().find(item=>item.id===id);
 
-if(!product)return;
+if(!product)
+return;
 
-document.getElementById("modalImage").src=product.image;
+selectedProduct=product;
 
-document.getElementById("modalTitle").innerText=
+document.getElementById("detailImage").src=
+product.image;
+
+document.getElementById("detailImage").alt=
 product.name;
 
-document.getElementById("modalPrice").innerText=
-"₹"+product.price;
+document.getElementById("detailTitle").innerText=
+product.name;
 
-document.getElementById("modalDescription").innerText=
-"Fresh and quality product delivered to your doorstep by RoyalXQuick.";
+document.getElementById("detailPrice").innerText=
+product.price;
 
-document.getElementById("modalAdd").onclick=function(){
+document.getElementById("detailDoublePrice").innerText=
+product.price*2;
 
-addToCart(product.id);
+document.getElementById("detailMrp").innerText=
+Math.round(product.price*1.15);
 
-closeProductModal();
+document.getElementById("bottomPrice").innerText=
+product.price;
 
-};
+document.getElementById("detailUnit").innerText=
+getUnit(product.name);
 
-document.getElementById("productModal")
-.classList.add("show");
+document.getElementById("bottomUnit").innerText=
+getUnit(product.name);
+
+document.getElementById("detailBrand").innerText=
+getBrand(product.name);
+
+document.getElementById("productDetail").classList.add("show");
+
+document.body.style.overflow="hidden";
 
 }
 
 
-function closeProductModal(){
+function closeProduct(){
 
-document.getElementById("productModal")
+document
+.getElementById("productDetail")
 .classList.remove("show");
 
+document.body.style.overflow="";
+
+selectedProduct=null;
+
 }
 
 
-document.getElementById("productModal")
-.addEventListener("click",function(e){
+/* =========================================
+   UNIT
+========================================= */
 
-if(e.target===this){
-closeProductModal();
+function getUnit(name){
+
+if(name.includes("5 KG"))
+return "5 KG";
+
+if(name.includes("1 KG"))
+return "1 KG";
+
+if(name.includes("500 g"))
+return "500 g";
+
+if(name.includes("250 g"))
+return "250 g";
+
+if(name.includes("100 g"))
+return "100 g";
+
+if(name.includes("700 g"))
+return "700 g";
+
+if(name.includes("600 ml"))
+return "600 ml";
+
+if(name.includes("500 ml"))
+return "500 ml";
+
+if(name.includes("400 g"))
+return "400 g";
+
+if(name.includes("250 ml"))
+return "250 ml";
+
+if(name.includes("1 Litre"))
+return "1 Litre";
+
+if(name.includes("1 Piece"))
+return "1 Piece";
+
+if(name.includes("1 Bunch"))
+return "1 Bunch";
+
+if(name.includes("25 g"))
+return "25 g";
+
+return "1 Unit";
+
 }
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+function getBrand(name){
+
+if(name.toLowerCase().includes("amul"))
+return "Amul";
+
+if(name.toLowerCase().includes("heritage"))
+return "Heritage";
+
+if(name.toLowerCase().includes("tata"))
+return "Tata";
+
+if(name.toLowerCase().includes("aashirvaad"))
+return "Aashirvaad";
+
+if(name.toLowerCase().includes("lays"))
+return "Lay's";
+
+if(name.toLowerCase().includes("sprite"))
+return "Sprite";
+
+if(name.toLowerCase().includes("maaza"))
+return "Maaza";
+
+if(name.toLowerCase().includes("thums"))
+return "Thums Up";
+
+if(name.toLowerCase().includes("modern"))
+return "Modern";
+
+if(name.toLowerCase().includes("english oven"))
+return "English Oven";
+
+if(name.toLowerCase().includes("gold drop"))
+return "Gold Drop";
+
+return "RoyalXQuick";
+
+}
+
+
+/* =========================================
+   ADD FROM PRODUCT DETAIL
+========================================= */
+
+function addDetailToCart(){
+
+if(!selectedProduct)
+return;
+
+addToCart(selectedProduct.id);
+
+closeProduct();
+
+goCart();
+
+}
+
+
+/* =========================================
+   FAVORITE
+========================================= */
+
+function toggleFavorite(){
+
+alert("❤️ Product added to favorites!");
+
+}
+
+
+/* =========================================
+   SHARE
+========================================= */
+
+function shareProduct(){
+
+if(!selectedProduct)
+return;
+
+if(navigator.share){
+
+navigator.share({
+
+title:selectedProduct.name,
+
+text:
+selectedProduct.name+
+" - ₹"+
+selectedProduct.price+
+" on RoyalXQuick"
 
 });
 
+}else{
 
-/* =========================
-DEALS
-========================= */
+alert("Product share option is not available on this browser.");
 
-function renderDeals(){
-
-const products=allProducts().slice(0,4);
-
-const box=document.getElementById("deals");
-
-box.innerHTML="";
-
-products.forEach((product,index)=>{
-
-const discount=[30,25,20,33][index];
-
-box.innerHTML+=`
-
-<div
-class="deal-card"
-onclick="openProduct(${product.id})">
-
-<div class="offer">
-${discount}% OFF
-</div>
-
-<div class="heart">
-♡
-</div>
-
-<img
-class="deal-img"
-src="${product.image}"
-onerror="this.src='./1786646663690.jpeg'">
-
-<div class="deal-size">
-${product.name.includes("500")?"500 ml":"1 KG"}
-</div>
-
-<div class="deal-price">
-₹${product.price}
-<button
-class="deal-add"
-onclick="event.stopPropagation();addToCart(${product.id})">
-ADD
-</button>
-</div>
-
-<div class="save">
-You Save ₹${Math.max(5,Math.round(product.price*.1))}
-</div>
-
-<div class="lowest">
-Lowest in 30 days
-</div>
-
-<div class="rating">
-⭐ 4.5 (10K+) &nbsp; ⏱ 8 mins
-</div>
-
-</div>
-
-`;
-
-});
+}
 
 }
 
 
-/* =========================
-CART
-========================= */
+/* =========================================
+   CART
+========================================= */
 
 function addToCart(id){
 
 const product=
 allProducts().find(item=>item.id===id);
 
-if(!product)return;
+if(!product)
+return;
 
 const existing=
 cart.find(item=>item.id===id);
@@ -2069,7 +1799,8 @@ updateCart();
 
 function updateCart(){
 
-const box=document.getElementById("cartItems");
+const box=
+document.getElementById("cartItems");
 
 box.innerHTML="";
 
@@ -2078,7 +1809,8 @@ let count=0;
 
 if(cart.length===0){
 
-box.innerHTML="<p>Your cart is empty.</p>";
+box.innerHTML=
+"<p>Your cart is empty.</p>";
 
 }
 
@@ -2126,24 +1858,29 @@ ${item.qty}
 
 
 const delivery=
-subtotal>0 ? 30 : 0;
+subtotal>0?30:0;
 
 const handling=
-subtotal>0 ? 5 : 0;
+subtotal>0?5:0;
 
 const total=
 subtotal+delivery+handling;
 
 
-document.getElementById("cartCount").innerText=count;
+document.getElementById("cartCount").innerText=
+count;
 
-document.getElementById("subtotal").innerText=subtotal;
+document.getElementById("subtotal").innerText=
+subtotal;
 
-document.getElementById("delivery").innerText=delivery;
+document.getElementById("delivery").innerText=
+delivery;
 
-document.getElementById("handlingCharge").innerText=handling;
+document.getElementById("handlingCharge").innerText=
+handling;
 
-document.getElementById("total").innerText=total;
+document.getElementById("total").innerText=
+total;
 
 }
 
@@ -2174,9 +1911,9 @@ behavior:"smooth"
 }
 
 
-/* =========================
-ORDER
-========================= */
+/* =========================================
+   ORDER
+========================================= */
 
 function placeOrder(){
 
@@ -2188,18 +1925,28 @@ return;
 
 }
 
-
 const name=
-document.getElementById("name").value.trim();
+document
+.getElementById("name")
+.value
+.trim();
 
 const phone=
-document.getElementById("phone").value.trim();
+document
+.getElementById("phone")
+.value
+.trim();
 
 const address=
-document.getElementById("address").value.trim();
+document
+.getElementById("address")
+.value
+.trim();
 
 const payment=
-document.getElementById("payment").value;
+document
+.getElementById("payment")
+.value;
 
 
 if(!name || !phone || !address){
@@ -2236,19 +1983,22 @@ item.price*item.qty;
 subtotal+=itemTotal;
 
 orderItems+=
-"• "+item.name+
-" × "+item.qty+
-" = ₹"+itemTotal+
+"• "+
+item.name+
+" × "+
+item.qty+
+" = ₹"+
+itemTotal+
 "\n";
 
 });
 
 
 const delivery=
-subtotal>0 ? 30 : 0;
+subtotal>0?30:0;
 
 const handling=
-subtotal>0 ? 5 : 0;
+subtotal>0?5:0;
 
 const total=
 subtotal+delivery+handling;
@@ -2263,20 +2013,36 @@ const message=
 "Products:\n"+
 orderItems+
 
-"\nSubtotal: ₹"+subtotal+
-"\nDelivery: ₹"+delivery+
-"\nHandling Charge: ₹"+handling+
-"\nTotal: ₹"+total+
+"\nSubtotal: ₹"+
+subtotal+
 
-"\n\nName: "+name+
-"\nMobile: "+phone+
-"\nAddress: "+address+
-"\n"+locationText+
+"\nDelivery: ₹"+
+delivery+
 
-"Payment: "+payment.toUpperCase();
+"\nHandling Charge: ₹"+
+handling+
+
+"\nTotal: ₹"+
+total+
+
+"\n\nName: "+
+name+
+
+"\nMobile: "+
+phone+
+
+"\nAddress: "+
+address+
+
+"\n"+
+locationText+
+
+"Payment: "+
+payment.toUpperCase();
 
 
-const whatsappNumber="919705335701";
+const whatsappNumber=
+"919705335701";
 
 
 window.location.href=
@@ -2302,7 +2068,9 @@ position.coords.longitude;
 
 const locationLink=
 "https://www.google.com/maps?q="+
-lat+","+lon;
+lat+
+","+
+lon;
 
 openWhatsApp(
 "📍 Current Location:\n"+
@@ -2333,16 +2101,17 @@ openWhatsApp(
 }
 
 
-/* =========================
-FEEDBACK
-========================= */
+/* =========================================
+   FEEDBACK
+========================================= */
 
 function sendFeedback(){
 
 const name=
 document
 .getElementById("feedbackName")
-.value.trim();
+.value
+.trim();
 
 const rating=
 document
@@ -2352,7 +2121,8 @@ document
 const feedback=
 document
 .getElementById("feedbackText")
-.value.trim();
+.value
+.trim();
 
 
 if(!name){
@@ -2383,9 +2153,13 @@ return;
 const feedbackData={
 
 name:name,
+
 rating:rating,
+
 text:feedback,
-date:new Date().toLocaleDateString()
+
+date:new Date()
+.toLocaleDateString()
 
 };
 
@@ -2413,25 +2187,38 @@ JSON.stringify(feedbacks)
 const message=
 
 "⭐ ROYALXQUICK FEEDBACK\n\n"+
-"Name: "+name+
-"\nRating: "+rating+"/5"+
-"\nFeedback: "+feedback;
+
+"Name: "+
+name+
+
+"\nRating: "+
+rating+
+"/5"+
+
+"\nFeedback: "+
+feedback;
 
 
-const whatsappNumber="919705335701";
+const whatsappNumber=
+"919705335701";
 
 
 window.open(
+
 "https://wa.me/"+
 whatsappNumber+
 "?text="+
 encodeURIComponent(message),
+
 "_blank"
+
 );
 
 
 document.getElementById("feedbackName").value="";
+
 document.getElementById("feedbackRating").value="";
+
 document.getElementById("feedbackText").value="";
 
 
@@ -2440,9 +2227,9 @@ displayFeedbacks();
 }
 
 
-/* =========================
-SHOW FEEDBACK
-========================= */
+/* =========================================
+   SHOW FEEDBACK
+========================================= */
 
 function displayFeedbacks(){
 
@@ -2463,7 +2250,10 @@ if(feedbacks.length===0){
 box.innerHTML=`
 
 <div class="feedback-card">
-No feedback yet. Be the first one! ⭐
+
+No feedback yet.
+Be the first one! ⭐
+
 </div>
 
 `;
@@ -2473,13 +2263,16 @@ return;
 }
 
 
-box.innerHTML="<h3>💬 Customer Reviews</h3>";
+box.innerHTML=
+"<h3>💬 Customer Reviews</h3>";
 
 
 feedbacks.forEach(item=>{
 
 const stars=
-"⭐".repeat(Number(item.rating));
+"⭐".repeat(
+Number(item.rating)
+);
 
 
 box.innerHTML+=`
@@ -2523,9 +2316,9 @@ return div.innerHTML;
 }
 
 
-/* =========================
-PWA
-========================= */
+/* =========================================
+   PWA
+========================================= */
 
 if("serviceWorker" in navigator){
 
@@ -2544,18 +2337,19 @@ error
 
 });
 
-});
+}
+);
 
 }
 
 
-/* =========================
-START
-========================= */
+/* =========================================
+   START
+========================================= */
 
-renderDeals();
-
-displayProducts(allProducts());
+displayProducts(
+allProducts()
+);
 
 updateCart();
 
