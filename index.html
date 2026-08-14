@@ -7,11 +7,9 @@
 <title>RoyalXQuick - Grocery Delivery</title>
 
 <link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#008a4c">
+<meta name="theme-color" content="#008a3b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-touch-fullscreen" content="yes">
-
 <link rel="icon" type="image/jpeg" href="./1786646663690.jpeg">
 <link rel="apple-touch-icon" href="./1786646663690.jpeg">
 
@@ -20,179 +18,588 @@
   box-sizing:border-box;
   margin:0;
   padding:0;
-  font-family:Arial,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  background:#f4f7fb;
-  color:#222;
+  background:#f6f8f6;
+  color:#202020;
+  padding-bottom:75px;
+}
+
+button,input,textarea,select{
+  font-family:inherit;
 }
 
 button{
   cursor:pointer;
 }
 
-header{
-  background:#008a4c;
-  color:white;
-  padding:12px 15px;
+/* ================= HEADER ================= */
+
+.header{
   position:sticky;
   top:0;
   z-index:1000;
-  box-shadow:0 2px 10px #bbb;
+  background:#008a3b;
+  color:white;
+  box-shadow:0 2px 10px rgba(0,0,0,.18);
 }
 
-.top{
+.header-main{
+  height:68px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:10px;
+  gap:8px;
+  padding:7px 10px;
+}
+
+.menu-btn{
+  border:0;
+  background:transparent;
+  color:white;
+  font-size:25px;
+  width:32px;
+}
+
+.logo-box{
+  width:155px;
+  flex-shrink:0;
 }
 
 .logo{
-  font-size:23px;
-  font-weight:bold;
+  font-size:20px;
+  font-weight:800;
+  line-height:21px;
 }
 
-.location{
-  font-size:12px;
-  margin-top:4px;
+.logo small{
+  display:block;
+  font-size:10px;
+  font-weight:500;
+  opacity:.9;
+  margin-top:2px;
+}
+
+.search-box{
+  flex:1;
+  min-width:0;
+  position:relative;
+}
+
+.search-box input{
+  width:100%;
+  height:42px;
+  border:0;
+  outline:0;
+  border-radius:8px;
+  padding:0 12px 0 38px;
+  font-size:13px;
+}
+
+.search-icon{
+  position:absolute;
+  left:12px;
+  top:12px;
+  color:#555;
+}
+
+.location-box{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  width:135px;
+  font-size:11px;
+  line-height:14px;
+}
+
+.location-box button{
+  background:transparent;
+  border:0;
+  color:white;
+  text-align:left;
+}
+
+.location-title{
+  font-size:10px;
   opacity:.9;
 }
 
-.cart-btn{
-  border:0;
-  background:white;
-  color:#008a4c;
-  padding:10px 13px;
-  border-radius:10px;
+.location-name{
   font-weight:bold;
+  font-size:12px;
 }
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:12px;
+.header-cart{
+  border:1px solid rgba(255,255,255,.35);
+  background:#087b38;
+  color:white;
+  border-radius:10px;
+  min-width:58px;
+  height:45px;
+  position:relative;
 }
 
-.search{
-  width:100%;
-  padding:14px;
-  border:1px solid #ddd;
-  border-radius:14px;
-  font-size:16px;
-  margin-bottom:12px;
-  background:white;
+.header-cart-icon{
+  font-size:22px;
 }
 
-.categories{
+.cart-badge{
+  position:absolute;
+  right:4px;
+  top:2px;
+  min-width:18px;
+  height:18px;
+  padding:0 4px;
+  border-radius:10px;
+  background:#ffd900;
+  color:#111;
+  font-size:11px;
+  font-weight:bold;
   display:flex;
-  gap:10px;
-  overflow-x:auto;
-  padding:5px 2px 14px;
-  scrollbar-width:none;
+  align-items:center;
+  justify-content:center;
 }
 
-.categories::-webkit-scrollbar{
+/* ================= CATEGORY TOP ================= */
+
+.category-strip{
+  background:white;
+  display:flex;
+  overflow-x:auto;
+  gap:5px;
+  padding:7px 8px 9px;
+  scrollbar-width:none;
+  border-bottom:1px solid #e7e7e7;
+}
+
+.category-strip::-webkit-scrollbar{
   display:none;
 }
 
-.category-btn{
-  min-width:82px;
-  background:white;
+.top-category{
+  flex:0 0 74px;
+  min-height:90px;
   border:1px solid #eee;
-  border-radius:14px;
-  padding:9px 8px;
-  text-align:center;
-  font-size:12px;
-  font-weight:bold;
-  box-shadow:0 2px 7px #ddd;
+  background:white;
+  border-radius:9px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  font-size:11px;
+  color:#222;
 }
 
-.category-btn span{
-  display:block;
+.top-category .cat-icon{
+  font-size:32px;
+  height:38px;
+  display:flex;
+  align-items:center;
+}
+
+.top-category.active{
+  color:#087b38;
+  border-bottom:3px solid #087b38;
+  font-weight:bold;
+}
+
+.top-category.active .cat-circle{
+  background:#087b38;
+  color:white;
+}
+
+.cat-circle{
+  width:39px;
+  height:39px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+}
+
+/* ================= HOME ================= */
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:10px;
+}
+
+/* HERO */
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:8px;
+  margin:10px 0 15px;
+}
+
+.hero{
+  min-height:210px;
+  border-radius:12px;
+  overflow:hidden;
+  position:relative;
+}
+
+.fresh-banner{
+  background:linear-gradient(135deg,#effbdd,#d8f4bd);
+  border:1px solid #d4e8bf;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px;
+}
+
+.fresh-text{
+  z-index:2;
+}
+
+.fresh-text h1{
+  color:#087b38;
+  font-size:28px;
+  line-height:31px;
+  margin-bottom:12px;
+}
+
+.fresh-text p{
+  font-size:16px;
+  line-height:23px;
+  margin-bottom:14px;
+}
+
+.shop-btn{
+  border:0;
+  background:#087b38;
+  color:white;
+  border-radius:7px;
+  padding:10px 17px;
+  font-weight:bold;
+}
+
+.hero-veg{
+  width:55%;
+  height:100%;
+  object-fit:contain;
+  mix-blend-mode:multiply;
+}
+
+.delivery-banner{
+  background:linear-gradient(135deg,#fff8e9,#fff0d2);
+  padding:18px 10px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.delivery-banner h2{
+  color:#f15a24;
+  font-size:23px;
+  margin-bottom:7px;
+}
+
+.delivery-banner p{
+  font-size:15px;
+  line-height:22px;
+}
+
+.delivery-price{
+  color:#e93620;
   font-size:27px;
-  margin-bottom:4px;
+  font-weight:900;
+  margin:3px 0 10px;
 }
 
-.category-btn.active{
-  background:#dff7e8;
-  border:2px solid #008a4c;
-  color:#006b3c;
-}
-
-.banner{
-  background:linear-gradient(135deg,#e5fff0,#fff);
-  border:2px solid #b8e8cb;
-  border-radius:20px;
-  padding:18px;
-  margin-bottom:18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  box-shadow:0 3px 12px #ddd;
-}
-
-.banner h1{
-  color:#006b3c;
-  font-size:21px;
-  margin-bottom:6px;
-}
-
-.banner p{
-  color:#555;
-  font-size:14px;
-  margin-bottom:5px;
-}
-
-.banner small{
-  color:#008a4c;
-  font-weight:bold;
-}
-
-.banner-icon{
-  font-size:35px;
-}
-
-.free-banner{
-  background:linear-gradient(135deg,#fff3d9,#fff);
-  border:2px solid #ffd98a;
-  border-radius:18px;
-  padding:15px;
-  margin-bottom:18px;
+.delivery-scooter{
   text-align:center;
-  font-weight:bold;
-  color:#9a6500;
+  font-size:55px;
 }
 
-.section-head{
+/* ================= SECTION TITLE ================= */
+
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:13px 2px 9px;
+}
+
+.section-title h2{
+  font-size:18px;
+}
+
+.view-all{
+  border:0;
+  background:transparent;
+  color:#087b38;
+  font-weight:bold;
+  font-size:12px;
+}
+
+/* ================= TOP DEALS ================= */
+
+.deals{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+
+.deal-card{
+  background:white;
+  border:1px solid #e8e8e8;
+  border-radius:10px;
+  padding:7px;
+  position:relative;
+  box-shadow:0 1px 5px rgba(0,0,0,.06);
+  cursor:pointer;
+  min-width:0;
+}
+
+.deal-discount{
+  position:absolute;
+  top:7px;
+  left:7px;
+  background:#e62e35;
+  color:white;
+  padding:4px 6px;
+  border-radius:4px;
+  font-size:10px;
+  font-weight:bold;
+  z-index:2;
+}
+
+.deal-heart{
+  position:absolute;
+  right:8px;
+  top:7px;
+  font-size:21px;
+  color:#777;
+  z-index:2;
+}
+
+.deal-img{
+  width:100%;
+  height:145px;
+  object-fit:contain;
+  border-radius:8px;
+  margin-top:8px;
+  background:#fafafa;
+}
+
+.deal-unit{
+  font-size:11px;
+  margin-top:4px;
+  color:#444;
+}
+
+.deal-price-row{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  margin-top:7px;
+}
+
+.deal-price{
+  color:#087b38;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.deal-mrp{
+  color:#777;
+  text-decoration:line-through;
+  font-size:11px;
+}
+
+.deal-add{
+  float:right;
+  border:1px solid #a4d3b1;
+  background:white;
+  color:#087b38;
+  padding:5px 9px;
+  border-radius:6px;
+  font-weight:bold;
+  font-size:11px;
+  margin-top:-22px;
+}
+
+.deal-save{
+  color:#e83d31;
+  font-size:11px;
+  font-weight:bold;
+  margin-top:6px;
+}
+
+.deal-info{
+  background:#eff9ed;
+  border-radius:5px;
+  padding:6px;
+  margin-top:8px;
+  color:#5b7a58;
+  font-size:10px;
+  text-align:center;
+}
+
+.deal-rating{
+  font-size:10px;
+  margin-top:7px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  margin:8px 0 12px;
+  color:#444;
 }
 
-.section-head h2{
+/* ================= SERVICE FEATURES ================= */
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin:16px 0;
+}
+
+.feature{
+  background:#f0f8ec;
+  border-radius:9px;
+  padding:10px 5px;
+  text-align:center;
+}
+
+.feature-icon{
+  font-size:28px;
+}
+
+.feature-title{
+  color:#247b38;
+  font-weight:bold;
+  font-size:11px;
+  margin-top:4px;
+}
+
+.feature-text{
+  font-size:9px;
+  color:#666;
+  margin-top:3px;
+}
+
+/* ================= SHOP BY CATEGORY ================= */
+
+.shop-categories{
+  display:flex;
+  overflow-x:auto;
+  gap:13px;
+  padding:3px 4px 10px;
+  scrollbar-width:none;
+}
+
+.shop-categories::-webkit-scrollbar{
+  display:none;
+}
+
+.shop-category{
+  flex:0 0 75px;
+  text-align:center;
+  cursor:pointer;
+}
+
+.shop-category-image{
+  width:67px;
+  height:67px;
+  border-radius:50%;
+  background:#f6f8f4;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto;
+  overflow:hidden;
+  border:1px solid #e8e8e8;
+  font-size:34px;
+}
+
+.shop-category-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.shop-category-name{
+  font-size:10px;
+  margin-top:7px;
+  font-weight:bold;
+}
+
+/* ================= DAILY BANNER ================= */
+
+.daily-banner{
+  margin:10px 0 17px;
+  background:linear-gradient(90deg,#eaf7dc,#f6ffed);
+  border-radius:10px;
+  min-height:85px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 14px;
+  overflow:hidden;
+}
+
+.daily-banner-text h2{
+  color:#287e39;
+  font-size:19px;
+}
+
+.daily-banner-text p{
+  color:#555;
+  font-size:10px;
+  margin-top:4px;
+}
+
+.daily-products{
+  display:flex;
+  gap:2px;
+  font-size:48px;
+}
+
+/* ================= ALL PRODUCTS ================= */
+
+.products-section{
+  margin-top:5px;
+}
+
+.products-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.products-head h2{
   font-size:20px;
 }
 
-.section-head small{
-  color:#008a4c;
+.product-count{
+  color:#087b38;
   font-weight:bold;
+  font-size:13px;
 }
 
 .products{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:12px;
+  gap:10px;
 }
 
 .product{
   background:white;
-  border-radius:16px;
-  padding:10px;
-  box-shadow:0 2px 9px #ddd;
+  border-radius:12px;
+  padding:8px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  border:1px solid #eee;
+  cursor:pointer;
   overflow:hidden;
   transition:.15s;
 }
@@ -201,382 +608,670 @@ header{
   transform:scale(.98);
 }
 
+.product-img-wrap{
+  width:100%;
+  height:155px;
+  background:#fafafa;
+  border-radius:9px;
+  position:relative;
+}
+
 .product-img{
   width:100%;
-  height:145px;
-  object-fit:cover;
-  border-radius:12px;
-  background:#eee;
+  height:100%;
+  object-fit:contain;
+  border-radius:9px;
+}
+
+.product-offer{
+  position:absolute;
+  left:5px;
+  top:5px;
+  background:#e93136;
+  color:white;
+  border-radius:4px;
+  padding:4px 5px;
+  font-size:9px;
+  font-weight:bold;
 }
 
 .product h3{
-  font-size:14px;
-  line-height:1.35;
+  font-size:13px;
+  line-height:18px;
   margin-top:8px;
-  min-height:38px;
+  min-height:36px;
 }
 
-.rating{
-  font-size:12px;
-  color:#f2a900;
-  margin-top:5px;
+.product-unit{
+  color:#777;
+  font-size:10px;
+  margin-top:4px;
 }
 
-.price-row{
+.product-bottom{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-top:6px;
-}
-
-.price{
-  color:#008a4c;
-  font-size:19px;
-  font-weight:bold;
-}
-
-.mrp{
-  color:#999;
-  text-decoration:line-through;
-  font-size:12px;
-  margin-left:5px;
-}
-
-.discount{
-  color:#e24b00;
-  font-size:11px;
-  font-weight:bold;
-}
-
-.add{
-  width:100%;
-  border:2px solid #008a4c;
-  background:white;
-  color:#008a4c;
-  padding:9px;
-  border-radius:10px;
-  font-weight:bold;
+  gap:5px;
   margin-top:7px;
 }
 
-.add:active{
-  background:#008a4c;
-  color:white;
+.product-price{
+  color:#008a4c;
+  font-size:18px;
+  font-weight:bold;
 }
 
-.empty{
+.product-add{
+  border:1px solid #8dcaa0;
   background:white;
-  padding:25px;
-  border-radius:15px;
-  text-align:center;
-  color:#777;
-  grid-column:1/-1;
+  color:#087b38;
+  border-radius:6px;
+  padding:6px 9px;
+  font-weight:bold;
+  font-size:11px;
 }
 
-.deals{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  padding-bottom:8px;
-  scrollbar-width:none;
+.product-rating{
+  margin-top:7px;
+  font-size:10px;
+  color:#555;
 }
 
-.deals::-webkit-scrollbar{
-  display:none;
-}
+/* ================= CART ================= */
 
-.deal-card{
-  min-width:180px;
+.cart-section{
   background:white;
-  border-radius:15px;
-  padding:10px;
-  box-shadow:0 2px 8px #ddd;
+  margin-top:20px;
+  border-radius:14px;
+  padding:15px;
+  box-shadow:0 2px 9px rgba(0,0,0,.08);
 }
 
-.deal-card img{
-  width:100%;
-  height:110px;
-  object-fit:cover;
-  border-radius:10px;
-}
-
-.deal-card b{
-  display:block;
-  margin-top:6px;
-  font-size:13px;
-}
-
-.cart{
-  background:white;
-  padding:18px;
-  border-radius:17px;
-  margin-top:22px;
-  box-shadow:0 2px 9px #ddd;
-}
-
-.cart h2{
+.cart-section h2{
+  font-size:20px;
   margin-bottom:12px;
 }
 
 .cart-item{
   display:flex;
+  align-items:center;
   justify-content:space-between;
   gap:8px;
-  padding:12px 0;
+  padding:10px 0;
   border-bottom:1px solid #eee;
-  font-size:14px;
+}
+
+.cart-item-name{
+  font-size:13px;
+  font-weight:bold;
+  flex:1;
+}
+
+.cart-item-price{
+  font-size:12px;
+  color:#555;
+  margin-top:3px;
+}
+
+.qty{
+  display:flex;
+  align-items:center;
+  gap:7px;
 }
 
 .qty button{
-  padding:5px 10px;
-  margin:0 2px;
-  border:1px solid #ccc;
+  width:30px;
+  height:30px;
+  border:1px solid #bbb;
   background:white;
-  border-radius:6px;
-}
-
-.total{
-  margin-top:10px;
-  font-size:17px;
+  border-radius:7px;
+  font-size:19px;
+  color:#087b38;
   font-weight:bold;
 }
 
-input,
-textarea,
-select{
+.qty span{
+  min-width:16px;
+  text-align:center;
+  font-weight:bold;
+}
+
+.bill{
+  margin-top:13px;
+  border-top:1px solid #ddd;
+  padding-top:10px;
+}
+
+.bill-row{
+  display:flex;
+  justify-content:space-between;
+  margin:7px 0;
+  font-size:14px;
+}
+
+.bill-total{
+  font-size:19px;
+  font-weight:bold;
+  color:#087b38;
+  border-top:1px solid #ddd;
+  padding-top:9px;
+}
+
+.delivery-form{
+  margin-top:20px;
+}
+
+.delivery-form h3{
+  margin-bottom:8px;
+}
+
+.delivery-form input,
+.delivery-form textarea,
+.delivery-form select,
+.feedback-box input,
+.feedback-box textarea,
+.feedback-box select{
   width:100%;
-  padding:13px;
-  margin:7px 0 10px;
+  padding:12px;
   border:1px solid #ccc;
   border-radius:9px;
-  font-size:15px;
+  margin:5px 0 8px;
+  font-size:14px;
+  outline:none;
 }
 
-textarea{
+.delivery-form textarea,
+.feedback-box textarea{
   min-height:90px;
+  resize:vertical;
 }
 
-.place-order{
+.primary-btn{
   width:100%;
-  padding:14px;
   border:0;
-  background:#008a4c;
+  background:#008a3b;
   color:white;
-  font-size:17px;
-  font-weight:bold;
   border-radius:10px;
+  padding:14px;
+  font-size:16px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+/* ================= FEEDBACK ================= */
+
+.feedback-box{
+  background:white;
+  border-radius:14px;
+  padding:15px;
+  margin-top:15px;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
 }
 
 .feedback-card{
-  background:white;
-  border-radius:14px;
-  padding:14px;
+  border:1px solid #eee;
+  border-radius:10px;
+  padding:10px;
   margin-top:10px;
-  box-shadow:0 2px 7px #ddd;
 }
 
 .feedback-name{
   font-weight:bold;
-  font-size:16px;
 }
 
 .feedback-stars{
-  color:#f5b400;
-  font-size:18px;
   margin:4px 0;
+  color:#f4b400;
 }
 
 .feedback-text{
-  color:#444;
-  font-size:14px;
-  line-height:1.4;
+  font-size:13px;
+  line-height:18px;
 }
 
 .feedback-date{
-  font-size:11px;
   color:#999;
+  font-size:10px;
   margin-top:5px;
 }
 
-/* PRODUCT DETAIL */
+/* ================= DETAIL SCREEN ================= */
 
-#detailScreen{
-  display:none;
+.detail-screen{
   position:fixed;
   inset:0;
-  background:#f4f7fb;
-  z-index:2000;
+  background:#f6f7f8;
+  z-index:3000;
+  display:none;
   overflow-y:auto;
+  padding-bottom:90px;
 }
 
-.detail-header{
-  background:#008a4c;
-  color:white;
-  padding:13px 15px;
+.detail-screen.show{
+  display:block;
+}
+
+.detail-top{
+  height:58px;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 15px;
   position:sticky;
   top:0;
   z-index:5;
-  display:flex;
-  align-items:center;
-  gap:15px;
+  box-shadow:0 1px 5px #ddd;
 }
 
 .back-btn{
   border:0;
   background:white;
-  color:#008a4c;
-  border-radius:50%;
-  width:40px;
-  height:40px;
+  font-size:26px;
+}
+
+.detail-title-small{
+  font-weight:bold;
+  font-size:15px;
+  flex:1;
+  margin-left:12px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.detail-share{
+  border:0;
+  background:white;
   font-size:22px;
 }
 
-.detail-body{
-  max-width:700px;
-  margin:auto;
-  padding-bottom:100px;
-}
-
-.detail-image{
-  width:100%;
+.detail-image-area{
+  background:#f8f9fa;
   height:330px;
-  object-fit:contain;
-  background:white;
-}
-
-.detail-info{
-  background:white;
-  padding:20px;
-  border-radius:20px 20px 0 0;
-  margin-top:-15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   position:relative;
 }
 
-.detail-name{
-  font-size:23px;
+.detail-image{
+  width:92%;
+  height:310px;
+  object-fit:contain;
+}
+
+.detail-content{
+  background:white;
+  border-radius:20px 20px 0 0;
+  margin-top:-15px;
+  position:relative;
+  padding:20px 18px 30px;
+}
+
+.shelf-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#f4f5f8;
+  border-radius:10px;
+  padding:10px;
+  margin-bottom:15px;
+}
+
+.shelf-label{
+  color:#777;
+  font-size:13px;
+}
+
+.shelf-value{
   font-weight:bold;
-  line-height:1.3;
+  margin-top:4px;
+}
+
+.view-details{
+  border:1px solid #8bc79a;
+  color:#287b38;
+  background:#f1ffef;
+  padding:9px;
+  border-radius:10px;
+  font-weight:bold;
 }
 
 .detail-rating{
+  margin-top:8px;
+  color:#f0ae00;
+  font-size:14px;
+}
+
+.detail-rating span{
+  color:#555;
+  font-size:12px;
+}
+
+.detail-name{
+  font-size:24px;
+  line-height:30px;
+  margin-top:9px;
+}
+
+.detail-unit-title{
+  font-size:16px;
+  font-weight:bold;
+  margin-top:7px;
+}
+
+.unit-options{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
   margin-top:10px;
-  color:#f3a900;
+}
+
+.unit-option{
+  min-width:145px;
+  border:1px solid #ddd;
+  border-radius:14px;
+  padding:13px;
+  background:white;
+}
+
+.unit-option.selected{
+  border:2px solid #64a65d;
+  background:#efffec;
+}
+
+.unit-option strong{
+  display:block;
   font-size:16px;
 }
 
-.detail-price{
-  color:#008a4c;
-  font-size:27px;
-  font-weight:bold;
-  margin-top:12px;
-}
-
-.detail-unit{
-  color:#777;
-  margin-top:6px;
-}
-
-.unit-title{
-  margin-top:20px;
-  font-weight:bold;
-}
-
-.unit-buttons{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:8px;
-}
-
-.unit-btn{
-  padding:10px 15px;
-  border:1px solid #ccc;
-  background:white;
-  border-radius:10px;
-}
-
-.unit-btn.active{
-  background:#dff7e8;
-  border:2px solid #008a4c;
-  color:#006b3c;
-}
-
-.detail-qty{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin-top:15px;
-}
-
-.detail-qty button{
-  width:40px;
-  height:40px;
-  border:1px solid #ccc;
-  background:white;
-  border-radius:8px;
+.unit-option-price{
   font-size:20px;
+  font-weight:bold;
+  margin-top:4px;
 }
 
-.detail-bottom{
+.detail-price{
+  color:#087b38;
+}
+
+.detail-mrp{
+  color:#777;
+  text-decoration:line-through;
+  font-size:12px;
+  margin-left:5px;
+}
+
+.detail-offer{
+  color:#2773cf;
+  font-weight:bold;
+  font-size:13px;
+  margin-top:7px;
+}
+
+.detail-per-unit{
+  color:#777;
+  font-size:12px;
+  margin-top:5px;
+}
+
+.detail-info-card{
+  margin-top:14px;
+  padding:13px;
+  background:#fafafa;
+  border-radius:11px;
+}
+
+.detail-info-card strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.detail-fixed-cart{
   position:fixed;
   bottom:0;
   left:0;
   right:0;
+  z-index:3100;
   background:white;
-  padding:10px;
-  box-shadow:0 -2px 10px #ccc;
-  z-index:10;
+  box-shadow:0 -2px 10px rgba(0,0,0,.12);
+  padding:10px 15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
 
-.detail-add{
-  width:100%;
-  max-width:700px;
-  display:block;
-  margin:auto;
-  background:#008a4c;
-  color:white;
+.detail-fixed-price{
+  font-weight:bold;
+  font-size:17px;
+}
+
+.detail-add-btn{
   border:0;
-  padding:15px;
+  background:#2d8a18;
+  color:white;
+  border-radius:10px;
+  padding:14px 28px;
+  font-weight:bold;
+  font-size:17px;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+  grid-column:1/-1;
+  background:white;
+  padding:30px;
+  text-align:center;
   border-radius:12px;
-  font-size:18px;
+  color:#777;
+}
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:68px;
+  background:white;
+  z-index:2000;
+  box-shadow:0 -2px 10px rgba(0,0,0,.12);
+  display:flex;
+  justify-content:space-around;
+}
+
+.bottom-btn{
+  flex:1;
+  border:0;
+  background:white;
+  color:#777;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  font-size:10px;
+}
+
+.bottom-btn .nav-icon{
+  font-size:22px;
+}
+
+.bottom-btn.active{
+  color:#008a3b;
   font-weight:bold;
 }
 
-footer{
-  text-align:center;
-  color:#777;
-  padding:30px;
+.bottom-cart-wrap{
+  position:relative;
 }
 
-@media(min-width:650px){
+.bottom-cart-count{
+  position:absolute;
+  top:-3px;
+  right:8px;
+  background:#008a3b;
+  color:white;
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  font-size:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ================= DESKTOP ================= */
+
+@media(min-width:700px){
+
+  .header-main{
+    max-width:1200px;
+    margin:auto;
+  }
+
+  .category-strip{
+    justify-content:center;
+  }
+
+  .container{
+    padding:15px;
+  }
+
   .products{
     grid-template-columns:repeat(4,1fr);
   }
 
-  .category-btn{
-    min-width:110px;
+  .deals{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .product-img-wrap{
+    height:190px;
+  }
+
+  .bottom-nav{
+    max-width:700px;
+    left:50%;
+    transform:translateX(-50%);
+    border-radius:15px 15px 0 0;
   }
 }
 
+/* ================= SMALL PHONE ================= */
+
 @media(max-width:500px){
-  .banner{
-    padding:15px 10px;
+
+  .header-main{
+    height:62px;
+    padding:5px 7px;
   }
 
-  .banner h1{
+  .logo-box{
+    width:112px;
+  }
+
+  .logo{
     font-size:17px;
   }
 
-  .banner p{
+  .logo small{
+    font-size:8px;
+  }
+
+  .location-box{
+    display:none;
+  }
+
+  .search-box input{
+    height:38px;
+    font-size:11px;
+  }
+
+  .header-cart{
+    min-width:48px;
+    height:40px;
+  }
+
+  .hero-grid{
+    grid-template-columns:1.65fr 1fr;
+  }
+
+  .hero{
+    min-height:195px;
+  }
+
+  .fresh-text h1{
+    font-size:22px;
+    line-height:25px;
+  }
+
+  .fresh-text p{
+    font-size:12px;
+    line-height:17px;
+  }
+
+  .hero-veg{
+    width:53%;
+  }
+
+  .delivery-banner h2{
+    font-size:18px;
+  }
+
+  .delivery-banner p{
+    font-size:11px;
+    line-height:16px;
+  }
+
+  .delivery-price{
+    font-size:22px;
+  }
+
+  .delivery-scooter{
+    font-size:40px;
+  }
+
+  .deals{
+    grid-template-columns:repeat(4,1fr);
+    overflow-x:auto;
+  }
+
+  .deal-card{
+    min-width:145px;
+  }
+
+  .features{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .feature-icon{
+    font-size:22px;
+  }
+
+  .feature-title{
+    font-size:9px;
+  }
+
+  .feature-text{
+    font-size:7px;
+  }
+
+  .product-img-wrap{
+    height:140px;
+  }
+
+  .product h3{
     font-size:12px;
   }
 
-  .banner-icon{
-    font-size:27px;
-  }
-
-  .product-img{
-    height:135px;
+  .detail-image-area{
+    height:300px;
   }
 
   .detail-image{
@@ -588,1562 +1283,2416 @@ footer{
 
 <body>
 
-<header>
-<div class="top">
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
-<div>
-<div class="logo">🛒 RoyalXQuick</div>
-<div class="location">📍 Fast Grocery Delivery</div>
-</div>
+<header class="header">
 
-<button class="cart-btn" onclick="goCart()">
-🛒 Cart (<span id="cartCount">0</span>)
-</button>
+  <div class="header-main">
 
-</div>
+    <button class="menu-btn" onclick="scrollToTop()">☰</button>
+
+    <div class="logo-box">
+      <div class="logo">👑 RoyalXQuick</div>
+      <small>Fast. Fresh. Delivered.</small>
+    </div>
+
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input
+        id="search"
+        type="text"
+        placeholder="Search in Hindi or English..."
+        oninput="searchProducts()"
+      >
+    </div>
+
+    <div class="location-box">
+      <button onclick="getHeaderLocation()">
+        <div>📍</div>
+        <div class="location-title">Deliver to</div>
+        <div class="location-name" id="locationName">Your Location⌄</div>
+      </button>
+    </div>
+
+    <button class="header-cart" onclick="goCart()">
+      <span class="header-cart-icon">🛒</span>
+      <span class="cart-badge" id="cartCount">0</span>
+    </button>
+
+  </div>
+
 </header>
 
-<div class="container">
 
-<input
-class="search"
-id="search"
-type="text"
-placeholder="🔍 Search products in Hindi or English..."
-oninput="searchProducts()"
->
+<!-- =========================================================
+     TOP CATEGORIES
+========================================================= -->
 
-<div class="categories">
+<div class="category-strip" id="categoryStrip">
 
-<button class="category-btn active" onclick="showCategory('all',this)">
-<span>🛍️</span>All
-</button>
+  <button class="top-category active"
+          onclick="showCategory('all',this)">
+    <div class="cat-circle">▦</div>
+    <span>All</span>
+  </button>
 
-<button class="category-btn" onclick="showCategory('dairy',this)">
-<span>🥛</span>Milk
-</button>
+  <button class="top-category"
+          onclick="showCategory('dairy',this)">
+    <div class="cat-icon">🥛</div>
+    <span>Dairy</span>
+  </button>
 
-<button class="category-btn" onclick="showCategory('vegetables',this)">
-<span>🥦</span>Vegetables
-</button>
+  <button class="top-category"
+          onclick="showCategory('vegetables',this)">
+    <div class="cat-icon">🥦</div>
+    <span>Vegetables</span>
+  </button>
 
-<button class="category-btn" onclick="showCategory('fruits',this)">
-<span>🍎</span>Fruits
-</button>
+  <button class="top-category"
+          onclick="showCategory('fruits',this)">
+    <div class="cat-icon">🍎</div>
+    <span>Fruits</span>
+  </button>
 
-<button class="category-btn" onclick="showCategory('bakery',this)">
-<span>🍞</span>Bakery
-</button>
+  <button class="top-category"
+          onclick="showCategory('bakery',this)">
+    <div class="cat-icon">🍞</div>
+    <span>Bakery</span>
+  </button>
 
-<button class="category-btn" onclick="showCategory('kirana',this)">
-<span>🛒</span>Kirana
-</button>
+  <button class="top-category"
+          onclick="showCategory('household',this)">
+    <div class="cat-icon">🧴</div>
+    <span>Household</span>
+  </button>
 
-<button class="category-btn" onclick="showCategory('household',this)">
-<span>🏠</span>Household
-</button>
+  <button class="top-category"
+          onclick="showCategory('drinks',this)">
+    <div class="cat-icon">🥤</div>
+    <span>Beverages</span>
+  </button>
 
-<button class="category-btn" onclick="showCategory('drinks',this)">
-<span>🥤</span>Drinks
-</button>
+  <button class="top-category"
+          onclick="showCategory('electronics',this)">
+    <div class="cat-icon">📱</div>
+    <span>Electronics</span>
+  </button>
 
-<button class="category-btn" onclick="showCategory('electronics',this)">
-<span>📱</span>Electronics
-</button>
-
-<button class="category-btn" onclick="showCategory('more',this)">
-<span>➕</span>More
-</button>
-
-</div>
-
-<div class="banner">
-
-<div class="banner-icon">🛒</div>
-
-<div>
-<h1>🚀 Super Fresh Week</h1>
-<p>Fresh groceries delivered to your doorstep ❤️</p>
-<small>⚡ Fast & Easy Grocery Delivery</small>
-</div>
-
-<div class="banner-icon">🥦</div>
+  <button class="top-category"
+          onclick="showCategory('more',this)">
+    <div class="cat-icon">•••</div>
+    <span>More</span>
+  </button>
 
 </div>
 
-<div class="free-banner">
-🚚 FREE DELIVERY OFFERS AVAILABLE 🎉
-</div>
 
-<div class="section-head">
-<h2>🔥 Today's Top Deals</h2>
-<small>Fresh & Best</small>
-</div>
+<main class="container" id="home">
 
-<div class="deals" id="deals"></div>
 
-<div class="section-head">
-<h2 id="categoryTitle">🛍️ All Products</h2>
-<small id="productCount">Products</small>
-</div>
+<!-- =========================================================
+     HERO BANNERS
+========================================================= -->
 
-<div class="products" id="products"></div>
+<div class="hero-grid">
 
-<!-- CART -->
+  <div class="hero fresh-banner">
 
-<div class="cart" id="cart">
+    <div class="fresh-text">
 
-<h2>🛒 Your Cart</h2>
+      <h1>
+        SUPER<br>
+        FRESH WEEK
+      </h1>
 
-<div id="cartItems">
-<p>Your cart is empty.</p>
-</div>
+      <p>
+        Up to <b>40% OFF</b><br>
+        On Top Products
+      </p>
 
-<div class="total">
-Subtotal: ₹<span id="subtotal">0</span>
-</div>
+      <button class="shop-btn"
+              onclick="scrollToProducts()">
+        SHOP NOW
+      </button>
 
-<div class="total">
-Delivery: ₹<span id="delivery">0</span>
-</div>
+    </div>
 
-<div class="total">
-Handling Charge: ₹<span id="handlingCharge">0</span>
-</div>
+    <!-- Existing vegetable image -->
+    <img
+      class="hero-veg"
+      src="IMG_20260812_213053.png"
+      onerror="this.style.display='none'"
+      alt="Fresh vegetables"
+    >
 
-<div class="total">
-Total: ₹<span id="total">0</span>
-</div>
+  </div>
 
-<div style="margin-top:20px">
 
-<h2>📍 Delivery Details</h2>
+  <div class="hero delivery-banner">
 
-<input type="text" id="name" placeholder="Your Name">
+    <h2>FREE DELIVERY</h2>
 
-<input type="tel" id="phone" placeholder="Mobile Number">
+    <p>On Orders Above</p>
 
-<textarea
-id="address"
-placeholder="Enter complete delivery address">
-</textarea>
+    <div class="delivery-price">₹499</div>
 
-<select id="payment">
+    <div class="delivery-scooter">🛵</div>
 
-<option value="cod">
-💵 Cash on Delivery
-</option>
-
-<option value="upi">
-📱 UPI Payment
-</option>
-
-</select>
-
-<button class="place-order" onclick="placeOrder()">
-Place Order
-</button>
+  </div>
 
 </div>
 
-</div>
 
-<!-- FEEDBACK -->
+<!-- =========================================================
+     TODAY'S TOP DEALS
+========================================================= -->
 
-<div class="cart">
+<div class="section-title">
 
-<h2>⭐ Customer Feedback</h2>
+  <h2>🔥 TODAY'S TOP DEALS</h2>
 
-<input
-type="text"
-id="feedbackName"
-placeholder="Your Name">
-
-<select id="feedbackRating">
-
-<option value="">
-Select Rating
-</option>
-
-<option value="5">
-⭐⭐⭐⭐⭐ 5 Stars
-</option>
-
-<option value="4">
-⭐⭐⭐⭐ 4 Stars
-</option>
-
-<option value="3">
-⭐⭐⭐ 3 Stars
-</option>
-
-<option value="2">
-⭐⭐ 2 Stars
-</option>
-
-<option value="1">
-⭐ 1 Star
-</option>
-
-</select>
-
-<textarea
-id="feedbackText"
-placeholder="Tell us about your experience...">
-</textarea>
-
-<button
-class="place-order"
-onclick="sendFeedback()">
-
-⭐ Submit Feedback
-
-</button>
-
-<div id="feedbackList" style="margin-top:20px"></div>
+  <button class="view-all"
+          onclick="scrollToProducts()">
+    View All Deals ›
+  </button>
 
 </div>
 
-</div>
-
-<footer>
-© 2026 RoyalXQuick Grocery Delivery
-</footer>
+<div class="deals" id="topDeals"></div>
 
 
-<!-- PRODUCT DETAIL SCREEN -->
+<!-- =========================================================
+     FEATURES
+========================================================= -->
 
-<div id="detailScreen">
+<div class="features">
 
-<div class="detail-header">
+  <div class="feature">
+    <div class="feature-icon">🚀</div>
+    <div class="feature-title">10 Mins Delivery</div>
+    <div class="feature-text">Lightning fast delivery</div>
+  </div>
 
-<button class="back-btn" onclick="closeDetail()">
-←
-</button>
+  <div class="feature">
+    <div class="feature-icon">🏅</div>
+    <div class="feature-title">Best Quality</div>
+    <div class="feature-text">Fresh & genuine products</div>
+  </div>
 
-<b>Product Details</b>
+  <div class="feature">
+    <div class="feature-icon">🏷️</div>
+    <div class="feature-title">Best Prices</div>
+    <div class="feature-text">Lowest price promise</div>
+  </div>
 
-</div>
-
-<div class="detail-body">
-
-<img
-id="detailImage"
-class="detail-image"
-src=""
-alt="Product">
-
-<div class="detail-info">
-
-<div id="detailName" class="detail-name"></div>
-
-<div id="detailRating" class="detail-rating">
-⭐⭐⭐⭐⭐ 4.8
-</div>
-
-<div id="detailPrice" class="detail-price"></div>
-
-<div id="detailMRP"></div>
-
-<div id="detailUnit" class="detail-unit"></div>
-
-<div class="unit-title">
-Select Unit
-</div>
-
-<div id="unitButtons" class="unit-buttons"></div>
-
-<div class="unit-title">
-Quantity
-</div>
-
-<div class="detail-qty">
-
-<button onclick="detailChangeQty(-1)">
-−
-</button>
-
-<b id="detailQty">
-1
-</b>
-
-<button onclick="detailChangeQty(1)">
-+
-</button>
+  <div class="feature">
+    <div class="feature-icon">🛡️</div>
+    <div class="feature-title">Safe & Secure</div>
+    <div class="feature-text">100% secure payments</div>
+  </div>
 
 </div>
 
+
+<!-- =========================================================
+     SHOP BY CATEGORY
+========================================================= -->
+
+<div class="section-title">
+  <h2>SHOP BY CATEGORY</h2>
 </div>
 
+<div class="shop-categories">
+
+  <div class="shop-category"
+       onclick="showCategoryByName('dairy')">
+    <div class="shop-category-image">🥛</div>
+    <div class="shop-category-name">Dairy</div>
+  </div>
+
+  <div class="shop-category"
+       onclick="showCategoryByName('vegetables')">
+    <div class="shop-category-image">🥦</div>
+    <div class="shop-category-name">Vegetables</div>
+  </div>
+
+  <div class="shop-category"
+       onclick="showCategoryByName('fruits')">
+    <div class="shop-category-image">🍎</div>
+    <div class="shop-category-name">Fruits</div>
+  </div>
+
+  <div class="shop-category"
+       onclick="showCategoryByName('bakery')">
+    <div class="shop-category-image">🍞</div>
+    <div class="shop-category-name">Bakery</div>
+  </div>
+
+  <div class="shop-category"
+       onclick="showCategoryByName('household')">
+    <div class="shop-category-image">🧴</div>
+    <div class="shop-category-name">Household</div>
+  </div>
+
+  <div class="shop-category"
+       onclick="showCategoryByName('drinks')">
+    <div class="shop-category-image">🥤</div>
+    <div class="shop-category-name">Beverages</div>
+  </div>
+
+  <div class="shop-category"
+       onclick="showCategoryByName('electronics')">
+    <div class="shop-category-image">📱</div>
+    <div class="shop-category-name">Electronics</div>
+  </div>
+
+  <div class="shop-category"
+       onclick="showCategoryByName('more')">
+    <div class="shop-category-image">•••</div>
+    <div class="shop-category-name">More</div>
+  </div>
+
 </div>
 
-<div class="detail-bottom">
 
-<button
-class="detail-add"
-onclick="addDetailToCart()">
+<!-- =========================================================
+     DAILY BANNER
+========================================================= -->
 
-🛒 Add to Cart
+<div class="daily-banner">
 
-</button>
+  <div class="daily-banner-text">
+
+    <h2>Fresh Products<br>Delivered Daily!</h2>
+
+    <p>Best quality, best prices, on time.</p>
+
+  </div>
+
+  <div class="daily-products">
+    🥬🍅🥕
+  </div>
+
+  <button class="shop-btn"
+          onclick="scrollToProducts()">
+    ORDER NOW
+  </button>
 
 </div>
 
+
+<!-- =========================================================
+     ALL PRODUCTS
+========================================================= -->
+
+<section class="products-section" id="productsSection">
+
+  <div class="products-head">
+
+    <h2 id="categoryTitle">
+      🛍️ All Products
+    </h2>
+
+    <div class="product-count"
+         id="productCount">
+      44 Products
+    </div>
+
+  </div>
+
+  <div class="products" id="products"></div>
+
+</section>
+
+
+<!-- =========================================================
+     CART
+========================================================= -->
+
+<section class="cart-section" id="cart">
+
+  <h2>🛒 Your Cart</h2>
+
+  <div id="cartItems">
+    <p>Your cart is empty.</p>
+  </div>
+
+  <div class="bill">
+
+    <div class="bill-row">
+      <span>Subtotal</span>
+      <b>₹<span id="subtotal">0</span></b>
+    </div>
+
+    <div class="bill-row">
+      <span>Delivery</span>
+      <b>₹<span id="delivery">0</span></b>
+    </div>
+
+    <div class="bill-row">
+      <span>Handling Charge</span>
+      <b>₹<span id="handlingCharge">0</span></b>
+    </div>
+
+    <div class="bill-row bill-total">
+      <span>Total</span>
+      <span>₹<span id="total">0</span></span>
+    </div>
+
+  </div>
+
+
+  <div class="delivery-form">
+
+    <h3>📍 Delivery Details</h3>
+
+    <input
+      type="text"
+      id="name"
+      placeholder="Your Name"
+    >
+
+    <input
+      type="tel"
+      id="phone"
+      placeholder="Mobile Number"
+      inputmode="numeric"
+    >
+
+    <textarea
+      id="address"
+      placeholder="Enter complete delivery address"
+    ></textarea>
+
+    <select id="payment">
+
+      <option value="cod">
+        💵 Cash on Delivery
+      </option>
+
+      <option value="upi">
+        📱 UPI Payment
+      </option>
+
+    </select>
+
+    <button class="primary-btn"
+            onclick="placeOrder()">
+      🛒 Place Order
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FEEDBACK
+========================================================= -->
+
+<section class="feedback-box" id="feedback">
+
+  <h2>⭐ Customer Feedback</h2>
+
+  <input
+    type="text"
+    id="feedbackName"
+    placeholder="Your Name"
+  >
+
+  <select id="feedbackRating">
+
+    <option value="">
+      Select Rating
+    </option>
+
+    <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+    <option value="4">⭐⭐⭐⭐ 4 Stars</option>
+    <option value="3">⭐⭐⭐ 3 Stars</option>
+    <option value="2">⭐⭐ 2 Stars</option>
+    <option value="1">⭐ 1 Star</option>
+
+  </select>
+
+  <textarea
+    id="feedbackText"
+    placeholder="Tell us about your experience..."
+  ></textarea>
+
+  <button class="primary-btn"
+          onclick="sendFeedback()">
+    ⭐ Submit Feedback
+  </button>
+
+  <div id="feedbackList"></div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     PRODUCT DETAIL SCREEN
+========================================================= -->
+
+<div class="detail-screen" id="detailScreen">
+
+  <div class="detail-top">
+
+    <button class="back-btn"
+            onclick="closeDetail()">
+      ←
+    </button>
+
+    <div class="detail-title-small"
+         id="detailTopTitle">
+      Product
+    </div>
+
+    <button class="detail-share"
+            onclick="shareProduct()">
+      ⤴
+    </button>
+
+  </div>
+
+
+  <div class="detail-image-area">
+
+    <img
+      class="detail-image"
+      id="detailImage"
+      src=""
+      alt=""
+    >
+
+  </div>
+
+
+  <div class="detail-content">
+
+    <div class="shelf-row">
+
+      <div>
+        <div class="shelf-label">Product</div>
+        <div class="shelf-value">Fresh & Genuine</div>
+      </div>
+
+      <button class="view-details">
+        View details
+      </button>
+
+    </div>
+
+
+    <div class="detail-rating">
+      ⭐ <span id="detailRating">4.5</span>
+      <span id="detailReviews">Customer rating</span>
+    </div>
+
+
+    <h1 class="detail-name"
+        id="detailName">
+      Product Name
+    </h1>
+
+
+    <div class="detail-unit-title">
+      Select Unit
+    </div>
+
+
+    <div class="unit-options">
+
+      <div class="unit-option selected">
+
+        <strong id="detailUnit">
+          Unit
+        </strong>
+
+        <div class="unit-option-price detail-price">
+          ₹<span id="detailPrice">0</span>
+          <span class="detail-mrp">
+            MRP ₹<span id="detailMRP">0</span>
+          </span>
+        </div>
+
+        <div class="detail-offer"
+             id="detailOffer">
+          Special Price
+        </div>
+
+        <div class="detail-per-unit">
+          Inclusive of applicable taxes
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-info-card">
+
+      <strong>📦 Product Information</strong>
+
+      <div id="detailInfo">
+        Fresh grocery product.
+      </div>
+
+    </div>
+
+
+    <div class="detail-info-card">
+
+      <strong>🚚 Delivery</strong>
+
+      Fast grocery delivery to your doorstep.
+
+    </div>
+
+  </div>
+
+
+  <div class="detail-fixed-cart">
+
+    <div class="detail-fixed-price">
+      <div id="detailBottomUnit">Unit</div>
+      ₹<span id="detailBottomPrice">0</span>
+    </div>
+
+    <button class="detail-add-btn"
+            onclick="addDetailToCart()">
+      Add to cart
+    </button>
+
+  </div>
+
 </div>
+
+
+<!-- =========================================================
+     BOTTOM NAVIGATION
+========================================================= -->
+
+<nav class="bottom-nav">
+
+  <button class="bottom-btn active"
+          onclick="homeNav()">
+    <span class="nav-icon">⌂</span>
+    Home
+  </button>
+
+  <button class="bottom-btn"
+          onclick="categoryNav()">
+    <span class="nav-icon">▦</span>
+    Categories
+  </button>
+
+  <button class="bottom-btn"
+          onclick="searchNav()">
+    <span class="nav-icon">⌕</span>
+    Search
+  </button>
+
+  <button class="bottom-btn"
+          onclick="goCart()">
+
+    <span class="nav-icon bottom-cart-wrap">
+      🛒
+      <span class="bottom-cart-count"
+            id="bottomCartCount">
+        0
+      </span>
+    </span>
+
+    Cart
+  </button>
+
+  <button class="bottom-btn"
+          onclick="goFeedback()">
+    <span class="nav-icon">♙</span>
+    Account
+  </button>
+
+</nav>
 
 
 <script>
 
-/* =====================================================
+/* =========================================================
    VEGETABLE RATES
-   YAHAN SE VEGETABLE PRICE BAAR-BAAR CHANGE KAR SAKTE HO
-===================================================== */
+   YAHAN SE VEGETABLE PRICE CHANGE KAR SAKTE HO
+========================================================= */
 
 const VEGETABLE_PRICES = {
 
-"Green Chilli 250 g":30,
-"Capsicum 500 g":50,
-"Tomato 1 KG":50,
-"Carrot 1 KG":60,
-"Potato 1 KG":40,
-"Onion 1 KG":40,
-"Bottle Gourd 1 KG":40,
-"Lady Finger 500 g":40,
-"Ginger 250 g":30,
-"Cucumber 1 KG":40,
-"Green Beans 500 g":50,
-"Garlic 250 g":40,
-"Cabbage 1 KG":40,
-"Sweet Corn 1 Piece":30,
-"Radish 1 KG":40,
-"Brinjal 1 KG":50,
-"Coriander 1 Bunch":20,
-"Drumstick 500 g":50,
-"Pumpkin 1 KG":40,
-"Sweet Potato 1 KG":50,
-"Spinach 1 Bunch":20,
-"Beetroot 1 KG":60,
-"Cauliflower 1 Piece":50,
-"Ridge Gourd 1 KG":50,
-"Bitter Gourd 1 KG":60
+  "Green Chilli 250 g":30,
+  "Capsicum 500 g":50,
+  "Tomato 1 KG":50,
+  "Carrot 1 KG":60,
+  "Potato 1 KG":40,
+  "Onion 1 KG":40,
+  "Bottle Gourd 1 KG":40,
+  "Lady Finger 500 g":40,
+  "Ginger 250 g":30,
+  "Cucumber 1 KG":40,
+  "Green Beans 500 g":50,
+  "Garlic 250 g":40,
+  "Cabbage 1 KG":40,
+  "Sweet Corn 1 Piece":30,
+  "Radish 1 KG":40,
+  "Brinjal 1 KG":50,
+  "Coriander 1 Bunch":20,
+  "Drumstick 500 g":50,
+  "Pumpkin 1 KG":40,
+  "Sweet Potato 1 KG":50,
+  "Spinach 1 Bunch":20,
+  "Beetroot 1 KG":60,
+  "Cauliflower 1 Piece":50,
+  "Ridge Gourd 1 KG":50,
+  "Bitter Gourd 1 KG":60
 
 };
 
 
-/* DAIRY */
+/* =========================================================
+   DAIRY - EXISTING PRODUCTS PRESERVED
+========================================================= */
 
-const dairyProducts=[
+const dairyProducts = [
 
-{
-name:"Heritage Daily Health Toned Milk 500 ml",
-search:"Heritage Daily Health Toned Milk 500 ml हेरिटेज दूध मिल्क",
-price:33,
-mrp:35,
-unit:"500 ml",
-image:"IMG_20260811_192811.png"
-},
+  {
+    name:"Heritage Daily Health Toned Milk 500 ml",
+    search:"Heritage Daily Health Toned Milk 500 ml हेरिटेज दूध मिल्क",
+    price:33,
+    image:"IMG_20260811_192811.png",
+    unit:"500 ml"
+  },
 
-{
-name:"Heritage Daily Health Toned Milk 1 Litre",
-search:"Heritage Daily Health Toned Milk 1 Litre हेरिटेज दूध मिल्क",
-price:66,
-mrp:70,
-unit:"1 Litre",
-image:"IMG_20260811_192811.png"
-},
+  {
+    name:"Heritage Daily Health Toned Milk 1 Litre",
+    search:"Heritage Daily Health Toned Milk 1 Litre हेरिटेज दूध मिल्क",
+    price:66,
+    image:"IMG_20260811_192811.png",
+    unit:"1 Litre"
+  },
 
-{
-name:"Amul Taaza Milky Milk 500 ml",
-search:"Amul Taaza Milky Milk 500 ml अमूल दूध मिल्क",
-price:30,
-mrp:32,
-unit:"500 ml",
-image:"IMG_20260811_123753.png"
-},
+  {
+    name:"Amul Taaza Milky Milk 500 ml",
+    search:"Amul Taaza Milky Milk 500 ml अमूल दूध मिल्क",
+    price:30,
+    image:"IMG_20260811_123753.png",
+    unit:"500 ml"
+  },
 
-{
-name:"Amul Taaza Milky Milk 1 Litre",
-search:"Amul Taaza Milky Milk 1 Litre अमूल दूध मिल्क",
-price:60,
-mrp:64,
-unit:"1 Litre",
-image:"IMG_20260811_123753.png"
-},
+  {
+    name:"Amul Taaza Milky Milk 1 Litre",
+    search:"Amul Taaza Milky Milk 1 Litre अमूल दूध मिल्क",
+    price:60,
+    image:"IMG_20260811_123753.png",
+    unit:"1 Litre"
+  },
 
-{
-name:"Amul Dahi 700 g",
-search:"Amul Dahi 700 g अमूल दही curd",
-price:65,
-mrp:70,
-unit:"700 g",
-image:"IMG_20260812_151518.png"
-},
+  {
+    name:"Amul Dahi 700 g",
+    search:"Amul Dahi 700 g अमूल दही curd",
+    price:65,
+    image:"IMG_20260812_151518.png",
+    unit:"700 g"
+  },
 
-{
-name:"Heritage Total Curd 500 g",
-search:"Heritage Total Curd 500 g हेरिटेज दही curd",
-price:50,
-mrp:55,
-unit:"500 g",
-image:"IMG_20260812_151633.png"
-}
+  {
+    name:"Heritage Total Curd 500 g",
+    search:"Heritage Total Curd 500 g हेरिटेज दही curd",
+    price:50,
+    image:"IMG_20260812_151633.png",
+    unit:"500 g"
+  }
 
 ];
 
 
-/* VEGETABLES */
+/* =========================================================
+   VEGETABLES - ALL 25 EXISTING PRODUCTS
+========================================================= */
 
-const vegetables=[
+const vegetables = [
 
-{name:"Green Chilli 250 g",search:"Green Chilli 250 g हरी मिर्च",image:"IMG_20260812_212834.png",unit:"250 g"},
-{name:"Capsicum 500 g",search:"Capsicum 500 g शिमला मिर्च",image:"IMG_20260812_213001.png",unit:"500 g"},
-{name:"Tomato 1 KG",search:"Tomato 1 KG टमाटर",image:"IMG_20260812_213053.png",unit:"1 KG"},
-{name:"Carrot 1 KG",search:"Carrot 1 KG गाजर",image:"IMG_20260812_213129.png",unit:"1 KG"},
-{name:"Potato 1 KG",search:"Potato 1 KG आलू",image:"IMG_20260812_213426.png",unit:"1 KG"},
-{name:"Onion 1 KG",search:"Onion 1 KG प्याज",image:"IMG_20260812_213603.png",unit:"1 KG"},
-{name:"Bottle Gourd 1 KG",search:"Bottle Gourd 1 KG लौकी",image:"IMG_20260812_213731.png",unit:"1 KG"},
-{name:"Lady Finger 500 g",search:"Lady Finger 500 g Bhindi भिंडी",image:"IMG_20260812_213807.png",unit:"500 g"},
-{name:"Ginger 250 g",search:"Ginger 250 g अदरक",image:"IMG_20260812_214026.png",unit:"250 g"},
-{name:"Cucumber 1 KG",search:"Cucumber 1 KG खीरा",image:"IMG_20260812_214148.png",unit:"1 KG"},
-{name:"Green Beans 500 g",search:"Green Beans 500 g हरी बीन्स",image:"IMG_20260812_214448.png",unit:"500 g"},
-{name:"Garlic 250 g",search:"Garlic 250 g लहसुन",image:"IMG_20260812_214520.png",unit:"250 g"},
-{name:"Cabbage 1 KG",search:"Cabbage 1 KG पत्ता गोभी",image:"IMG_20260812_214608.png",unit:"1 KG"},
-{name:"Sweet Corn 1 Piece",search:"Sweet Corn 1 Piece स्वीट कॉर्न",image:"IMG_20260812_214713.png",unit:"1 Piece"},
-{name:"Radish 1 KG",search:"Radish 1 KG मूली",image:"IMG_20260812_214832.png",unit:"1 KG"},
-{name:"Brinjal 1 KG",search:"Brinjal 1 KG बैंगन",image:"IMG_20260812_214937.png",unit:"1 KG"},
-{name:"Coriander 1 Bunch",search:"Coriander 1 Bunch धनिया",image:"IMG_20260812_215325.png",unit:"1 Bunch"},
-{name:"Drumstick 500 g",search:"Drumstick 500 g सहजन",image:"IMG_20260812_215445.png",unit:"500 g"},
-{name:"Pumpkin 1 KG",search:"Pumpkin 1 KG कद्दू",image:"IMG_20260812_215618.png",unit:"1 KG"},
-{name:"Sweet Potato 1 KG",search:"Sweet Potato 1 KG शकरकंद",image:"IMG_20260812_215734.png",unit:"1 KG"},
-{name:"Spinach 1 Bunch",search:"Spinach 1 Bunch पालक",image:"IMG_20260812_215821.png",unit:"1 Bunch"},
-{name:"Beetroot 1 KG",search:"Beetroot 1 KG चुकंदर",image:"IMG_20260812_215955.png",unit:"1 KG"},
-{name:"Cauliflower 1 Piece",search:"Cauliflower 1 Piece फूलगोभी",image:"IMG_20260812_220104.png",unit:"1 Piece"},
-{name:"Ridge Gourd 1 KG",search:"Ridge Gourd 1 KG तुरई",image:"IMG_20260812_220214.png",unit:"1 KG"},
-{name:"Bitter Gourd 1 KG",search:"Bitter Gourd 1 KG करेला",image:"IMG_20260812_220312.png",unit:"1 KG"}
+  {
+    name:"Green Chilli 250 g",
+    search:"Green Chilli 250 g हरी मिर्च",
+    image:"IMG_20260812_212834.png",
+    unit:"250 g"
+  },
+
+  {
+    name:"Capsicum 500 g",
+    search:"Capsicum 500 g शिमला मिर्च",
+    image:"IMG_20260812_213001.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Tomato 1 KG",
+    search:"Tomato 1 KG टमाटर",
+    image:"IMG_20260812_213053.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Carrot 1 KG",
+    search:"Carrot 1 KG गाजर",
+    image:"IMG_20260812_213129.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Potato 1 KG",
+    search:"Potato 1 KG आलू",
+    image:"IMG_20260812_213426.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Onion 1 KG",
+    search:"Onion 1 KG प्याज",
+    image:"IMG_20260812_213603.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Bottle Gourd 1 KG",
+    search:"Bottle Gourd 1 KG लौकी",
+    image:"IMG_20260812_213731.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Lady Finger 500 g",
+    search:"Lady Finger 500 g Bhindi भिंडी",
+    image:"IMG_20260812_213807.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Ginger 250 g",
+    search:"Ginger 250 g अदरक",
+    image:"IMG_20260812_214026.png",
+    unit:"250 g"
+  },
+
+  {
+    name:"Cucumber 1 KG",
+    search:"Cucumber 1 KG खीरा",
+    image:"IMG_20260812_214148.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Green Beans 500 g",
+    search:"Green Beans 500 g हरी बीन्स",
+    image:"IMG_20260812_214448.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Garlic 250 g",
+    search:"Garlic 250 g लहसुन",
+    image:"IMG_20260812_214520.png",
+    unit:"250 g"
+  },
+
+  {
+    name:"Cabbage 1 KG",
+    search:"Cabbage 1 KG पत्ता गोभी",
+    image:"IMG_20260812_214608.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Sweet Corn 1 Piece",
+    search:"Sweet Corn 1 Piece स्वीट कॉर्न",
+    image:"IMG_20260812_214713.png",
+    unit:"1 Piece"
+  },
+
+  {
+    name:"Radish 1 KG",
+    search:"Radish 1 KG मूली",
+    image:"IMG_20260812_214832.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Brinjal 1 KG",
+    search:"Brinjal 1 KG बैंगन",
+    image:"IMG_20260812_214937.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Coriander 1 Bunch",
+    search:"Coriander 1 Bunch धनिया",
+    image:"IMG_20260812_215325.png",
+    unit:"1 Bunch"
+  },
+
+  {
+    name:"Drumstick 500 g",
+    search:"Drumstick 500 g सहजन",
+    image:"IMG_20260812_215445.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Pumpkin 1 KG",
+    search:"Pumpkin 1 KG कद्दू",
+    image:"IMG_20260812_215618.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Sweet Potato 1 KG",
+    search:"Sweet Potato 1 KG शकरकंद",
+    image:"IMG_20260812_215734.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Spinach 1 Bunch",
+    search:"Spinach 1 Bunch पालक",
+    image:"IMG_20260812_215821.png",
+    unit:"1 Bunch"
+  },
+
+  {
+    name:"Beetroot 1 KG",
+    search:"Beetroot 1 KG चुकंदर",
+    image:"IMG_20260812_215955.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Cauliflower 1 Piece",
+    search:"Cauliflower 1 Piece फूलगोभी",
+    image:"IMG_20260812_220104.png",
+    unit:"1 Piece"
+  },
+
+  {
+    name:"Ridge Gourd 1 KG",
+    search:"Ridge Gourd 1 KG तुरई",
+    image:"IMG_20260812_220214.png",
+    unit:"1 KG"
+  },
+
+  {
+    name:"Bitter Gourd 1 KG",
+    search:"Bitter Gourd 1 KG करेला",
+    image:"IMG_20260812_220312.png",
+    unit:"1 KG"
+  }
 
 ];
 
-vegetables.forEach(product=>{
-product.price=VEGETABLE_PRICES[product.name] || 0;
-product.mrp=product.price;
+
+vegetables.forEach(product => {
+  product.price =
+    VEGETABLE_PRICES[product.name] || 0;
 });
 
 
-/* BAKERY */
+/* =========================================================
+   BAKERY
+========================================================= */
 
-const bakeryProducts=[
+const bakeryProducts = [
 
-{
-name:"Modern White Bread 400 g",
-search:"Modern White Bread 400 g bread ब्रेड",
-price:60,
-mrp:65,
-unit:"400 g",
-image:"IMG_20260812_143847.png"
-},
+  {
+    name:"Modern White Bread 400 g",
+    search:"Modern White Bread 400 g bread ब्रेड",
+    price:60,
+    image:"IMG_20260812_143847.png",
+    unit:"400 g"
+  },
 
-{
-name:"English Oven Milk Bread 400 g",
-search:"English Oven Milk Bread 400 g bread ब्रेड",
-price:55,
-mrp:60,
-unit:"400 g",
-image:"IMG_20260812_143822.png"
-}
-
-];
-
-
-/* KIRANA */
-
-const kiranaProducts=[
-
-{
-name:"Tata Salt 1 KG",
-search:"Tata Salt 1 KG टाटा नमक salt",
-price:30,
-mrp:35,
-unit:"1 KG",
-image:"IMG-20260813-WA0005.jpg"
-},
-
-{
-name:"Tide Nirma Detergent",
-search:"Tide Nirma detergent washing powder",
-price:140,
-mrp:150,
-unit:"Pack",
-image:"IMG-20260813-WA0006(1).jpg"
-},
-
-{
-name:"Tata Poha 500 g",
-search:"Tata Poha 500 g टाटा पोहा",
-price:52,
-mrp:58,
-unit:"500 g",
-image:"IMG-20260813-WA0007.jpg"
-},
-
-{
-name:"Red Label Tea 100 g",
-search:"Red Label Tea 100 g चाय",
-price:45,
-mrp:50,
-unit:"100 g",
-image:"IMG-20260813-WA0008.jpg"
-},
-
-{
-name:"Red Chilli Powder 100 g",
-search:"Red Chilli Powder 100 g लाल मिर्च",
-price:66,
-mrp:70,
-unit:"100 g",
-image:"IMG-20260813-WA0009.jpg"
-},
-
-{
-name:"Gold Drop Oil 5 KG",
-search:"Gold Drop Oil 5 KG तेल cooking oil",
-price:890,
-mrp:920,
-unit:"5 KG",
-image:"IMG-20260813-WA0010.jpg"
-},
-
-{
-name:"Aashirvaad Whole Wheat Atta 5 KG",
-search:"Aashirvaad Whole Wheat Atta 5 KG आटा",
-price:308,
-mrp:330,
-unit:"5 KG",
-image:"IMG-20260813-WA0011.jpg"
-},
-
-{
-name:"Lays Magic Masala 25 g",
-search:"Lays Magic Masala 25 g chips",
-price:25,
-mrp:30,
-unit:"25 g",
-image:"IMG-20260813-WA0012.jpg"
-}
+  {
+    name:"English Oven Milk Bread 400 g",
+    search:"English Oven Milk Bread 400 g bread ब्रेड",
+    price:55,
+    image:"IMG_20260812_143822.png",
+    unit:"400 g"
+  }
 
 ];
 
 
-/* DRINKS */
+/* =========================================================
+   KIRANA - EXISTING PRODUCTS PRESERVED
+========================================================= */
 
-const drinksProducts=[
+const kiranaProducts = [
 
-{
-name:"Maaza 600 ml",
-search:"Maaza 600 ml mango juice",
-price:35,
-mrp:40,
-unit:"600 ml",
-image:"IMG-20260813-WA0013.jpg"
-},
+  {
+    name:"Tata Salt 1 KG",
+    search:"Tata Salt 1 KG टाटा नमक salt",
+    price:30,
+    image:"IMG-20260813-WA0005.jpg",
+    unit:"1 KG"
+  },
 
-{
-name:"Sprite 250 ml",
-search:"Sprite 250 ml cold drink",
-price:20,
-mrp:25,
-unit:"250 ml",
-image:"IMG-20260813-WA0014.jpg"
-},
+  {
+    name:"Tide Nirma Detergent",
+    search:"Tide Nirma detergent washing powder",
+    price:140,
+    image:"IMG-20260813-WA0006(1).jpg",
+    unit:"Pack"
+  },
 
-{
-name:"Thums Up 250 ml",
-search:"Thums Up 250 ml cold drink",
-price:20,
-mrp:25,
-unit:"250 ml",
-image:"IMG-20260813-WA0015.jpg"
-}
+  {
+    name:"Tata Poha 500 g",
+    search:"Tata Poha 500 g टाटा पोहा",
+    price:52,
+    image:"IMG-20260813-WA0007.jpg",
+    unit:"500 g"
+  },
+
+  {
+    name:"Red Label Tea 100 g",
+    search:"Red Label Tea 100 g चाय tea",
+    price:45,
+    image:"IMG-20260813-WA0008.jpg",
+    unit:"100 g"
+  },
+
+  {
+    name:"Red Chilli Powder 100 g",
+    search:"Red Chilli Powder 100 g लाल मिर्च",
+    price:66,
+    image:"IMG-20260813-WA0009.jpg",
+    unit:"100 g"
+  },
+
+  {
+    name:"Gold Drop Oil 5 KG",
+    search:"Gold Drop Oil 5 KG तेल sunflower oil",
+    price:890,
+    image:"IMG-20260813-WA0010.jpg",
+    unit:"5 KG"
+  },
+
+  {
+    name:"Aashirvaad Whole Wheat Atta 5 KG",
+    search:"Aashirvaad Whole Wheat Atta 5 KG आटा atta",
+    price:308,
+    image:"IMG-20260813-WA0011.jpg",
+    unit:"5 KG"
+  },
+
+  {
+    name:"Lays Magic Masala 25 g",
+    search:"Lays Magic Masala 25 g chips",
+    price:25,
+    image:"IMG-20260813-WA0012.jpg",
+    unit:"25 g"
+  }
 
 ];
 
 
-/* EMPTY CATEGORIES */
+/* =========================================================
+   DRINKS
+========================================================= */
 
-const fruitsProducts=[];
-const householdProducts=[];
-const electronicsProducts=[];
-const otherProducts=[];
+const drinksProducts = [
+
+  {
+    name:"Maaza 600 ml",
+    search:"Maaza 600 ml mango juice आम रस",
+    price:35,
+    image:"IMG-20260813-WA0013.jpg",
+    unit:"600 ml"
+  },
+
+  {
+    name:"Sprite 250 ml",
+    search:"Sprite 250 ml cold drink",
+    price:20,
+    image:"IMG-20260813-WA0014.jpg",
+    unit:"250 ml"
+  },
+
+  {
+    name:"Thums Up 250 ml",
+    search:"Thums Up 250 ml cold drink",
+    price:20,
+    image:"IMG-20260813-WA0015.jpg",
+    unit:"250 ml"
+  }
+
+];
 
 
-/* ALL PRODUCTS */
+/* =========================================================
+   EMPTY CATEGORIES
+========================================================= */
+
+const fruitsProducts = [];
+const householdProducts = [];
+const electronicsProducts = [];
+
+
+/* =========================================================
+   ALL PRODUCTS
+   TOTAL = 44 EXISTING PRODUCTS
+========================================================= */
 
 function allProducts(){
 
-return [
+  return [
 
-...dairyProducts,
-...vegetables,
-...fruitsProducts,
-...bakeryProducts,
-...kiranaProducts,
-...drinksProducts,
-...householdProducts,
-...electronicsProducts,
-...otherProducts
+    ...dairyProducts,
+    ...vegetables,
+    ...fruitsProducts,
+    ...bakeryProducts,
+    ...kiranaProducts,
+    ...drinksProducts,
+    ...householdProducts,
+    ...electronicsProducts
 
-];
+  ];
 
 }
 
 
-let idCounter=0;
+/* =========================================================
+   PRODUCT IDS
+========================================================= */
 
-allProducts().forEach(product=>{
-product.id=idCounter++;
+let idCounter = 0;
+
+allProducts().forEach(product => {
+
+  product.id = idCounter++;
+
+  if(!product.rating){
+    product.rating = "4.5";
+  }
+
 });
 
 
-let cart=[];
-let currentCategory="all";
+/* =========================================================
+   CART
+========================================================= */
 
-let selectedDetailProduct=null;
-let detailQty=1;
+let cart = [];
 
+let currentCategory = "all";
 
-/* PRODUCT CARD */
-
-function productCard(product){
-
-return `
-
-<div class="product" onclick="openProductDetail(${product.id})">
-
-<img
-class="product-img"
-src="${product.image}"
-alt="${escapeHTML(product.name)}"
-onerror="this.src='./1786646663690.jpeg'"
->
-
-<h3>${escapeHTML(product.name)}</h3>
-
-<div class="rating">
-⭐⭐⭐⭐⭐ 4.8
-</div>
-
-<div class="price-row">
-
-<div>
-
-<span class="price">
-₹${product.price}
-</span>
-
-<span class="mrp">
-₹${product.mrp || product.price}
-</span>
-
-</div>
-
-</div>
-
-<div class="discount">
-🔥 Special Price
-</div>
-
-<button
-class="add"
-onclick="event.stopPropagation(); addToCart(${product.id})">
-
-➕ ADD
-
-</button>
-
-</div>
-
-`;
-
-}
+let selectedDetailProduct = null;
 
 
-/* DISPLAY PRODUCTS */
-
-function displayProducts(list){
-
-const box=document.getElementById("products");
-
-box.innerHTML="";
-
-if(list.length===0){
-
-box.innerHTML=
-`<div class="empty">
-😔 No products found.
-</div>`;
-
-document.getElementById("productCount").innerText=
-"0 Products";
-
-return;
-
-}
-
-list.forEach(product=>{
-box.innerHTML+=productCard(product);
-});
-
-document.getElementById("productCount").innerText=
-list.length+" Products";
-
-}
-
-
-/* CATEGORY */
+/* =========================================================
+   CATEGORY LIST
+========================================================= */
 
 function getCategoryList(category){
 
-if(category==="all") return allProducts();
-if(category==="dairy") return dairyProducts;
-if(category==="vegetables") return vegetables;
-if(category==="fruits") return fruitsProducts;
-if(category==="bakery") return bakeryProducts;
-if(category==="kirana") return kiranaProducts;
-if(category==="household") return householdProducts;
-if(category==="drinks") return drinksProducts;
-if(category==="electronics") return electronicsProducts;
-if(category==="more") return otherProducts;
+  if(category === "all")
+    return allProducts();
 
-return [];
+  if(category === "dairy")
+    return dairyProducts;
+
+  if(category === "vegetables")
+    return vegetables;
+
+  if(category === "fruits")
+    return fruitsProducts;
+
+  if(category === "bakery")
+    return bakeryProducts;
+
+  if(category === "household")
+    return householdProducts;
+
+  if(category === "drinks")
+    return drinksProducts;
+
+  if(category === "electronics")
+    return electronicsProducts;
+
+  if(category === "more")
+    return [
+      ...kiranaProducts,
+      ...drinksProducts
+    ];
+
+  return [];
 
 }
 
+
+/* =========================================================
+   CATEGORY TITLES
+========================================================= */
 
 function getCategoryTitle(category){
 
-const titles={
+  const titles = {
 
-all:"🛍️ All Products",
-dairy:"🥛 Milk & Dairy",
-vegetables:"🥦 Vegetables",
-fruits:"🍎 Fruits",
-bakery:"🍞 Bakery",
-kirana:"🛒 Kirana",
-household:"🏠 Household",
-drinks:"🥤 Drinks",
-electronics:"📱 Electronics",
-more:"➕ More"
+    all:"🛍️ All Products",
+    dairy:"🥛 Milk & Dairy",
+    vegetables:"🥦 Vegetables",
+    fruits:"🍎 Fruits",
+    bakery:"🍞 Bakery",
+    household:"🧴 Household",
+    drinks:"🥤 Beverages",
+    electronics:"📱 Electronics",
+    more:"🛒 More Products"
 
-};
+  };
 
-return titles[category] || "🛍️ All Products";
+  return titles[category] || "🛍️ All Products";
 
 }
 
+
+/* =========================================================
+   PRODUCT CARD
+   PRODUCT CARD PAR KAHIN BHI CLICK KARO = DETAIL
+========================================================= */
+
+function productCard(product){
+
+  return `
+
+    <div class="product"
+         onclick="openProductDetail(${product.id})">
+
+      <div class="product-img-wrap">
+
+        <div class="product-offer">
+          SPECIAL
+        </div>
+
+        <img
+          class="product-img"
+          src="${product.image}"
+          alt="${escapeHTML(product.name)}"
+          onerror="this.src='./1786646663690.jpeg'"
+        >
+
+      </div>
+
+      <h3>
+        ${escapeHTML(product.name)}
+      </h3>
+
+      <div class="product-unit">
+        ${escapeHTML(product.unit || "Unit")}
+      </div>
+
+      <div class="product-bottom">
+
+        <div class="product-price">
+          ₹${product.price}
+        </div>
+
+        <button
+          class="product-add"
+          onclick="event.stopPropagation();addToCart(${product.id})">
+          ADD
+        </button>
+
+      </div>
+
+      <div class="product-rating">
+        ⭐ ${product.rating || "4.5"} · Fresh product
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   DISPLAY PRODUCTS
+========================================================= */
+
+function displayProducts(list){
+
+  const box =
+    document.getElementById("products");
+
+  box.innerHTML = "";
+
+  if(list.length === 0){
+
+    box.innerHTML = `
+      <div class="empty">
+        😔 Is category mein abhi products nahi hain.
+      </div>
+    `;
+
+    document.getElementById("productCount")
+      .innerText = "0 Products";
+
+    return;
+
+  }
+
+  list.forEach(product => {
+
+    box.innerHTML += productCard(product);
+
+  });
+
+  document.getElementById("productCount")
+    .innerText = list.length + " Products";
+
+}
+
+
+/* =========================================================
+   CATEGORY CHANGE
+========================================================= */
 
 function showCategory(category,button){
 
-currentCategory=category;
+  currentCategory = category;
 
-document
-.querySelectorAll(".category-btn")
-.forEach(btn=>{
-btn.classList.remove("active");
-});
+  document
+    .querySelectorAll(".top-category")
+    .forEach(btn => {
+      btn.classList.remove("active");
+    });
 
-button.classList.add("active");
+  if(button){
+    button.classList.add("active");
+  }
 
-document.getElementById("search").value="";
+  document.getElementById("search").value = "";
 
-document.getElementById("categoryTitle").innerText=
-getCategoryTitle(category);
+  document.getElementById("categoryTitle")
+    .innerText = getCategoryTitle(category);
 
-displayProducts(getCategoryList(category));
+  displayProducts(getCategoryList(category));
+
+  scrollToProducts();
 
 }
 
 
-/* SEARCH */
+/* =========================================================
+   CATEGORY FROM SHOP BY CATEGORY
+========================================================= */
+
+function showCategoryByName(category){
+
+  const buttons =
+    document.querySelectorAll(".top-category");
+
+  let indexMap = {
+
+    all:0,
+    dairy:1,
+    vegetables:2,
+    fruits:3,
+    bakery:4,
+    household:5,
+    drinks:6,
+    electronics:7,
+    more:8
+
+  };
+
+  const button = buttons[indexMap[category]];
+
+  showCategory(category,button);
+
+}
+
+
+/* =========================================================
+   SEARCH
+   HINDI + ENGLISH
+========================================================= */
 
 function searchProducts(){
 
-const text=
-document
-.getElementById("search")
-.value
-.toLowerCase()
-.trim();
+  const text =
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase()
+      .trim();
 
-if(text===""){
+  if(text === ""){
 
-showCurrentCategory();
+    document.getElementById("categoryTitle")
+      .innerText =
+      getCategoryTitle(currentCategory);
 
-return;
+    displayProducts(
+      getCategoryList(currentCategory)
+    );
 
-}
+    return;
 
-const results=
-allProducts().filter(product=>
+  }
 
-(product.name+" "+product.search)
-.toLowerCase()
-.includes(text)
+  const results =
+    allProducts().filter(product => {
 
-);
+      const searchText =
+        (
+          product.name +
+          " " +
+          (product.search || "") +
+          " " +
+          (product.unit || "")
+        ).toLowerCase();
 
-document.getElementById("categoryTitle").innerText=
-"🔍 Search Results";
+      return searchText.includes(text);
 
-displayProducts(results);
+    });
 
-}
+  document.getElementById("categoryTitle")
+    .innerText = "🔍 Search Results";
 
-
-function showCurrentCategory(){
-
-document.getElementById("categoryTitle").innerText=
-getCategoryTitle(currentCategory);
-
-displayProducts(
-getCategoryList(currentCategory)
-);
-
-}
-
-
-/* =====================================================
-   PRODUCT DETAIL
-===================================================== */
-
-function openProductDetail(id){
-
-const product=
-allProducts().find(item=>item.id===id);
-
-if(!product)return;
-
-selectedDetailProduct=product;
-
-detailQty=1;
-
-document.getElementById("detailScreen").style.display="block";
-
-document.getElementById("detailImage").src=
-product.image;
-
-document.getElementById("detailImage").onerror=function(){
-this.src="./1786646663690.jpeg";
-};
-
-document.getElementById("detailName").innerText=
-product.name;
-
-document.getElementById("detailRating").innerText=
-"⭐⭐⭐⭐⭐ 4.8";
-
-document.getElementById("detailPrice").innerText=
-"₹"+product.price;
-
-document.getElementById("detailMRP").innerHTML=
-`<span class="mrp">MRP ₹${product.mrp || product.price}</span>`;
-
-document.getElementById("detailUnit").innerText=
-"📦 "+(product.unit || "1 Pack");
-
-document.getElementById("detailQty").innerText=
-detailQty;
-
-
-/* UNIT OPTIONS */
-
-const unitBox=
-document.getElementById("unitButtons");
-
-unitBox.innerHTML="";
-
-const units=[
-product.unit || "1 Pack"
-];
-
-units.forEach((unit,index)=>{
-
-const btn=document.createElement("button");
-
-btn.className="unit-btn active";
-
-btn.innerText=unit;
-
-btn.onclick=function(){
-
-document
-.querySelectorAll(".unit-btn")
-.forEach(b=>b.classList.remove("active"));
-
-btn.classList.add("active");
-
-};
-
-unitBox.appendChild(btn);
-
-});
+  displayProducts(results);
 
 }
 
 
-function detailChangeQty(change){
+/* =========================================================
+   TOP DEALS
+   AVAILABLE PRODUCTS SE DIKHAYE JA RAHE HAIN
+========================================================= */
 
-detailQty+=change;
+function renderTopDeals(){
 
-if(detailQty<1){
-detailQty=1;
+  const products = [
+
+    dairyProducts[2],
+    kiranaProducts[6],
+    vegetables[2],
+    kiranaProducts[0]
+
+  ];
+
+  const box =
+    document.getElementById("topDeals");
+
+  box.innerHTML = "";
+
+  products.forEach(product => {
+
+    if(!product) return;
+
+    const discount =
+      product.price >= 300 ? 15 :
+      product.price >= 100 ? 20 :
+      10;
+
+    const mrp =
+      Math.ceil(
+        (product.price / (1 - discount/100)) / 5
+      ) * 5;
+
+    const saving = mrp - product.price;
+
+    box.innerHTML += `
+
+      <div class="deal-card"
+           onclick="openProductDetail(${product.id})">
+
+        <div class="deal-discount">
+          ${discount}% OFF
+        </div>
+
+        <div class="deal-heart">
+          ♡
+        </div>
+
+        <img
+          class="deal-img"
+          src="${product.image}"
+          onerror="this.src='./1786646663690.jpeg'"
+          alt="${escapeHTML(product.name)}"
+        >
+
+        <div class="deal-unit">
+          ${escapeHTML(product.unit || "Unit")}
+        </div>
+
+        <div class="deal-price-row">
+
+          <span class="deal-price">
+            ₹${product.price}
+          </span>
+
+          <span class="deal-mrp">
+            ₹${mrp}
+          </span>
+
+        </div>
+
+        <button
+          class="deal-add"
+          onclick="event.stopPropagation();addToCart(${product.id})">
+          ADD
+        </button>
+
+        <div class="deal-save">
+          You Save ₹${saving}
+        </div>
+
+        <div class="deal-info">
+          Lowest price
+        </div>
+
+        <div class="deal-rating">
+          <span>⭐ ${product.rating || "4.5"}</span>
+          <span>🚚 Fast delivery</span>
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
 }
 
-if(detailQty>20){
-detailQty=20;
-}
 
-document.getElementById("detailQty").innerText=
-detailQty;
-
-}
-
-
-function addDetailToCart(){
-
-if(!selectedDetailProduct)return;
-
-const existing=
-cart.find(item=>item.id===selectedDetailProduct.id);
-
-if(existing){
-
-existing.qty+=detailQty;
-
-}else{
-
-cart.push({
-...selectedDetailProduct,
-qty:detailQty
-});
-
-}
-
-updateCart();
-
-closeDetail();
-
-alert(
-selectedDetailProduct.name+
-" cart mein add ho gaya 🛒"
-);
-
-}
-
-
-function closeDetail(){
-
-document.getElementById("detailScreen").style.display="none";
-
-selectedDetailProduct=null;
-
-}
-
-
-/* CART */
+/* =========================================================
+   ADD TO CART
+========================================================= */
 
 function addToCart(id){
 
-const product=
-allProducts().find(item=>item.id===id);
+  const product =
+    allProducts().find(item => item.id === id);
 
-if(!product)return;
+  if(!product) return;
 
-const existing=
-cart.find(item=>item.id===id);
+  const existing =
+    cart.find(item => item.id === id);
 
-if(existing){
+  if(existing){
 
-existing.qty++;
+    existing.qty++;
 
-}else{
+  }else{
 
-cart.push({
-...product,
-qty:1
-});
+    cart.push({
+      ...product,
+      qty:1
+    });
+
+  }
+
+  updateCart();
 
 }
 
-updateCart();
 
-}
-
+/* =========================================================
+   UPDATE CART
+========================================================= */
 
 function updateCart(){
 
-const box=
-document.getElementById("cartItems");
+  const box =
+    document.getElementById("cartItems");
 
-box.innerHTML="";
+  box.innerHTML = "";
 
-let subtotal=0;
-let count=0;
+  let subtotal = 0;
+  let count = 0;
 
-if(cart.length===0){
+  if(cart.length === 0){
 
-box.innerHTML=
-"<p>Your cart is empty.</p>";
+    box.innerHTML =
+      "<p>Your cart is empty.</p>";
+
+  }
+
+  cart.forEach((item,index) => {
+
+    const itemTotal =
+      item.price * item.qty;
+
+    subtotal += itemTotal;
+    count += item.qty;
+
+    box.innerHTML += `
+
+      <div class="cart-item">
+
+        <div class="cart-item-name">
+
+          ${escapeHTML(item.name)}
+
+          <div class="cart-item-price">
+            ₹${item.price} × ${item.qty}
+          </div>
+
+        </div>
+
+        <div class="qty">
+
+          <button
+            onclick="changeQty(${index},-1)">
+            −
+          </button>
+
+          <span>
+            ${item.qty}
+          </span>
+
+          <button
+            onclick="changeQty(${index},1)">
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+
+  const delivery =
+    subtotal > 0 ? 30 : 0;
+
+  const handling =
+    subtotal > 0 ? 5 : 0;
+
+  const total =
+    subtotal + delivery + handling;
+
+
+  document.getElementById("cartCount")
+    .innerText = count;
+
+  document.getElementById("bottomCartCount")
+    .innerText = count;
+
+  document.getElementById("subtotal")
+    .innerText = subtotal;
+
+  document.getElementById("delivery")
+    .innerText = delivery;
+
+  document.getElementById("handlingCharge")
+    .innerText = handling;
+
+  document.getElementById("total")
+    .innerText = total;
 
 }
 
-cart.forEach((item,index)=>{
 
-const itemTotal=
-item.price*item.qty;
-
-subtotal+=itemTotal;
-
-count+=item.qty;
-
-box.innerHTML+=`
-
-<div class="cart-item">
-
-<div>
-
-<b>${escapeHTML(item.name)}</b>
-
-<br>
-
-₹${item.price} × ${item.qty}
-
-</div>
-
-<div class="qty">
-
-<button onclick="changeQty(${index},-1)">
-−
-</button>
-
-${item.qty}
-
-<button onclick="changeQty(${index},1)">
-+
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-
-const delivery=
-subtotal>0 ? 30 : 0;
-
-const handling=
-subtotal>0 ? 5 : 0;
-
-const total=
-subtotal+delivery+handling;
-
-
-document.getElementById("cartCount").innerText=count;
-
-document.getElementById("subtotal").innerText=subtotal;
-
-document.getElementById("delivery").innerText=delivery;
-
-document.getElementById("handlingCharge").innerText=handling;
-
-document.getElementById("total").innerText=total;
-
-}
-
+/* =========================================================
+   CHANGE QUANTITY
+========================================================= */
 
 function changeQty(index,change){
 
-cart[index].qty+=change;
+  if(!cart[index]) return;
 
-if(cart[index].qty<=0){
+  cart[index].qty += change;
 
-cart.splice(index,1);
+  if(cart[index].qty <= 0){
+
+    cart.splice(index,1);
+
+  }
+
+  updateCart();
 
 }
 
-updateCart();
+
+/* =========================================================
+   PRODUCT DETAIL
+========================================================= */
+
+function openProductDetail(id){
+
+  const product =
+    allProducts().find(item => item.id === id);
+
+  if(!product) return;
+
+  selectedDetailProduct = product;
+
+  const detail =
+    document.getElementById("detailScreen");
+
+  detail.classList.add("show");
+
+  document.body.style.overflow = "hidden";
+
+
+  document.getElementById("detailImage")
+    .src = product.image;
+
+  document.getElementById("detailImage")
+    .onerror = function(){
+
+      this.src =
+        "./1786646663690.jpeg";
+
+    };
+
+
+  document.getElementById("detailTopTitle")
+    .innerText = product.name;
+
+
+  document.getElementById("detailName")
+    .innerText = product.name;
+
+
+  document.getElementById("detailUnit")
+    .innerText = product.unit || "Unit";
+
+
+  document.getElementById("detailBottomUnit")
+    .innerText = product.unit || "Unit";
+
+
+  document.getElementById("detailPrice")
+    .innerText = product.price;
+
+
+  document.getElementById("detailBottomPrice")
+    .innerText = product.price;
+
+
+  /*
+    Actual MRP tumhare data mein available nahi hai,
+    isliye yahan same price dikhaya ja raha hai.
+    Baad mein actual MRP add kar sakte ho.
+  */
+
+  document.getElementById("detailMRP")
+    .innerText = product.price;
+
+
+  document.getElementById("detailRating")
+    .innerText =
+    product.rating || "4.5";
+
+
+  document.getElementById("detailOffer")
+    .innerText =
+    "Special RoyalXQuick Price";
+
+
+  document.getElementById("detailInfo")
+    .innerText =
+    "Fresh grocery product • " +
+    (product.unit || "Unit") +
+    " • RoyalXQuick delivery";
+
+
+  window.scrollTo(0,0);
 
 }
 
+
+/* =========================================================
+   CLOSE DETAIL
+========================================================= */
+
+function closeDetail(){
+
+  document
+    .getElementById("detailScreen")
+    .classList.remove("show");
+
+  document.body.style.overflow = "";
+
+  selectedDetailProduct = null;
+
+}
+
+
+/* =========================================================
+   ADD FROM PRODUCT DETAIL
+========================================================= */
+
+function addDetailToCart(){
+
+  if(!selectedDetailProduct) return;
+
+  addToCart(selectedDetailProduct.id);
+
+}
+
+
+/* =========================================================
+   SHARE PRODUCT
+========================================================= */
+
+function shareProduct(){
+
+  if(!selectedDetailProduct) return;
+
+  const product =
+    selectedDetailProduct;
+
+  const text =
+    "🛒 " +
+    product.name +
+    " - ₹" +
+    product.price +
+    " | RoyalXQuick";
+
+  if(navigator.share){
+
+    navigator.share({
+      title:product.name,
+      text:text
+    });
+
+  }else{
+
+    alert(text);
+
+  }
+
+}
+
+
+/* =========================================================
+   GO CART
+========================================================= */
 
 function goCart(){
 
-document
-.getElementById("cart")
-.scrollIntoView({
-behavior:"smooth"
-});
+  closeDetail();
+
+  document
+    .getElementById("cart")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
 
 }
 
 
-/* ORDER */
+/* =========================================================
+   SCROLL PRODUCTS
+========================================================= */
+
+function scrollToProducts(){
+
+  document
+    .getElementById("productsSection")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   TOP
+========================================================= */
+
+function scrollToTop(){
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   BOTTOM NAV
+========================================================= */
+
+function homeNav(){
+
+  closeDetail();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function categoryNav(){
+
+  closeDetail();
+
+  document
+    .getElementById("categoryStrip")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+function searchNav(){
+
+  closeDetail();
+
+  const input =
+    document.getElementById("search");
+
+  input.focus();
+
+  input.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+
+}
+
+
+function goFeedback(){
+
+  closeDetail();
+
+  document
+    .getElementById("feedback")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   HEADER LOCATION
+========================================================= */
+
+function getHeaderLocation(){
+
+  if(!navigator.geolocation){
+
+    document.getElementById("locationName")
+      .innerText = "Location unavailable";
+
+    return;
+
+  }
+
+  document.getElementById("locationName")
+    .innerText = "Getting location...";
+
+
+  navigator.geolocation.getCurrentPosition(
+
+    function(position){
+
+      const lat =
+        position.coords.latitude;
+
+      const lon =
+        position.coords.longitude;
+
+      window.currentCustomerLocation =
+        "https://www.google.com/maps?q=" +
+        lat + "," + lon;
+
+      document.getElementById("locationName")
+        .innerText = "Location ready";
+
+    },
+
+    function(){
+
+      document.getElementById("locationName")
+        .innerText = "Your Location";
+
+    }
+
+  );
+
+}
+
+
+/* =========================================================
+   PLACE ORDER
+========================================================= */
 
 function placeOrder(){
 
-if(cart.length===0){
+  if(cart.length === 0){
 
-alert("Please add products to cart first.");
+    alert(
+      "Please add products to cart first."
+    );
 
-return;
+    return;
+
+  }
+
+
+  const name =
+    document
+      .getElementById("name")
+      .value
+      .trim();
+
+
+  const phone =
+    document
+      .getElementById("phone")
+      .value
+      .trim();
+
+
+  const address =
+    document
+      .getElementById("address")
+      .value
+      .trim();
+
+
+  const payment =
+    document
+      .getElementById("payment")
+      .value;
+
+
+  if(!name || !phone || !address){
+
+    alert(
+      "Please enter your name, mobile number and address."
+    );
+
+    return;
+
+  }
+
+
+  if(payment === "upi"){
+
+    alert(
+      "UPI payment gateway is not connected yet. Please select Cash on Delivery."
+    );
+
+    return;
+
+  }
+
+
+  let orderItems = "";
+  let subtotal = 0;
+
+
+  cart.forEach(item => {
+
+    const itemTotal =
+      item.price * item.qty;
+
+    subtotal += itemTotal;
+
+    orderItems +=
+      "• " +
+      item.name +
+      " × " +
+      item.qty +
+      " = ₹" +
+      itemTotal +
+      "\n";
+
+  });
+
+
+  const delivery =
+    subtotal > 0 ? 30 : 0;
+
+  const handling =
+    subtotal > 0 ? 5 : 0;
+
+  const total =
+    subtotal + delivery + handling;
+
+
+  function openWhatsApp(locationText){
+
+    const message =
+
+      "🛒 NEW ROYALXQUICK ORDER\n\n" +
+
+      "Products:\n" +
+
+      orderItems +
+
+      "\nSubtotal: ₹" +
+      subtotal +
+
+      "\nDelivery: ₹" +
+      delivery +
+
+      "\nHandling Charge: ₹" +
+      handling +
+
+      "\nTotal: ₹" +
+      total +
+
+      "\n\nName: " +
+      name +
+
+      "\nMobile: " +
+      phone +
+
+      "\nAddress: " +
+      address +
+
+      "\n" +
+      locationText +
+
+      "Payment: " +
+      payment.toUpperCase();
+
+
+    const whatsappNumber =
+      "919705335701";
+
+
+    window.location.href =
+      "https://wa.me/" +
+      whatsappNumber +
+      "?text=" +
+      encodeURIComponent(message);
+
+  }
+
+
+  if(navigator.geolocation){
+
+    navigator.geolocation.getCurrentPosition(
+
+      function(position){
+
+        const lat =
+          position.coords.latitude;
+
+        const lon =
+          position.coords.longitude;
+
+        const locationLink =
+          "https://www.google.com/maps?q=" +
+          lat + "," + lon;
+
+
+        openWhatsApp(
+          "📍 Current Location:\n" +
+          locationLink +
+          "\n"
+        );
+
+      },
+
+      function(){
+
+        openWhatsApp(
+          "📍 Current Location: Not shared\n"
+        );
+
+      }
+
+    );
+
+  }else{
+
+    openWhatsApp(
+      "📍 Current Location: Not available\n"
+    );
+
+  }
 
 }
 
-const name=
-document.getElementById("name")
-.value.trim();
 
-const phone=
-document.getElementById("phone")
-.value.trim();
-
-const address=
-document.getElementById("address")
-.value.trim();
-
-const payment=
-document.getElementById("payment")
-.value;
-
-
-if(!name || !phone || !address){
-
-alert(
-"Please enter your name, mobile number and address."
-);
-
-return;
-
-}
-
-
-if(payment==="upi"){
-
-alert(
-"UPI payment gateway is not connected yet."
-);
-
-return;
-
-}
-
-
-let orderItems="";
-let subtotal=0;
-
-
-cart.forEach(item=>{
-
-const itemTotal=
-item.price*item.qty;
-
-subtotal+=itemTotal;
-
-orderItems+=
-"• "+
-item.name+
-" × "+
-item.qty+
-" = ₹"+
-itemTotal+
-"\n";
-
-});
-
-
-const delivery=
-subtotal>0 ? 30 : 0;
-
-const handling=
-subtotal>0 ? 5 : 0;
-
-const total=
-subtotal+delivery+handling;
-
-
-function openWhatsApp(locationText){
-
-const message=
-
-"🛒 NEW ROYALXQUICK ORDER\n\n"+
-
-"Products:\n"+
-orderItems+
-
-"\nSubtotal: ₹"+
-subtotal+
-
-"\nDelivery: ₹"+
-delivery+
-
-"\nHandling Charge: ₹"+
-handling+
-
-"\nTotal: ₹"+
-total+
-
-"\n\nName: "+
-name+
-
-"\nMobile: "+
-phone+
-
-"\nAddress: "+
-address+
-
-"\n"+
-locationText+
-
-"Payment: "+
-payment.toUpperCase();
-
-
-const whatsappNumber="919705335701";
-
-window.location.href=
-"https://wa.me/"+
-whatsappNumber+
-"?text="+
-encodeURIComponent(message);
-
-}
-
-
-if(navigator.geolocation){
-
-navigator.geolocation.getCurrentPosition(
-
-function(position){
-
-const lat=
-position.coords.latitude;
-
-const lon=
-position.coords.longitude;
-
-const locationLink=
-"https://www.google.com/maps?q="+
-lat+
-","+
-lon;
-
-openWhatsApp(
-"📍 Current Location:\n"+
-locationLink+
-"\n"
-);
-
-},
-
-function(){
-
-openWhatsApp(
-"📍 Current Location: Not shared\n"
-);
-
-}
-
-);
-
-}else{
-
-openWhatsApp(
-"📍 Current Location: Not available\n"
-);
-
-}
-
-}
-
-
-/* FEEDBACK */
+/* =========================================================
+   FEEDBACK
+========================================================= */
 
 function sendFeedback(){
 
-const name=
-document.getElementById("feedbackName")
-.value.trim();
-
-const rating=
-document.getElementById("feedbackRating")
-.value;
-
-const feedback=
-document.getElementById("feedbackText")
-.value.trim();
+  const name =
+    document
+      .getElementById("feedbackName")
+      .value
+      .trim();
 
 
-if(!name){
+  const rating =
+    document
+      .getElementById("feedbackRating")
+      .value;
 
-alert("Please enter your name.");
 
-return;
+  const feedback =
+    document
+      .getElementById("feedbackText")
+      .value
+      .trim();
+
+
+  if(!name){
+
+    alert("Please enter your name.");
+
+    return;
+
+  }
+
+
+  if(!rating){
+
+    alert("Please select a rating.");
+
+    return;
+
+  }
+
+
+  if(!feedback){
+
+    alert("Please write your feedback.");
+
+    return;
+
+  }
+
+
+  const feedbackData = {
+
+    name:name,
+
+    rating:rating,
+
+    text:feedback,
+
+    date:new Date()
+      .toLocaleDateString()
+
+  };
+
+
+  let feedbacks =
+    JSON.parse(
+      localStorage.getItem(
+        "royalxquick_feedbacks"
+      ) || "[]"
+    );
+
+
+  feedbacks.unshift(
+    feedbackData
+  );
+
+
+  feedbacks =
+    feedbacks.slice(0,50);
+
+
+  localStorage.setItem(
+    "royalxquick_feedbacks",
+    JSON.stringify(feedbacks)
+  );
+
+
+  const message =
+
+    "⭐ ROYALXQUICK FEEDBACK\n\n" +
+
+    "Name: " +
+    name +
+
+    "\nRating: " +
+    rating +
+    "/5" +
+
+    "\nFeedback: " +
+    feedback;
+
+
+  const whatsappNumber =
+    "919705335701";
+
+
+  window.open(
+
+    "https://wa.me/" +
+    whatsappNumber +
+    "?text=" +
+    encodeURIComponent(message),
+
+    "_blank"
+
+  );
+
+
+  document.getElementById("feedbackName")
+    .value = "";
+
+  document.getElementById("feedbackRating")
+    .value = "";
+
+  document.getElementById("feedbackText")
+    .value = "";
+
+
+  displayFeedbacks();
 
 }
 
-if(!rating){
 
-alert("Please select a rating.");
-
-return;
-
-}
-
-if(!feedback){
-
-alert("Please write your feedback.");
-
-return;
-
-}
-
-
-const feedbackData={
-
-name:name,
-
-rating:rating,
-
-text:feedback,
-
-date:new Date().toLocaleDateString()
-
-};
-
-
-let feedbacks=
-JSON.parse(
-localStorage.getItem(
-"royalxquick_feedbacks"
-) || "[]"
-);
-
-
-feedbacks.unshift(feedbackData);
-
-feedbacks=
-feedbacks.slice(0,50);
-
-
-localStorage.setItem(
-"royalxquick_feedbacks",
-JSON.stringify(feedbacks)
-);
-
-
-/* WHATSAPP FEEDBACK */
-
-const message=
-
-"⭐ ROYALXQUICK FEEDBACK\n\n"+
-
-"Name: "+
-name+
-
-"\nRating: "+
-rating+
-"/5"+
-
-"\nFeedback: "+
-feedback;
-
-
-const whatsappNumber="919705335701";
-
-
-window.open(
-
-"https://wa.me/"+
-whatsappNumber+
-"?text="+
-encodeURIComponent(message),
-
-"_blank"
-
-);
-
-
-document.getElementById("feedbackName").value="";
-
-document.getElementById("feedbackRating").value="";
-
-document.getElementById("feedbackText").value="";
-
-
-displayFeedbacks();
-
-}
-
-
-/* DISPLAY FEEDBACK */
+/* =========================================================
+   DISPLAY FEEDBACK
+========================================================= */
 
 function displayFeedbacks(){
 
-const box=
-document.getElementById("feedbackList");
+  const box =
+    document.getElementById(
+      "feedbackList"
+    );
 
 
-const feedbacks=
-JSON.parse(
-localStorage.getItem(
-"royalxquick_feedbacks"
-) || "[]"
-);
+  const feedbacks =
+    JSON.parse(
+      localStorage.getItem(
+        "royalxquick_feedbacks"
+      ) || "[]"
+    );
 
 
-if(feedbacks.length===0){
+  if(feedbacks.length === 0){
 
-box.innerHTML=
+    box.innerHTML = `
 
-`
-<div class="feedback-card">
-No feedback yet. Be the first one! ⭐
-</div>
-`;
+      <div class="feedback-card">
+        No feedback yet. Be the first one! ⭐
+      </div>
 
-return;
+    `;
 
-}
+    return;
 
-
-box.innerHTML=
-"<h3>💬 Customer Reviews</h3>";
+  }
 
 
-feedbacks.forEach(item=>{
-
-const stars=
-"⭐".repeat(
-Number(item.rating)
-);
+  box.innerHTML =
+    "<h3 style='margin-top:18px'>💬 Customer Reviews</h3>";
 
 
-box.innerHTML+=`
+  feedbacks.forEach(item => {
 
-<div class="feedback-card">
-
-<div class="feedback-name">
-👤 ${escapeHTML(item.name)}
-</div>
-
-<div class="feedback-stars">
-${stars}
-</div>
-
-<div class="feedback-text">
-${escapeHTML(item.text)}
-</div>
-
-<div class="feedback-date">
-${item.date}
-</div>
-
-</div>
-
-`;
-
-});
-
-}
+    const stars =
+      "⭐".repeat(
+        Number(item.rating)
+      );
 
 
-/* TOP DEALS */
+    box.innerHTML += `
 
-function displayDeals(){
+      <div class="feedback-card">
 
-const box=
-document.getElementById("deals");
+        <div class="feedback-name">
+          👤 ${escapeHTML(item.name)}
+        </div>
 
-const list=
-allProducts().slice(0,8);
+        <div class="feedback-stars">
+          ${stars}
+        </div>
 
-box.innerHTML="";
+        <div class="feedback-text">
+          ${escapeHTML(item.text)}
+        </div>
 
+        <div class="feedback-date">
+          ${item.date}
+        </div>
 
-list.forEach(product=>{
+      </div>
 
-box.innerHTML+=`
+    `;
 
-<div
-class="deal-card"
-onclick="openProductDetail(${product.id})">
-
-<img
-src="${product.image}"
-onerror="this.src='./1786646663690.jpeg'"
->
-
-<b>
-${escapeHTML(product.name)}
-</b>
-
-<div class="price">
-₹${product.price}
-</div>
-
-</div>
-
-`;
-
-});
+  });
 
 }
 
 
-/* ESCAPE HTML */
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
 function escapeHTML(text){
 
-const div=
-document.createElement("div");
+  const div =
+    document.createElement("div");
 
-div.textContent=text;
+  div.textContent =
+    text == null ? "" : String(text);
 
-return div.innerHTML;
+  return div.innerHTML;
 
 }
 
 
-/* PWA */
+/* =========================================================
+   PWA SERVICE WORKER
+========================================================= */
 
 if("serviceWorker" in navigator){
 
-window.addEventListener(
-"load",
-function(){
+  window.addEventListener(
+    "load",
+    function(){
 
-navigator.serviceWorker
-.register("./service-worker.js")
-.catch(function(error){
+      navigator.serviceWorker
+        .register("./service-worker.js")
+        .catch(function(error){
 
-console.log(
-"Service worker error:",
-error
-);
+          console.log(
+            "Service worker error:",
+            error
+          );
 
-});
+        });
 
-});
+    }
+  );
 
 }
 
 
-/* START */
+/* =========================================================
+   START WEBSITE
+========================================================= */
 
-displayProducts(allProducts());
+renderTopDeals();
 
-displayDeals();
+displayProducts(
+  allProducts()
+);
 
 updateCart();
 
