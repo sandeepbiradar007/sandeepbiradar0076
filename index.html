@@ -2371,18 +2371,73 @@ function allProducts(){
    PRODUCT IDS
 ========================================================= */
 
+/* =========================================================
+   PRODUCT IDS + INDIVIDUAL RATINGS
+========================================================= */
+
 let idCounter = 0;
+
+const PRODUCT_RATINGS = {
+
+  "Green Chilli 250 g":"4.2",
+  "Capsicum 500 g":"4.4",
+  "Tomato 1 KG":"4.3",
+  "Carrot 1 KG":"4.1",
+  "Potato 1 KG":"4.5",
+  "Onion 1 KG":"4.2",
+  "Bottle Gourd 1 KG":"4.0",
+  "Lady Finger 500 g":"4.3",
+  "Ginger 250 g":"4.4",
+  "Cucumber 1 KG":"4.1",
+  "Green Beans 500 g":"4.5",
+  "Garlic 250 g":"4.3",
+  "Cabbage 1 KG":"4.0",
+  "Sweet Corn 1 Piece":"4.4",
+  "Radish 1 KG":"4.1",
+  "Brinjal 1 KG":"4.2",
+  "Coriander 1 Bunch":"4.5",
+  "Drumstick 500 g":"4.3",
+  "Pumpkin 1 KG":"4.1",
+  "Sweet Potato 1 KG":"4.4",
+  "Spinach 1 Bunch":"4.5",
+  "Beetroot 1 KG":"4.2",
+  "Cauliflower 1 Piece":"4.3",
+  "Ridge Gourd 1 KG":"4.1",
+  "Bitter Gourd 1 KG":"4.2",
+
+  "Heritage Daily Health Toned Milk 500 ml":"4.5",
+  "Heritage Daily Health Toned Milk 1 Litre":"4.4",
+  "Amul Taaza Milky Milk 500 ml":"4.6",
+  "Amul Taaza Milky Milk 1 Litre":"4.5",
+  "Amul Dahi 700 g":"4.4",
+  "Heritage Total Curd 500 g":"4.3",
+
+  "Modern White Bread 400 g":"4.2",
+  "English Oven Milk Bread 400 g":"4.4",
+
+  "Tata Salt 1 KG":"4.5",
+  "Tide Nirma Detergent":"4.1",
+  "Tata Poha 500 g":"4.3",
+  "Red Label Tea 100 g":"4.5",
+  "Red Chilli Powder 100 g":"4.2",
+  "Gold Drop Oil 5 KG":"4.1",
+  "Aashirvaad Whole Wheat Atta 5 KG":"4.5",
+  "Lays Magic Masala 25 g":"4.4",
+
+  "Maaza 600 ml":"4.3",
+  "Sprite 250 ml":"4.2",
+  "Thums Up 250 ml":"4.4"
+
+};
 
 allProducts().forEach(product => {
 
   product.id = idCounter++;
 
-  if(!product.rating){
-    product.rating = "4.5";
-  }
+  product.rating =
+    PRODUCT_RATINGS[product.name] || "4.2";
 
 });
-
 
 /* =========================================================
    CART
@@ -2624,12 +2679,18 @@ function showCategoryByName(category){
    HINDI + ENGLISH
 ========================================================= */
 
+/* =========================================================
+   SEARCH
+   ENGLISH + HINDI + COMMON TYPING MISTAKES
+========================================================= */
+
 function searchProducts(){
 
+  const input =
+    document.getElementById("search");
+
   const text =
-    document
-      .getElementById("search")
-      .value
+    input.value
       .toLowerCase()
       .trim();
 
@@ -2647,19 +2708,84 @@ function searchProducts(){
 
   }
 
+  /*
+    Common search spellings ko correct/search-friendly
+    banaya gaya hai.
+  */
+
+  const aliases = {
+
+    "tamato":"tomato",
+    "tamatar":"tomato",
+    "tomatto":"tomato",
+
+    "aloo":"potato",
+    "alu":"potato",
+
+    "pyaj":"onion",
+    "pyaaz":"onion",
+
+    "gajar":"carrot",
+
+    "mirchi":"chilli",
+    "mirch":"chilli",
+
+    "bhindi":"lady finger",
+
+    "baigan":"brinjal",
+    "baingan":"brinjal",
+
+    "adrak":"ginger",
+
+    "lahsun":"garlic",
+
+    "dahi":"curd",
+
+    "dudh":"milk",
+    "doodh":"milk",
+
+    "bread":"bread"
+
+  };
+
+  const searchText =
+    aliases[text] || text;
+
   const results =
     allProducts().filter(product => {
 
-      const searchText =
-        (
-          product.name +
-          " " +
-          (product.search || "") +
-          " " +
-          (product.unit || "")
-        ).toLowerCase();
+      const searchableText = (
 
-      return searchText.includes(text);
+        product.name +
+        " " +
+        (product.search || "") +
+        " " +
+        (product.unit || "")
+
+      ).toLowerCase();
+
+      /*
+        Exact text search
+      */
+
+      if(searchableText.includes(searchText)){
+        return true;
+      }
+
+      /*
+        Har word ko alag check karta hai.
+        Isse "tomato 1kg", "tomato kg",
+        "green chilli" jaise searches better work karenge.
+      */
+
+      const words =
+        searchText
+          .split(/\s+/)
+          .filter(Boolean);
+
+      return words.every(word =>
+        searchableText.includes(word)
+      );
 
     });
 
@@ -2669,7 +2795,6 @@ function searchProducts(){
   displayProducts(results);
 
 }
-
 
 /* =========================================================
    TOP DEALS
