@@ -3366,7 +3366,6 @@ async function placeOrder(){
   if(cart.length === 0){
 
     alert("Please add products to cart first.");
-
     return;
 
   }
@@ -3414,7 +3413,7 @@ async function placeOrder(){
   cart.forEach(item => {
 
     const itemTotal =
-      item.price * item.qty;
+      Number(item.price) * Number(item.qty);
 
     subtotal += itemTotal;
 
@@ -3432,8 +3431,8 @@ async function placeOrder(){
 
       productId: item.id,
       name: item.name,
-      price: item.price,
-      quantity: item.qty,
+      price: Number(item.price),
+      quantity: Number(item.qty),
       unit: item.unit || "Unit",
       total: itemTotal
 
@@ -3453,10 +3452,10 @@ async function placeOrder(){
 
 
   /*
-    Customer location
+    SAVE ORDER + OPEN WHATSAPP
   */
 
-  function saveAndOpenWhatsApp(locationText){
+  async function saveAndOpenWhatsApp(locationText){
 
     const orderData = {
 
@@ -3473,11 +3472,8 @@ async function placeOrder(){
       items: firebaseItems,
 
       subtotal: subtotal,
-
       delivery: delivery,
-
       handling: handling,
-
       total: total,
 
       payment: payment,
@@ -3486,97 +3482,118 @@ async function placeOrder(){
 
       status: "new",
 
-      createdAt: new Date().toISOString()
+      createdAt:
+        new Date().toISOString()
 
     };
 
 
     /*
-      SAVE ORDER TO FIREBASE
+      FIREBASE SAVE
     */
 
-    if(window.saveRoyalXQuickOrder){
+    try {
 
-      window.saveRoyalXQuickOrder(orderData)
+      if(!window.saveRoyalXQuickOrder){
 
-        .then(function(orderId){
+        alert(
+          "Firebase is not ready. Please refresh the website and try again."
+        );
 
-          console.log(
-            "Firebase Order Saved:",
-            orderId
-          );
+        return;
 
-        })
+      }
 
-        .catch(function(error){
 
-          console.error(
-            "Firebase order error:",
-            error
-          );
+      /*
+        IMPORTANT:
+        Wait until Firebase actually saves
+        the order BEFORE opening WhatsApp.
+      */
 
-        });
+      const orderId =
+        await window.saveRoyalXQuickOrder(orderData);
 
-    }else{
 
-      console.warn(
-        "Firebase order function not available."
+      console.log(
+        "Firebase Order Saved:",
+        orderId
+      );
+
+
+      /*
+        WHATSAPP MESSAGE
+      */
+
+      const message =
+
+        "🛒 NEW ROYALXQUICK ORDER\n\n" +
+
+        "Order ID: " +
+        orderId +
+        "\n\n" +
+
+        "Products:\n" +
+
+        orderItems +
+
+        "\nSubtotal: ₹" +
+        subtotal +
+
+        "\nDelivery: ₹" +
+        delivery +
+
+        "\nHandling Charge: ₹" +
+        handling +
+
+        "\nTotal: ₹" +
+        total +
+
+        "\n\nName: " +
+        name +
+
+        "\nMobile: " +
+        phone +
+
+        "\nAddress: " +
+        address +
+
+        "\n" +
+        locationText +
+
+        "\nPayment: " +
+        payment.toUpperCase();
+
+
+      const whatsappNumber =
+        "919705335701";
+
+
+      /*
+        Open WhatsApp ONLY AFTER
+        Firebase confirms the save.
+      */
+
+      window.location.href =
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    } catch(error){
+
+      console.error(
+        "Firebase order error:",
+        error
+      );
+
+
+      alert(
+        "Order save nahi ho paya. Internet connection check karke dobara try karein."
       );
 
     }
-
-
-    /*
-      WHATSAPP MESSAGE
-    */
-
-    const message =
-
-      "🛒 NEW ROYALXQUICK ORDER\n\n" +
-
-      "Order ID: Firebase\n\n" +
-
-      "Products:\n" +
-
-      orderItems +
-
-      "\nSubtotal: ₹" +
-      subtotal +
-
-      "\nDelivery: ₹" +
-      delivery +
-
-      "\nHandling Charge: ₹" +
-      handling +
-
-      "\nTotal: ₹" +
-      total +
-
-      "\n\nName: " +
-      name +
-
-      "\nMobile: " +
-      phone +
-
-      "\nAddress: " +
-      address +
-
-      "\n" +
-      locationText +
-
-      "\nPayment: " +
-      payment.toUpperCase();
-
-
-    const whatsappNumber =
-      "919705335701";
-
-
-    window.location.href =
-      "https://wa.me/" +
-      whatsappNumber +
-      "?text=" +
-      encodeURIComponent(message);
 
   }
 
@@ -3589,7 +3606,7 @@ async function placeOrder(){
 
     navigator.geolocation.getCurrentPosition(
 
-      function(position){
+      async function(position){
 
         const lat =
           position.coords.latitude;
@@ -3602,7 +3619,7 @@ async function placeOrder(){
           lat + "," + lon;
 
 
-        saveAndOpenWhatsApp(
+        await saveAndOpenWhatsApp(
 
           "📍 Current Location:\n" +
           locationLink +
@@ -3612,9 +3629,9 @@ async function placeOrder(){
 
       },
 
-      function(){
+      async function(){
 
-        saveAndOpenWhatsApp(
+        await saveAndOpenWhatsApp(
           "📍 Current Location: Not shared\n"
         );
 
@@ -3624,14 +3641,13 @@ async function placeOrder(){
 
   }else{
 
-    saveAndOpenWhatsApp(
+    await saveAndOpenWhatsApp(
       "📍 Current Location: Not available\n"
     );
 
   }
 
 }
-
 
 /* =========================================================
    FEEDBACK
