@@ -3905,11 +3905,15 @@ displayFeedbacks();
 
 </script>
 
-  
 <script type="module">
 
   import { initializeApp }
     from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+  import {
+    getAuth,
+    signInAnonymously
+  } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
   import {
     getDatabase,
@@ -3948,6 +3952,10 @@ displayFeedbacks();
     initializeApp(firebaseConfig);
 
 
+  const auth =
+    getAuth(app);
+
+
   const database =
     getDatabase(app);
 
@@ -3965,46 +3973,105 @@ displayFeedbacks();
 
 
   /*
-    SAVE ROYALXQUICK ORDER
+    AUTOMATIC ANONYMOUS LOGIN
+  */
+
+  signInAnonymously(auth)
+
+    .then(function(){
+
+      console.log(
+        "RoyalXQuick anonymous login successful"
+      );
+
+    })
+
+    .catch(function(error){
+
+      console.error(
+        "Firebase Authentication Error:",
+        error
+      );
+
+    });
+
+
+  /*
+    SAVE ORDER TO FIREBASE
   */
 
   window.saveRoyalXQuickOrder =
     function(orderData){
 
-      const newOrderRef =
-        push(ordersRef);
+      if(!auth.currentUser){
 
+        return signInAnonymously(auth)
+          .then(function(){
 
-      return set(
-        newOrderRef,
-        orderData
-      )
-      .then(function(){
+            return saveOrder(orderData);
 
-        console.log(
-          "RoyalXQuick Order Saved:",
-          newOrderRef.key
-        );
+          });
 
-        return newOrderRef.key;
+      }
 
-      })
-      .catch(function(error){
-
-        console.error(
-          "Firebase Order Error:",
-          error
-        );
-
-        throw error;
-
-      });
+      return saveOrder(orderData);
 
     };
 
 
+  function saveOrder(orderData){
+
+    const newOrderRef =
+      push(ordersRef);
+
+
+    const finalOrder = {
+
+      ...orderData,
+
+      orderId: newOrderRef.key,
+
+      createdAt:
+        new Date().toISOString(),
+
+      status:
+        "New"
+
+    };
+
+
+    return set(
+      newOrderRef,
+      finalOrder
+    )
+
+    .then(function(){
+
+      console.log(
+        "RoyalXQuick Order Saved:",
+        newOrderRef.key
+      );
+
+      return newOrderRef.key;
+
+    })
+
+    .catch(function(error){
+
+      console.error(
+        "Firebase Order Error:",
+        error
+      );
+
+      throw error;
+
+    });
+
+  }
+
+
   console.log(
-    "RoyalXQuick Firebase connected successfully"
+    "RoyalXQuick Firebase connected"
   );
 
 </script>
