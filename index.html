@@ -3358,47 +3358,30 @@ function getHeaderLocation(){
 
 
 /* =========================================================
-   PLACE ORDER
+   PLACE ORDER - FIREBASE + WHATSAPP
 ========================================================= */
 
-function placeOrder(){
+async function placeOrder(){
 
   if(cart.length === 0){
 
-    alert(
-      "Please add products to cart first."
-    );
+    alert("Please add products to cart first.");
 
     return;
 
   }
 
-
   const name =
-    document
-      .getElementById("name")
-      .value
-      .trim();
-
+    document.getElementById("name").value.trim();
 
   const phone =
-    document
-      .getElementById("phone")
-      .value
-      .trim();
-
+    document.getElementById("phone").value.trim();
 
   const address =
-    document
-      .getElementById("address")
-      .value
-      .trim();
-
+    document.getElementById("address").value.trim();
 
   const payment =
-    document
-      .getElementById("payment")
-      .value;
+    document.getElementById("payment").value;
 
 
   if(!name || !phone || !address){
@@ -3424,6 +3407,7 @@ function placeOrder(){
 
 
   let orderItems = "";
+  let firebaseItems = [];
   let subtotal = 0;
 
 
@@ -3443,6 +3427,18 @@ function placeOrder(){
       itemTotal +
       "\n";
 
+
+    firebaseItems.push({
+
+      productId: item.id,
+      name: item.name,
+      price: item.price,
+      quantity: item.qty,
+      unit: item.unit || "Unit",
+      total: itemTotal
+
+    });
+
   });
 
 
@@ -3456,11 +3452,89 @@ function placeOrder(){
     subtotal + delivery + handling;
 
 
-  function openWhatsApp(locationText){
+  /*
+    Customer location
+  */
+
+  function saveAndOpenWhatsApp(locationText){
+
+    const orderData = {
+
+      store: "RoyalXQuick",
+
+      customer: {
+
+        name: name,
+        phone: phone,
+        address: address
+
+      },
+
+      items: firebaseItems,
+
+      subtotal: subtotal,
+
+      delivery: delivery,
+
+      handling: handling,
+
+      total: total,
+
+      payment: payment,
+
+      location: locationText,
+
+      status: "new",
+
+      createdAt: new Date().toISOString()
+
+    };
+
+
+    /*
+      SAVE ORDER TO FIREBASE
+    */
+
+    if(window.saveRoyalXQuickOrder){
+
+      window.saveRoyalXQuickOrder(orderData)
+
+        .then(function(orderId){
+
+          console.log(
+            "Firebase Order Saved:",
+            orderId
+          );
+
+        })
+
+        .catch(function(error){
+
+          console.error(
+            "Firebase order error:",
+            error
+          );
+
+        });
+
+    }else{
+
+      console.warn(
+        "Firebase order function not available."
+      );
+
+    }
+
+
+    /*
+      WHATSAPP MESSAGE
+    */
 
     const message =
 
       "🛒 NEW ROYALXQUICK ORDER\n\n" +
+
+      "Order ID: Firebase\n\n" +
 
       "Products:\n" +
 
@@ -3490,7 +3564,7 @@ function placeOrder(){
       "\n" +
       locationText +
 
-      "Payment: " +
+      "\nPayment: " +
       payment.toUpperCase();
 
 
@@ -3506,6 +3580,10 @@ function placeOrder(){
 
   }
 
+
+  /*
+    GET CUSTOMER LOCATION
+  */
 
   if(navigator.geolocation){
 
@@ -3524,17 +3602,19 @@ function placeOrder(){
           lat + "," + lon;
 
 
-        openWhatsApp(
+        saveAndOpenWhatsApp(
+
           "📍 Current Location:\n" +
           locationLink +
           "\n"
+
         );
 
       },
 
       function(){
 
-        openWhatsApp(
+        saveAndOpenWhatsApp(
           "📍 Current Location: Not shared\n"
         );
 
@@ -3544,7 +3624,7 @@ function placeOrder(){
 
   }else{
 
-    openWhatsApp(
+    saveAndOpenWhatsApp(
       "📍 Current Location: Not available\n"
     );
 
@@ -3824,32 +3904,109 @@ updateCart();
 displayFeedbacks();
 
 </script>
+
   
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
   import {
     getDatabase,
     ref,
-    push
+    push,
+    set
   } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
+
   const firebaseConfig = {
+
     apiKey: "AIzaSyDaQJW1o5Sqf086zrvamhwOhA0RSsZTfbM",
-    authDomain: "quickbasket-6ab58.firebaseapp.com",
-    databaseURL: "https://quickbasket-6ab58-default-rtdb.firebaseio.com",
-    projectId: "quickbasket-6ab58",
-    storageBucket: "quickbasket-6ab58.firebasestorage.app",
-    messagingSenderId: "848483992298",
-    appId: "1:848483992298:web:b4df1dca170487f8bb0d93"
+
+    authDomain:
+      "quickbasket-6ab58.firebaseapp.com",
+
+    databaseURL:
+      "https://quickbasket-6ab58-default-rtdb.firebaseio.com",
+
+    projectId:
+      "quickbasket-6ab58",
+
+    storageBucket:
+      "quickbasket-6ab58.firebasestorage.app",
+
+    messagingSenderId:
+      "848483992298",
+
+    appId:
+      "1:848483992298:web:b4df1dca170487f8bb0d93"
+
   };
 
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
 
-  window.firebaseDatabase = database;
-  window.firebaseOrdersRef = ref(database, "orders");
+  const app =
+    initializeApp(firebaseConfig);
 
-  console.log("RoyalXQuick Firebase connected");
+
+  const database =
+    getDatabase(app);
+
+
+  const ordersRef =
+    ref(database, "orders");
+
+
+  window.firebaseDatabase =
+    database;
+
+
+  window.firebaseOrdersRef =
+    ordersRef;
+
+
+  /*
+    SAVE ROYALXQUICK ORDER
+  */
+
+  window.saveRoyalXQuickOrder =
+    function(orderData){
+
+      const newOrderRef =
+        push(ordersRef);
+
+
+      return set(
+        newOrderRef,
+        orderData
+      )
+      .then(function(){
+
+        console.log(
+          "RoyalXQuick Order Saved:",
+          newOrderRef.key
+        );
+
+        return newOrderRef.key;
+
+      })
+      .catch(function(error){
+
+        console.error(
+          "Firebase Order Error:",
+          error
+        );
+
+        throw error;
+
+      });
+
+    };
+
+
+  console.log(
+    "RoyalXQuick Firebase connected successfully"
+  );
+
 </script>
   
 </body>
