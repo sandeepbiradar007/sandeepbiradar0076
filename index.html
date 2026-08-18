@@ -1725,40 +1725,67 @@ Account
 
 </nav>  <script>  
   
-/* =========================================================  
-   VEGETABLE RATES  
-   YAHAN SE VEGETABLE PRICE CHANGE KAR SAKTE HO  
-========================================================= */  
   
-const VEGETABLE_PRICES = {  
-  
-  "Green Chilli 250 g":30,  
-  "Capsicum 500 g":49,  
-  "Tomato 500 g":23,  
-  "Carrot 500 g":32,  
-  "Potato 500 g":14,  
-  "Onion 500 g":19,  
-  "Bottle Gourd 400 g":29,  
-  "Lady Finger 500 g":32,  
-  "Ginger 250 g":65,  
-  "Cucumber 500 g":29,  
-  "Green Beans 500 g":37,  
-  "Garlic 250 g":73,  
-  "Cabbage 400 g":32,  
-  "Sweet Corn 1 Piece":29,  
-  "Radish 250 g":32,  
-  "Brinjal 500 g":35,  
-  "Coriander 100 g":18,  
-  "Drumstick 2 Pieces":27,  
-  "Pumpkin 500 g":49,  
-  "Sweet Potato 450 g":43,  
-  "Spinach 250 g":39,  
-  "Beetroot 500 g":27,  
-  "Cauliflower 1 Piece":39,  
-  "Ridge Gourd 500 g":34,  
-  "Bitter Gourd 250 g":24  
-  
-};  
+const VEGETABLE_PRICES = {
+
+  "Green Chilli 250 g":30,
+  "Capsicum 250 g":22,
+  "Tomato 500 g":20,
+  "Carrot 500 g":31,
+  "Potato 500 g":16,
+  "Onion 500 g":19,
+  "Bottle Gourd 400 g":29,
+  "Lady Finger 250 g":16,
+  "Ginger 200 g":54,
+  "Cucumber 500 g":27,
+  "Green Beans 250 g":19,
+  "Garlic 200 g":62,
+  "Cabbage 400 g":31,
+  "Sweet Corn 1 Piece":25,
+  "Radish 250 g":19,
+  "Brinjal 500 g":37,
+  "Coriander 100 g":16,
+  "Drumstick 2 Pieces":25,
+  "Pumpkin 500 g":49,
+  "Sweet Potato 450 g":40,
+  "Spinach 200 g":35,
+  "Beetroot 500 g":25,
+  "Cauliflower 1 Piece":40,
+  "Ridge Gourd 500 g":35,
+  "Bitter Gourd 250 g":20
+
+};
+
+
+const VEGETABLE_MRP = {
+
+  "Green Chilli 250 g":32,
+  "Capsicum 250 g":26,
+  "Tomato 500 g":22,
+  "Carrot 500 g":39,
+  "Potato 500 g":19,
+  "Onion 500 g":21,
+  "Bottle Gourd 400 g":36,
+  "Lady Finger 250 g":20,
+  "Ginger 200 g":69,
+  "Cucumber 500 g":31,
+  "Green Beans 250 g":23,
+  "Garlic 200 g":74,
+  "Cabbage 400 g":40,
+  "Sweet Corn 1 Piece":32,
+  "Radish 250 g":22,
+  "Brinjal 500 g":48,
+  "Coriander 100 g":18,
+  "Drumstick 2 Pieces":31,
+  "Pumpkin 500 g":57,
+  "Sweet Potato 450 g":49,
+  "Spinach 200 g":44,
+  "Beetroot 500 g":31,
+  "Cauliflower 1 Piece":49,
+  "Ridge Gourd 500 g":43,
+  "Bitter Gourd 250 g":23
+
+};
   
   
 /* =========================================================  
@@ -2001,12 +2028,16 @@ const vegetables = [
   
 ];  
   
-  
-vegetables.forEach(product => {  
-  product.price =  
-    VEGETABLE_PRICES[product.name] || 0;  
-});  
-  
+  vegetables.forEach(product => {
+
+  product.price =
+    VEGETABLE_PRICES[product.name] || 0;
+
+  product.mrp =
+    VEGETABLE_MRP[product.name] || product.price;
+
+});
+
   
 /* =========================================================  
    BAKERY  
