@@ -2917,15 +2917,8 @@ document.getElementById("detailPrice")
 document.getElementById("detailBottomPrice")
 .innerText = product.price;
 
-/*
-Actual MRP tumhare data mein available nahi hai,
-isliye yahan same price dikhaya ja raha hai.
-Baad mein actual MRP add kar sakte ho.
-*/
-
 document.getElementById("detailMRP")
-.innerText = product.price;
-
+.innerText = product.mrp || product.price;
 document.getElementById("detailRating")
 .innerText =
 product.rating || "4.5";
