@@ -1844,191 +1844,197 @@ const dairyProducts = [
   
 ];  
   
-  
-/* =========================================================  
-   VEGETABLES - ALL 25 EXISTING PRODUCTS  
-========================================================= */  
-  
-const vegetables = [  
-  
-  {  
-    name:"Green Chilli 250 g",  
-    search:"Green Chilli 250 g हरी मिर्च",  
-    image:"IMG_20260812_212834.png",  
-    unit:"250 g"  
-  },  
-  
-  {  
-    name:"Capsicum 500 g",  
-    search:"Capsicum 500 g शिमला मिर्च",  
-    image:"IMG_20260812_213001.png",  
-    unit:"500 g"  
-  },  
-  
-  {  
-    name:"Tomato 500 g",  
-    search:"Tomato 500 g टमाटर",  
-    image:"IMG_20260812_213053.png",  
-    unit:"500 g"  
-  },  
-  
-  {  
-    name:"Carrot 500 g",  
-    search:"Carrot 500 g गाजर",  
-    image:"IMG_20260812_213129.png",  
-    unit:"500 g"  
-  },  
-  
-  {  
-    name:"Potato 500 g",  
-    search:"Potato 500 g आलू",  
-    image:"IMG_20260812_213426.png",  
-    unit:"500 g"  
-  },  
-  
-  {  
-    name:"Onion 500 g",  
-    search:"Onion 500 g प्याज",  
-    image:"IMG_20260812_213603.png",  
-    unit:"500 g"  
-  },  
-  
-  {  
-    name:"Bottle Gourd 400 g",  
-    search:"Bottle Gourd 400 g लौकी",  
-    image:"IMG_20260812_213731.png",  
-    unit:"400 g"  
-  },  
-  
-  {  
-    name:"Lady Finger 500 g",  
-    search:"Lady Finger 500 g Bhindi भिंडी",  
-    image:"IMG_20260812_213807.png",  
-    unit:"500 g"  
-  },  
-  
-  {  
-    name:"Ginger 250 g",  
-    search:"Ginger 250 g अदरक",  
-    image:"IMG_20260812_214026.png",  
-    unit:"250 g"  
-  },  
-  
-  {  
-    name:"Cucumber 500 g",  
-    search:"Cucumber 500 g खीरा",  
-    image:"IMG_20260812_214148.png",  
-    unit:"500 g"  
-  },  
-  
-  {  
-    name:"Green Beans 500 g",  
-    search:"Green Beans 500 g हरी बीन्स",  
-    image:"IMG_20260812_214448.png",  
-    unit:"500 g"  
-  },  
-  
-  {  
-    name:"Garlic 250 g",  
-    search:"Garlic 250 g लहसुन",  
-    image:"IMG_20260812_214520.png",  
-    unit:"250 g"  
-  },  
-  
-  {  
-    name:"Cabbage 400 g",  
-    search:"Cabbage 400 g पत्ता गोभी",  
-    image:"IMG_20260812_214608.png",  
-    unit:"400 g"  
-  },  
-  
-  {  
-    name:"Sweet Corn 1 Piece",  
-    search:"Sweet Corn 1 Piece स्वीट कॉर्न",  
-    image:"IMG_20260812_214713.png",  
-    unit:"1 Piece"  
-  },  
-  
-  {  
-    name:"Radish 250 g",  
-    search:"Radish 250 g मूली",  
-    image:"IMG_20260812_214832.png",  
-    unit:"250 g"  
-  },  
-  
-  {  
-    name:"Brinjal 500 g",  
-    search:"Brinjal 500 g बैंगन",  
-    image:"IMG_20260812_214937.png",  
-    unit:"500 g"  
-  },  
-  
-  {  
-    name:"Coriander 100 g",  
-    search:"Coriander 100 g धनिया",  
-    image:"IMG_20260812_215325.png",  
-    unit:"100 g"  
-  },  
-  
-  {  
-    name:"Drumstick 2 Pieces",  
-    search:"Drumstick 2 Pieces सहजन",  
-    image:"IMG_20260812_215445.png",  
-    unit:"2 Pieces"  
-  },  
-  
-  {  
-    name:"Pumpkin 500 g",  
-    search:"Pumpkin 500 g कद्दू",  
-    image:"IMG_20260812_215618.png",  
-    unit:"500 g"  
-  },  
-  
-  {  
-    name:"Sweet Potato 450 g",  
-    search:"Sweet Potato 450 g शकरकंद",  
-    image:"IMG_20260812_215734.png",  
-    unit:"450 g"  
-  },  
-  
-  {  
-    name:"Spinach 250 g",  
-    search:"Spinach 250 g पालक",  
-    image:"IMG_20260812_215821.png",  
-    unit:"250 g"  
-  },  
-  
-  {  
-    name:"Beetroot 500 g",  
-    search:"Beetroot 500 g चुकंदर",  
-    image:"IMG_20260812_215955.png",  
-    unit:"500 g"  
-  },  
-  
-  {  
-    name:"Cauliflower 1 Piece",  
-    search:"Cauliflower 1 Piece फूलगोभी",  
-    image:"IMG_20260812_220104.png",  
-    unit:"1 Piece"  
-  },  
-  
-  {  
-    name:"Ridge Gourd 500 g",  
-    search:"Ridge Gourd 500 g तुरई",  
-    image:"IMG_20260812_220214.png",  
-    unit:"500 g"  
-  },  
-  
-  {  
-    name:"Bitter Gourd 250 g",  
-    search:"Bitter Gourd 250 g करेला",  
-    image:"IMG_20260812_220312.png",  
-    unit:"250 g"  
-  }  
-  
-];  
-  
-  vegetables.forEach(product => {
+
+  /* =========================================================
+   VEGETABLES - ALL 25 PRODUCTS
+   RATE + MRP + PACK SIZE FIXED
+========================================================= */
+
+const vegetables = [
+
+  {
+    name:"Green Chilli 250 g",
+    search:"Green Chilli 250 g हरी मिर्च",
+    image:"IMG_20260812_212834.png",
+    unit:"250 g"
+  },
+
+  {
+    name:"Capsicum 250 g",
+    search:"Capsicum 250 g शिमला मिर्च",
+    image:"IMG_20260812_213001.png",
+    unit:"250 g"
+  },
+
+  {
+    name:"Tomato 500 g",
+    search:"Tomato 500 g टमाटर",
+    image:"IMG_20260812_213053.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Carrot 500 g",
+    search:"Carrot 500 g गाजर",
+    image:"IMG_20260812_213129.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Potato 500 g",
+    search:"Potato 500 g आलू",
+    image:"IMG_20260812_213426.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Onion 500 g",
+    search:"Onion 500 g प्याज",
+    image:"IMG_20260812_213603.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Bottle Gourd 400 g",
+    search:"Bottle Gourd 400 g लौकी",
+    image:"IMG_20260812_213731.png",
+    unit:"400 g"
+  },
+
+  {
+    name:"Lady Finger 250 g",
+    search:"Lady Finger 250 g Bhindi भिंडी",
+    image:"IMG_20260812_213807.png",
+    unit:"250 g"
+  },
+
+  {
+    name:"Ginger 200 g",
+    search:"Ginger 200 g अदरक",
+    image:"IMG_20260812_214026.png",
+    unit:"200 g"
+  },
+
+  {
+    name:"Cucumber 500 g",
+    search:"Cucumber 500 g खीरा",
+    image:"IMG_20260812_214148.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Green Beans 250 g",
+    search:"Green Beans 250 g हरी बीन्स",
+    image:"IMG_20260812_214448.png",
+    unit:"250 g"
+  },
+
+  {
+    name:"Garlic 200 g",
+    search:"Garlic 200 g लहसुन",
+    image:"IMG_20260812_214520.png",
+    unit:"200 g"
+  },
+
+  {
+    name:"Cabbage 400 g",
+    search:"Cabbage 400 g पत्ता गोभी",
+    image:"IMG_20260812_214608.png",
+    unit:"400 g"
+  },
+
+  {
+    name:"Sweet Corn 1 Piece",
+    search:"Sweet Corn 1 Piece स्वीट कॉर्न",
+    image:"IMG_20260812_214713.png",
+    unit:"1 Piece"
+  },
+
+  {
+    name:"Radish 250 g",
+    search:"Radish 250 g मूली",
+    image:"IMG_20260812_214832.png",
+    unit:"250 g"
+  },
+
+  {
+    name:"Brinjal 500 g",
+    search:"Brinjal 500 g बैंगन",
+    image:"IMG_20260812_214937.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Coriander 100 g",
+    search:"Coriander 100 g धनिया",
+    image:"IMG_20260812_215325.png",
+    unit:"100 g"
+  },
+
+  {
+    name:"Drumstick 2 Pieces",
+    search:"Drumstick 2 Pieces सहजन",
+    image:"IMG_20260812_215445.png",
+    unit:"2 Pieces"
+  },
+
+  {
+    name:"Pumpkin 500 g",
+    search:"Pumpkin 500 g कद्दू",
+    image:"IMG_20260812_215618.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Sweet Potato 450 g",
+    search:"Sweet Potato 450 g शकरकंद",
+    image:"IMG_20260812_215734.png",
+    unit:"450 g"
+  },
+
+  {
+    name:"Spinach 200 g",
+    search:"Spinach 200 g पालक",
+    image:"IMG_20260812_215821.png",
+    unit:"200 g"
+  },
+
+  {
+    name:"Beetroot 500 g",
+    search:"Beetroot 500 g चुकंदर",
+    image:"IMG_20260812_215955.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Cauliflower 1 Piece",
+    search:"Cauliflower 1 Piece फूलगोभी",
+    image:"IMG_20260812_220104.png",
+    unit:"1 Piece"
+  },
+
+  {
+    name:"Ridge Gourd 500 g",
+    search:"Ridge Gourd 500 g तुरई",
+    image:"IMG_20260812_220214.png",
+    unit:"500 g"
+  },
+
+  {
+    name:"Bitter Gourd 250 g",
+    search:"Bitter Gourd 250 g करेला",
+    image:"IMG_20260812_220312.png",
+    unit:"250 g"
+  }
+
+];
+
+
+/* =========================================================
+   APPLY VEGETABLE RATE + MRP
+========================================================= */
+
+vegetables.forEach(product => {
 
   product.price =
     VEGETABLE_PRICES[product.name] || 0;
@@ -2038,6 +2044,7 @@ const vegetables = [
 
 });
 
+    
   
 /* =========================================================  
    BAKERY  
